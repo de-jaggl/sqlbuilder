@@ -6,30 +6,28 @@ A Java-Library to build SQL-Statements
 
 ### Simple Example
 ```java
-	public static final Table PERSONS = Table.create("persons");
-	
-	public static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").build();
-	public static final VarCharColumn FIRSTNAME = PERSONS.varCharColumn("firstname").build();
-	
-	public static final void mail(String[] args)
-	{
-		Queries.select().from(PERSONS).where(LASTNAME.isEqualTo("Doe")).build(Dialects.MYSQL);
-	}
-	
-	
+private static final Table PERSONS = Table.create("persons");
+
+private static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").build();
+private static final VarCharColumn FIRSTNAME = PERSONS.varCharColumn("firstname").build();
+
+public static final void mail(String[] args)
+{
+	Queries.select().from(PERSONS).where(LASTNAME.isEqualTo("Doe")).build(Dialects.MYSQL);
+}	
 ```
 This will build
 ```sql
-	SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
+SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 ```
 
 ###	Dependency
 ```xml
-	<dependency>
-		<groupId>de.jaggl.sqlbuilder</groupId>
-	  <artifactId>sqlbuilder-core</artifactId>
-	  <version>2.0.0-SNAPSHOT</version>
-	</dependency>
+<dependency>
+  <groupId>de.jaggl.sqlbuilder</groupId>
+  <artifactId>sqlbuilder-core</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+</dependency>
 ```
 
 ### Features
