@@ -13,7 +13,7 @@ private static final VarCharColumn FIRSTNAME = PERSONS.varCharColumn("firstname"
 
 public static final void mail(String[] args)
 {
-	Queries.select().from(PERSONS).where(LASTNAME.isEqualTo("Doe")).build(Dialects.MYSQL);
+  Queries.select().from(PERSONS).where(LASTNAME.isEqualTo("Doe")).build(Dialects.MYSQL);
 }	
 ```
 This will build
