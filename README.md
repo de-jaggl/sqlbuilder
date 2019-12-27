@@ -36,8 +36,6 @@ SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 	- MySQL
 	- Sybase
 	
-- Build queries with or without indentation
-
 - Currently supported queries are:
   - SELECT
   - INSERT
@@ -59,3 +57,13 @@ SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 	- CHAR
 	- TEXT
 	- VARCHAR
+	
+- Supports SQL-Functions, currently supported are:
+	- SUM
+	- MIN
+	- MAX
+	- AVG
+	- COUNT
+	- NOW
+	
+- Build queries with or without indentation
