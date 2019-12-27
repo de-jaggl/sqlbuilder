@@ -1,4 +1,4 @@
-# sqlbuilder
+# SQLbuilder
 
 [![Build Status](https://travis-ci.com/de-jaggl/sqlbuilder.svg?branch=master)](https://travis-ci.com/de-jaggl/sqlbuilder)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
