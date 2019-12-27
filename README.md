@@ -14,12 +14,16 @@ private static final Table PERSONS = Table.create("persons");
 private static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").build();
 private static final VarCharColumn FIRSTNAME = PERSONS.varCharColumn("firstname").build();
 
-public static final void mail(String[] args)
+public static final void main(String[] args)
 {
-  Queries.select().from(PERSONS).where(LASTNAME.isEqualTo("Doe")).build(Dialects.MYSQL);
+  var sql = Queries.select()
+  	.from(PERSONS)
+  	.where(LASTNAME.isEqualTo("Doe"))
+  	.build(Dialects.MYSQL);
+  System.out.println(sql);
 }	
 ```
-This will build
+This will build:
 ```sql
 SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 ```
@@ -70,3 +74,20 @@ SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 	- NOW
 	
 - Build queries with or without indentation
+
+### Indentation
+Just add `Indentation.enabled()` to the build()-method as follows:
+```java
+Queries.select()
+  .from(PERSONS)
+  .where(LASTNAME.isEqualTo("Doe"))
+  .build(Dialects.MYSQL, Indentation.enabled());
+```
+This will build:
+```sql
+SELECT
+  *
+FROM
+  `persons`
+WHERE `persons`.`lastname` = 'Doe'
+```

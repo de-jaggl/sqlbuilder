@@ -23,7 +23,6 @@ import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
 import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.domain.Selectable;
-import de.jaggl.sqlbuilder.queries.Queries;
 import de.jaggl.sqlbuilder.schema.Schema;
 import de.jaggl.sqlbuilder.schema.Table;
 
