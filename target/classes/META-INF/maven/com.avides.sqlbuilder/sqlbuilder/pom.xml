@@ -22,6 +22,44 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <organization>
+    <name>Jaggl.de</name>
+    <url>http://www.jaggl.de</url>
+  </organization>
+  
+  <developers>
+    <developer>
+      <name>Martin Schumacher</name>
+      <organization>Avides Media AG</organization>
+      <email>mail@martin-schumacher.com</email>
+      <url>http://www.martin-schumacher.com</url>
+        <properties>
+        <picUrl>https://s.gravatar.com/avatar/b4488ed6a5e0ca2843a4b811fb3a4488?s=320</picUrl>
+      </properties>
+      <timezone>1</timezone>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+  
+  <scm>
+    <url>https://github.com/de-jaggl/sqlbuilder</url>
+    <connection>git@github.com:de-jaggl/sqlbuilder.git</connection>
+  </scm>
+  
+  <issueManagement>
+    <system>Github issues</system>
+    <url>https://github.com/de-jaggl/sqlbuilder/issues</url>
+  </issueManagement>
+  
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://raw.githubusercontent.com/de-jaggl/sqlbuilder/master/LICENSE</url>
+    </license>
+  </licenses>
 
   <build>
     <plugins>
