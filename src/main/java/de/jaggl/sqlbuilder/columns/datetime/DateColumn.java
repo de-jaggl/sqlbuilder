@@ -143,11 +143,6 @@ public class DateColumn extends Column
         return new IsLike(this, otherColumn, NONE);
     }
 
-    public Condition isLike(Column otherColumn, LikeType likeType)
-    {
-        return new IsLike(this, otherColumn, likeType);
-    }
-
     public Condition isNotLike(CharSequence value)
     {
         return value == null ? new GenericCondition(IS_NOT_NULL, this) : new IsNotLike(this, value, NONE);
@@ -161,11 +156,6 @@ public class DateColumn extends Column
     public Condition isNotLike(Column otherColumn)
     {
         return new IsNotLike(this, otherColumn, NONE);
-    }
-
-    public Condition isNotLike(Column otherColumn, LikeType likeType)
-    {
-        return new IsNotLike(this, otherColumn, likeType);
     }
 
     public Condition isBetween(LocalDate value1, LocalDate value2)

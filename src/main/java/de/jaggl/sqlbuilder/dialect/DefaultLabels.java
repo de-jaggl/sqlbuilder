@@ -34,7 +34,7 @@ public class DefaultLabels implements Labels
     static final String IS_GREATER_THAN_OR_EQUAL_TO = "{0} >= {1}";
     static final String IS_LESS_THAN = "{0} < {1}";
     static final String IS_LESS_THAN_OR_EQUAL_TO = "{0} <= {1}";
-    static final String IS_BETWEEN = "{0} IS BETWEEN {1} AND {2}";
+    static final String IS_BETWEEN = "{0} BETWEEN {1} AND {2}";
     static final String IS_IN = "{0} IN ({1})";
     static final String IS_NOT_IN = "{0} NOT IN ({1})";
     static final String IS_LIKE = "{0} LIKE {1}";

@@ -115,8 +115,7 @@ public class Select
 
     public Select distinct()
     {
-        distinct = true;
-        return this;
+        return distinct(true);
     }
 
     public Select distinct(boolean doDistinct)

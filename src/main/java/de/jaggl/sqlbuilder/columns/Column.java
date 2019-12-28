@@ -62,12 +62,12 @@ public abstract class Column implements Groupable, Selectable, Definable
 
     public String getFullName(BuildingContext context)
     {
-        return (table != null ? table.getFullName(context) + "." : "") + BuilderUtils.columnApostrophe(name, context);
+        return table.getFullName(context) + "." + BuilderUtils.columnApostrophe(name, context);
     }
 
     public String getFullNameOrAlias(BuildingContext context)
     {
-        return (table != null ? table.getFullNameOrAlias(context) + "." : "") + BuilderUtils.columnApostrophe(name, context);
+        return table.getFullNameOrAlias(context) + "." + BuilderUtils.columnApostrophe(name, context);
     }
 
     public Condition isNull()
