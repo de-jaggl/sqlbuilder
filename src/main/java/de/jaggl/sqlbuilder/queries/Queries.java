@@ -29,24 +29,4 @@ public interface Queries
     {
         return new Select(selectables).distinct();
     }
-
-    public static Update copy(Update update)
-    {
-        return new Update(update);
-    }
-
-    public static Insert copy(Insert insert)
-    {
-        return new Insert(insert);
-    }
-
-    public static Delete copy(Delete delete)
-    {
-        return new Delete(delete);
-    }
-
-    public static Select copy(Select select)
-    {
-        return new Select(select);
-    }
 }

@@ -101,4 +101,9 @@ public class Insert
     {
         return Dialect.forName(dialectName).build(this, indentation);
     }
+
+    public static Insert copy(Insert insert)
+    {
+        return new Insert(insert);
+    }
 }

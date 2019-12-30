@@ -1,6 +1,7 @@
 package de.jaggl.sqlbuilder.dialect;
 
 import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE_NOT;
+import static de.jaggl.sqlbuilder.utils.BuilderUtils.getValued;
 import static java.util.stream.Collectors.joining;
 
 import java.time.format.DateTimeFormatter;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.jaggl.sqlbuilder.columns.Column;
+import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.conditions.CombinedCondition;
 import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
@@ -92,7 +94,7 @@ public abstract class DefaultDialect implements Dialect
             builder.append(indentation.indent().getIndent());
             builder.append(BuilderUtils.columnApostrophe(column.getName(), context));
             builder.append(" ");
-            builder.append(column.getColumnDefinition().getDefinition(context, indentation));
+            builder.append(buildColumnDefinition(column.getColumnDefinition(), context, indentation));
             isFirst = false;
         }
         if (indentation.isEnabled())
@@ -100,6 +102,46 @@ public abstract class DefaultDialect implements Dialect
             builder.append(indentation.getDelimiter());
         }
         builder.append(")");
+        return builder.toString();
+    }
+
+    String buildColumnDefinition(ColumnDefinition definition, BuildingContext context, Indentation indentation)
+    {
+        StringBuilder builder = new StringBuilder(definition.getDefinitionName());
+
+        if (definition.getSize() != null)
+        {
+            builder.append("(").append(definition.getSize().getValue()).append(")");
+        }
+
+        if (definition.isUnsigned())
+        {
+            builder.append(" UNSIGNED");
+        }
+
+        if (definition.isNullable())
+        {
+            if (definition.isDefaultNull())
+            {
+                builder.append(" DEFAULT NULL");
+            }
+        }
+        else
+        {
+            builder.append(" NOT NULL");
+        }
+
+        if (definition.getDefaultValue() != null)
+        {
+            builder.append(" DEFAULT ");
+            builder.append(getValued(definition.getDefaultValue(), context, indentation));
+        }
+
+        if (definition.isAutoIncrement())
+        {
+            builder.append(" AUTO_INCREMENT");
+        }
+
         return builder.toString();
     }
 

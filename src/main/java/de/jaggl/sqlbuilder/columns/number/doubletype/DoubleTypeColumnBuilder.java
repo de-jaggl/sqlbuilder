@@ -18,6 +18,7 @@ public abstract class DoubleTypeColumnBuilder<T extends DoubleTypeColumnBuilder<
     @SuppressWarnings("unchecked")
     public T defaultValue(double value)
     {
+        isDefaultNull = false;
         defaultValue = Double.valueOf(value);
         return (T) this;
     }

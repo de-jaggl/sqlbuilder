@@ -347,4 +347,9 @@ public class Select
     {
         select.limitation = null;
     }
+
+    public static Select copy(Select select)
+    {
+        return new Select(select);
+    }
 }

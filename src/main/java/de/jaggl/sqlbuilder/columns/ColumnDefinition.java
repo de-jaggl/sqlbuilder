@@ -1,10 +1,6 @@
 package de.jaggl.sqlbuilder.columns;
 
-import static de.jaggl.sqlbuilder.utils.BuilderUtils.getValued;
-
-import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.Size;
-import de.jaggl.sqlbuilder.utils.Indentation;
 
 public class ColumnDefinition
 {
@@ -28,43 +24,38 @@ public class ColumnDefinition
         this.defaultValue = defaultValue;
     }
 
-    public String getDefinition(BuildingContext context, Indentation indentation)
+    public String getDefinitionName()
     {
-        StringBuilder builder = new StringBuilder(definitionName);
+        return definitionName;
+    }
 
-        if (size != null)
-        {
-            builder.append("(").append(size.getValue()).append(")");
-        }
+    public Size getSize()
+    {
+        return size;
+    }
 
-        if (isUnsigned)
-        {
-            builder.append(" UNSIGNED");
-        }
+    public boolean isNullable()
+    {
+        return isNullable;
+    }
 
-        if (isNullable)
-        {
-            if (isDefaultNull)
-            {
-                builder.append(" DEFAULT NULL");
-            }
-        }
-        else
-        {
-            builder.append(" NOT NULL");
-        }
+    public boolean isDefaultNull()
+    {
+        return isDefaultNull;
+    }
 
-        if (defaultValue != null)
-        {
-            builder.append(" DEFAULT ");
-            builder.append(getValued(defaultValue, context, indentation));
-        }
+    public boolean isUnsigned()
+    {
+        return isUnsigned;
+    }
 
-        if (isAutoIncrement)
-        {
-            builder.append(" AUTO_INCREMENT");
-        }
+    public boolean isAutoIncrement()
+    {
+        return isAutoIncrement;
+    }
 
-        return builder.toString();
+    public Object getDefaultValue()
+    {
+        return defaultValue;
     }
 }

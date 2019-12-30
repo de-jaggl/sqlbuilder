@@ -102,13 +102,18 @@ public class Delete
         return Dialect.forName(dialectName).build(this, indentation);
     }
 
-    public void clearWheres(Delete delete)
+    public static void clearWheres(Delete delete)
     {
         delete.where = null;
     }
 
-    public void clearLimit(Delete delete)
+    public static void clearLimit(Delete delete)
     {
         delete.limitation = null;
+    }
+
+    public static Delete copy(Delete delete)
+    {
+        return new Delete(delete);
     }
 }

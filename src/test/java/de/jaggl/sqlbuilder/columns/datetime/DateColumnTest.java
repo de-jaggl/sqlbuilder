@@ -9,20 +9,21 @@ import java.util.function.BiFunction;
 
 import org.junit.jupiter.api.Test;
 
+import de.jaggl.sqlbuilder.columns.ColumnTest;
 import de.jaggl.sqlbuilder.schema.Table;
-import de.jaggl.sqlbuilder.testsupport.ColumnTestSupport;
+import de.jaggl.sqlbuilder.testsupport.ColumnAliasTestSupport;
 import de.jaggl.sqlbuilder.testsupport.Consumers;
 
-class DateColumnTest extends ColumnTestSupport<DateColumn, DateColumnBuilder>
+class DateColumnTest extends ColumnTest<DateColumn, DateColumnBuilder> implements ColumnAliasTestSupport<DateColumn, DateColumnBuilder>
 {
     @Override
-    protected DateColumnBuilder getColumnBuilder(Table table, String name)
+    public DateColumnBuilder getColumnBuilder(Table table, String name)
     {
         return new DateColumnBuilder(table, name);
     }
 
     @Override
-    protected BiFunction<DateColumn, String, DateColumn> getAliasFunction()
+    public BiFunction<DateColumn, String, DateColumn> getAliasFunction()
     {
         return (column, alias) -> column.as(alias);
     }
@@ -39,14 +40,12 @@ class DateColumnTest extends ColumnTestSupport<DateColumn, DateColumnBuilder>
     }
 
     @Test
-    void testConditions()
+    void testDateColumnConditions()
     {
         assertCondition(column -> column.isEqualTo(LocalDate.of(1981, 12, 29))).isEqualTo("= '1981-12-29'");
         assertCondition(column -> column.isEqualTo((LocalDate) null)).isEqualTo("IS NULL");
-        assertCondition(column -> column.isEqualTo(getOtherColumn())).isEqualTo("= `table`.`other`");
         assertCondition(column -> column.isNotEqualTo(LocalDate.of(1981, 12, 29))).isEqualTo("!= '1981-12-29'");
         assertCondition(column -> column.isNotEqualTo((LocalDate) null)).isEqualTo("IS NOT NULL");
-        assertCondition(column -> column.isNotEqualTo(getOtherColumn())).isEqualTo("!= `table`.`other`");
         assertCondition(column -> column.isLike("1981-12-%")).isEqualTo("LIKE '1981-12-%'");
         assertCondition(column -> column.isLike((String) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isLike("-12-29", BEFORE)).isEqualTo("LIKE '%-12-29'");
@@ -65,8 +64,6 @@ class DateColumnTest extends ColumnTestSupport<DateColumn, DateColumnBuilder>
         assertCondition(column -> column.isNotLike("-12-", BOTH)).isEqualTo("NOT LIKE '%-12-%'");
         assertCondition(column -> column.isNotLike(null, BOTH)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isNotLike(getOtherColumn())).isEqualTo("NOT LIKE `table`.`other`");
-        assertCondition(column -> column.isNull()).isEqualTo("IS NULL");
-        assertCondition(column -> column.isNotNull()).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isAfter(LocalDate.of(1981, 12, 29))).isEqualTo("> '1981-12-29'");
         assertCondition(column -> column.isAfterOrEqualTo(LocalDate.of(1981, 12, 29))).isEqualTo(">= '1981-12-29'");
         assertCondition(column -> column.isBefore(LocalDate.of(1981, 12, 29))).isEqualTo("< '1981-12-29'");

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.datetime.DateColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
-import de.jaggl.sqlbuilder.queries.Queries;
 import de.jaggl.sqlbuilder.schema.Table;
 
 class InsertTest
@@ -51,6 +50,6 @@ class InsertTest
         assertThat(insert.build(MYSQL)).isEqualTo(insert.build(SYBASE));
         assertThat(insert.build(MYSQL, enabled())).isEqualTo(insert.build(SYBASE, enabled()));
 
-        assertThat(Queries.copy(insert).build(MYSQL)).isEqualTo(insert.build(MYSQL));
+        assertThat(Insert.copy(insert).build(MYSQL)).isEqualTo(insert.build(MYSQL));
     }
 }

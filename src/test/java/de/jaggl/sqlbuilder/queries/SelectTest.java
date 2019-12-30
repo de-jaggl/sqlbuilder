@@ -218,6 +218,6 @@ class SelectTest
                         + "  `dba`.`persons`.`lastname` ASC,\n" //
                         + "  `dba`.`persons`.`forename` DESC");
 
-        assertThat(Queries.copy(select).build(MYSQL)).isEqualTo(select.build(MYSQL));
+        assertThat(Select.copy(select).build(MYSQL)).isEqualTo(select.build(MYSQL));
     }
 }

@@ -131,8 +131,13 @@ public class Update
         return Dialect.forName(dialectName).build(this, indentation);
     }
 
-    public void clearWheres(Update update)
+    public static void clearWheres(Update update)
     {
         update.where = null;
+    }
+
+    public static Update copy(Update update)
+    {
+        return new Update(update);
     }
 }

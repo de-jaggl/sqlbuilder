@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
-import de.jaggl.sqlbuilder.queries.Queries;
 import de.jaggl.sqlbuilder.schema.Table;
 
 class DeleteTest
@@ -71,6 +70,6 @@ class DeleteTest
                         + "  )\n" //
                         + ")");
 
-        assertThat(Queries.copy(delete).build(MYSQL)).isEqualTo(delete.build(MYSQL));
+        assertThat(Delete.copy(delete).build(MYSQL)).isEqualTo(delete.build(MYSQL));
     }
 }

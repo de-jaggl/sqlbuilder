@@ -33,6 +33,7 @@ public abstract class IntegerColumnBuilder<T extends IntegerColumnBuilder<T, C>,
     @SuppressWarnings("unchecked")
     public T defaultValue(int value)
     {
+        isDefaultNull = false;
         defaultValue = Integer.valueOf(value);
         return (T) this;
     }
