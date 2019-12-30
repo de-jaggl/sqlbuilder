@@ -2,7 +2,7 @@ package de.jaggl.sqlbuilder.schema;
 
 import de.jaggl.sqlbuilder.columns.Column;
 
-public abstract class TableBuilderUtil
+public final class TableBuilderUtil
 {
     private TableBuilderUtil()
     {
