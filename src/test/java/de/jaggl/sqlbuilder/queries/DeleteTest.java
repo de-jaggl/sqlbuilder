@@ -72,4 +72,23 @@ class DeleteTest
 
         assertThat(Delete.copy(delete).build(MYSQL)).isEqualTo(delete.build(MYSQL));
     }
+
+    @Test
+    void testBuildDeleteWithWhereNot()
+    {
+        var delete = deleteFrom(PERSONS).whereNot(LASTNAME.isLike("Nils", AFTER));
+
+        System.out.println(delete.build(MYSQL, enabled()));
+        System.out.println();
+        System.out.println(delete.build(SYBASE, enabled()));
+
+        assertThat(delete.build(MYSQL)).isEqualTo("DELETE FROM `persons` WHERE NOT `persons`.`lastname` LIKE 'Nils%'");
+
+        assertThat(delete.build(MYSQL, enabled()))
+                .isEqualTo("DELETE FROM\n" //
+                        + "  `persons`\n" //
+                        + "WHERE NOT `persons`.`lastname` LIKE 'Nils%'");
+
+        assertThat(Delete.copy(delete).build(MYSQL)).isEqualTo(delete.build(MYSQL));
+    }
 }

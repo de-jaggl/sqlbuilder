@@ -5,6 +5,8 @@ import static de.jaggl.sqlbuilder.domain.LikeType.BEFORE;
 import static de.jaggl.sqlbuilder.domain.LikeType.BOTH;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.function.BiFunction;
 
 import org.junit.jupiter.api.Test;
@@ -44,9 +46,13 @@ class DateTimeColumnTest extends ColumnTest<DateTimeColumn, DateTimeColumnBuilde
     void testDateTimeColumnConditions()
     {
         assertCondition(column -> column.isEqualTo(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isEqualTo(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("= '1981-12-29 21:03:51.000000'");
         assertCondition(column -> column.isEqualTo((LocalDateTime) null)).isEqualTo("IS NULL");
+        assertCondition(column -> column.isEqualTo((Date) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isNotEqualTo(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("!= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isNotEqualTo(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("!= '1981-12-29 21:03:51.000000'");
         assertCondition(column -> column.isNotEqualTo((LocalDateTime) null)).isEqualTo("IS NOT NULL");
+        assertCondition(column -> column.isNotEqualTo((Date) null)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isLike("1981-12-%")).isEqualTo("LIKE '1981-12-%'");
         assertCondition(column -> column.isLike((String) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isLike("-12-29", BEFORE)).isEqualTo("LIKE '%-12-29'");
@@ -66,18 +72,38 @@ class DateTimeColumnTest extends ColumnTest<DateTimeColumn, DateTimeColumnBuilde
         assertCondition(column -> column.isNotLike(null, BOTH)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isNotLike(getOtherColumn())).isEqualTo("NOT LIKE `table`.`other`");
         assertCondition(column -> column.isAfter(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("> '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isAfter(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("> '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isAfter(getOtherColumn())).isEqualTo("> `table`.`other`");
         assertCondition(column -> column.isAfterOrEqualTo(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo(">= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isAfterOrEqualTo(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo(">= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isAfterOrEqualTo(getOtherColumn())).isEqualTo(">= `table`.`other`");
         assertCondition(column -> column.isBefore(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("< '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isBefore(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("< '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isBefore(getOtherColumn())).isEqualTo("< `table`.`other`");
         assertCondition(column -> column.isBeforeOrEqualTo(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("<= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isBeforeOrEqualTo(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("<= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.isBeforeOrEqualTo(getOtherColumn())).isEqualTo("<= `table`.`other`");
         assertCondition(column -> column.isBetween(LocalDateTime.of(1981, 12, 29, 21, 3, 51), LocalDateTime.of(2019, 12, 28, 21, 3, 51)))
                 .isEqualTo("BETWEEN '1981-12-29 21:03:51.000000' AND '2019-12-28 21:03:51.000000'");
-        assertCondition(column -> column.isAfter(getOtherColumn())).isEqualTo("> `table`.`other`");
-        assertCondition(column -> column.isAfterOrEqualTo(getOtherColumn())).isEqualTo(">= `table`.`other`");
-        assertCondition(column -> column.isBefore(getOtherColumn())).isEqualTo("< `table`.`other`");
-        assertCondition(column -> column.isBeforeOrEqualTo(getOtherColumn())).isEqualTo("<= `table`.`other`");
+        assertCondition(column -> column.isBetween(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)), LocalDateTime.of(2019, 12, 28, 21, 3, 51)))
+                .isEqualTo("BETWEEN '1981-12-29 21:03:51.000000' AND '2019-12-28 21:03:51.000000'");
+        assertCondition(column -> column.isBetween(LocalDateTime.of(1981, 12, 29, 21, 3, 51), toDate(LocalDateTime.of(2019, 12, 28, 21, 3, 51))))
+                .isEqualTo("BETWEEN '1981-12-29 21:03:51.000000' AND '2019-12-28 21:03:51.000000'");
+        assertCondition(column -> column.isBetween(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)), toDate(LocalDateTime.of(2019, 12, 28, 21, 3, 51))))
+                .isEqualTo("BETWEEN '1981-12-29 21:03:51.000000' AND '2019-12-28 21:03:51.000000'");
         assertCondition(column -> column.isBetween(LocalDateTime.of(1981, 12, 29, 21, 3, 51), getOtherColumn()))
+                .isEqualTo("BETWEEN '1981-12-29 21:03:51.000000' AND `table`.`other`");
+        assertCondition(column -> column.isBetween(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)), getOtherColumn()))
                 .isEqualTo("BETWEEN '1981-12-29 21:03:51.000000' AND `table`.`other`");
         assertCondition(column -> column.isBetween(getOtherColumn(), LocalDateTime.of(2019, 12, 28, 21, 3, 51)))
                 .isEqualTo("BETWEEN `table`.`other` AND '2019-12-28 21:03:51.000000'");
+        assertCondition(column -> column.isBetween(getOtherColumn(), toDate(LocalDateTime.of(2019, 12, 28, 21, 3, 51))))
+                .isEqualTo("BETWEEN `table`.`other` AND '2019-12-28 21:03:51.000000'");
+        assertCondition(column -> column.isBetween(getOtherColumn(), getOtherColumn2())).isEqualTo("BETWEEN `table`.`other` AND `table`.`other2`");
+    }
+
+    private static Date toDate(LocalDateTime localDateTime)
+    {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }

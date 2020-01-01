@@ -26,7 +26,7 @@ import de.jaggl.sqlbuilder.utils.Indentation;
  *
  * @since 2.0.0
  */
-public class Select
+public class Select implements Query
 {
     private boolean distinct;
     private List<Selectable> selectables;
@@ -294,28 +294,13 @@ public class Select
 
     public Select limit(long limit)
     {
-        limitation = new Limit(limit, 0);
-        return this;
+        return limit(limit, 0);
     }
 
-    public String build(Dialect dialect)
-    {
-        return dialect.build(this, Indentation.disabled());
-    }
-
+    @Override
     public String build(Dialect dialect, Indentation indentation)
     {
         return dialect.build(this, indentation);
-    }
-
-    public String build(String dialectName)
-    {
-        return Dialect.forName(dialectName).build(this, Indentation.disabled());
-    }
-
-    public String build(String dialectName, Indentation indentation)
-    {
-        return Dialect.forName(dialectName).build(this, indentation);
     }
 
     public static void clearSelects(Select select)

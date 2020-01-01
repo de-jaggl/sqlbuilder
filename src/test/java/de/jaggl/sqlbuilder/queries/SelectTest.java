@@ -53,6 +53,13 @@ class SelectTest
     }
 
     @Test
+    void testGetDialectByName()
+    {
+        assertThat(select().from(PERSONS).build("MYSQL")).isEqualTo("SELECT * FROM `dba`.`persons`");
+        assertThat(select().from(PERSONS).build("MYSQL", enabled())).isEqualTo("SELECT\n  *\nFROM\n  `dba`.`persons`");
+    }
+
+    @Test
     void testBuildComplexSelect()
     {
         var subCondition = LASTNAME.isEqualTo("Schumacher")
