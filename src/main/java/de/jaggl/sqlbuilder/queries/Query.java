@@ -9,6 +9,16 @@ public interface Query
 {
     String build(Dialect dialect, Indentation indentation);
 
+    default String build()
+    {
+        return build(Dialect.getDefault());
+    }
+
+    default String build(Indentation indentation)
+    {
+        return build(Dialect.getDefault(), indentation);
+    }
+
     default String build(Dialect dialect)
     {
         return build(dialect, disabled());

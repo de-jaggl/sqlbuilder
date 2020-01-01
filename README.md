@@ -20,7 +20,7 @@ public static final void main(String[] args)
   var sql = Queries.select()
   	.from(PERSONS)
   	.where(LASTNAME.isEqualTo("Doe"))
-  	.build(Dialects.MYSQL);
+  	.build();
   System.out.println(sql);
 }	
 ```
@@ -76,13 +76,27 @@ SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 	
 - Build queries with or without indentation
 
+### Choose Dialect
+By default the MySQL-Dialect is chosen. To change the Dialect, you can pass your wanted Dialect to the `build()`-method. The known Dialects are collected in the Utility-Class `Dialects`. Simple Example for choose the known Sybase-Dialect:
+```java
+Queries.select()
+  .from(PERSONS)
+  .limit(100, 10)
+  .build(Dialects.SYBASE);
+```
+This will build:
+```sql
+SELECT TOP 100 START AT 11 FROM `persons` WHERE `persons`.`lastname` = 'Doe'
+```
+It is also possible to glabally change the default-Dialect. To do so, set the system-property `sqlbuilder.defaultDialect` to the name of the Dialect you want.
+
 ### Indentation
-Just add `Indentation.enabled()` to the build()-method as follows:
+Just add `Indentation.enabled()` to the `build()`-method as follows:
 ```java
 Queries.select()
   .from(PERSONS)
   .where(LASTNAME.isEqualTo("Doe"))
-  .build(Dialects.MYSQL, Indentation.enabled());
+  .build(Indentation.enabled());
 ```
 This will build:
 ```sql

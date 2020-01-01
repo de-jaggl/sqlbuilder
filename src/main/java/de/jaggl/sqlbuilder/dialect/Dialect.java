@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.dialect;
 
+import static java.lang.System.getProperty;
+
 import java.time.format.DateTimeFormatter;
 
 import de.jaggl.sqlbuilder.queries.Delete;
@@ -47,5 +49,10 @@ public interface Dialect
     public static Dialect forName(String name)
     {
         return Dialects.forName(name);
+    }
+
+    public static Dialect getDefault()
+    {
+        return forName(getProperty("sqlbuilder.defaultDialect", "MYSQL"));
     }
 }

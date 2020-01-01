@@ -43,10 +43,10 @@ class InsertTest
         System.out.println();
         System.out.println(insert.build(SYBASE, enabled()));
 
-        assertThat(insert.build(MYSQL))
+        assertThat(insert.build())
                 .isEqualTo("INSERT INTO `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`forename` = 'Martin', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89, `persons`.`lastname` = 'Schumacher'");
 
-        assertThat(insert.build(MYSQL, enabled()))
+        assertThat(insert.build(enabled()))
                 .isEqualTo("INSERT INTO\n" //
                         + "  `persons`\n" //
                         + "SET\n" //
