@@ -86,7 +86,7 @@ Queries.select()
 ```
 This will build:
 ```sql
-SELECT TOP 100 START AT 11 * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
+SELECT TOP 100 START AT 11 * FROM `persons`
 ```
 It is also possible to glabally change the default-Dialect. To do so, set the system-property `sqlbuilder.defaultDialect` to the name of the Dialect you want.
 
