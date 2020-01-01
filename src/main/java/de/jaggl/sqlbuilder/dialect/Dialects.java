@@ -6,6 +6,11 @@ import java.util.Map;
 
 import de.jaggl.sqlbuilder.domain.exceptions.UnknownDialectException;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public final class Dialects
 {
     private static final Map<String, Dialect> REGISTERED_DIALECTS = new HashMap<>();

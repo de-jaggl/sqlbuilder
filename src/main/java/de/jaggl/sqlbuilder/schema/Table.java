@@ -25,6 +25,11 @@ import de.jaggl.sqlbuilder.domain.Queryable;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Table implements Queryable
 {
     private Schema schema;

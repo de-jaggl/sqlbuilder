@@ -2,6 +2,11 @@ package de.jaggl.sqlbuilder.columns;
 
 import de.jaggl.sqlbuilder.domain.Size;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class ColumnDefinition
 {
     private final String definitionName;

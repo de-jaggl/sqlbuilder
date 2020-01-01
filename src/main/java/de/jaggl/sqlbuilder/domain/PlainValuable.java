@@ -3,6 +3,11 @@ package de.jaggl.sqlbuilder.domain;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class PlainValuable implements Valuable
 {
     private Object value;

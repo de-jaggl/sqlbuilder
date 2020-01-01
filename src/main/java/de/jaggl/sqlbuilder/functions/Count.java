@@ -4,6 +4,11 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Count extends NumberColumnFunction
 {
     public Count(Column column)

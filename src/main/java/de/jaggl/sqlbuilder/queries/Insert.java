@@ -15,6 +15,11 @@ import de.jaggl.sqlbuilder.functions.Function;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Insert
 {
     private Table table;

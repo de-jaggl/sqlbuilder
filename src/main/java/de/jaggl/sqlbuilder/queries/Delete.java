@@ -11,6 +11,11 @@ import de.jaggl.sqlbuilder.domain.Limit;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Delete
 {
     private Table table;

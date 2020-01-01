@@ -6,6 +6,11 @@ import de.jaggl.sqlbuilder.columns.configurable.NullableColumnBuilder;
 import de.jaggl.sqlbuilder.columns.configurable.UnsignableColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class NumberColumnBuilder<T extends NumberColumnBuilder<T, N, C>, N extends Number, C extends NumberColumn<C, N>> extends ColumnBuilder<C>
         implements NullableColumnBuilder<T>, DefaultValueColumnBuilder<T, N>, UnsignableColumnBuilder<T>
 {

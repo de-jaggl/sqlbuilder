@@ -1,5 +1,10 @@
 package de.jaggl.sqlbuilder.dialect;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class DefaultLabels implements Labels
 {
     private static DefaultLabels instance;

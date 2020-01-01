@@ -15,6 +15,11 @@ import de.jaggl.sqlbuilder.columns.number.NumberColumn;
 import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.conditions.GenericCondition;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class NumberColumnFunction extends ColumnFunction
 {
     public NumberColumnFunction(Column column, String definition)

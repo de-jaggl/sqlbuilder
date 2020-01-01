@@ -3,6 +3,11 @@ package de.jaggl.sqlbuilder.queries;
 import de.jaggl.sqlbuilder.domain.Selectable;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public interface Queries
 {
     public static Insert insertInto(Table table)

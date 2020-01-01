@@ -5,6 +5,11 @@ import de.jaggl.sqlbuilder.columns.number.NumberColumnBuilder;
 import de.jaggl.sqlbuilder.domain.IntSize;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class IntegerColumnBuilder<T extends IntegerColumnBuilder<T, C>, C extends IntegerColumn<C>>
         extends NumberColumnBuilder<T, Integer, C> implements AutoIncrementableColumnBuilder<T>
 {

@@ -5,6 +5,11 @@ import static java.util.Locale.GERMAN;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class DoubleSize implements Size
 {
     private static final DecimalFormat FORMAT = new DecimalFormat("0.0");

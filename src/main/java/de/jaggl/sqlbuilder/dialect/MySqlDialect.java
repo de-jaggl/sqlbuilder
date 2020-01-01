@@ -1,5 +1,10 @@
 package de.jaggl.sqlbuilder.dialect;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class MySqlDialect extends DefaultDialect
 {
     private static final MySqlDialect instance;

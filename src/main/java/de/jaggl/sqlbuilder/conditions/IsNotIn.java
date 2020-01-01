@@ -9,6 +9,11 @@ import java.util.Collection;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class IsNotIn extends Condition
 {
     private Object value;

@@ -1,5 +1,10 @@
 package de.jaggl.sqlbuilder.utils;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Indentation
 {
     private boolean enabled;

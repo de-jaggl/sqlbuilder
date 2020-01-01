@@ -2,6 +2,11 @@ package de.jaggl.sqlbuilder.schema;
 
 import de.jaggl.sqlbuilder.columns.Column;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public final class TableBuilderUtil
 {
     private TableBuilderUtil()

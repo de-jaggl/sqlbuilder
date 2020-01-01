@@ -12,6 +12,11 @@ import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.functions.Function;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public final class BuilderUtils
 {
     private BuilderUtils()

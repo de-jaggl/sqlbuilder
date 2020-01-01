@@ -8,6 +8,11 @@ import de.jaggl.sqlbuilder.columns.configurable.DefaultValueColumnBuilder;
 import de.jaggl.sqlbuilder.columns.configurable.NullableColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class DateTimeColumnBuilder extends ColumnBuilder<DateTimeColumn>
         implements NullableColumnBuilder<DateTimeColumnBuilder>, DefaultValueColumnBuilder<DateTimeColumnBuilder, LocalDateTime>
 {

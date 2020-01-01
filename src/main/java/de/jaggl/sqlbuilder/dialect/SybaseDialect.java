@@ -1,5 +1,10 @@
 package de.jaggl.sqlbuilder.dialect;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.Limit;
 import de.jaggl.sqlbuilder.queries.Delete;

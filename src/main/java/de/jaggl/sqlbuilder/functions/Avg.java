@@ -2,6 +2,11 @@ package de.jaggl.sqlbuilder.functions;
 
 import de.jaggl.sqlbuilder.columns.Column;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Avg extends NumberColumnFunction
 {
     public Avg(Column column)

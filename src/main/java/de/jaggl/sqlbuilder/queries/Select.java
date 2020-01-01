@@ -21,6 +21,11 @@ import de.jaggl.sqlbuilder.domain.QueryableSelect;
 import de.jaggl.sqlbuilder.domain.Selectable;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Select
 {
     private boolean distinct;

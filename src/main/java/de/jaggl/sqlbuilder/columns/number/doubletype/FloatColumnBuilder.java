@@ -3,6 +3,11 @@ package de.jaggl.sqlbuilder.columns.number.doubletype;
 import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class FloatColumnBuilder extends DoubleTypeColumnBuilder<FloatColumnBuilder, FloatColumn>
 {
     public FloatColumnBuilder(Table table, String name)

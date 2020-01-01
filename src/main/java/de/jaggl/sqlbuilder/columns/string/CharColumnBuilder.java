@@ -4,6 +4,11 @@ import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.domain.IntSize;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class CharColumnBuilder extends StringColumnBuilder<CharColumnBuilder, CharColumn>
 {
     private IntSize size;

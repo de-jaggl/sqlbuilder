@@ -8,6 +8,11 @@ import de.jaggl.sqlbuilder.conditions.GenericCondition;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class ColumnFunction implements Function
 {
     protected Column column;

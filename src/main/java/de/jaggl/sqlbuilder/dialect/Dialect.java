@@ -9,6 +9,11 @@ import de.jaggl.sqlbuilder.queries.Update;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public interface Dialect
 {
     String getName();

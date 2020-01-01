@@ -8,6 +8,11 @@ import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.columns.number.NumberColumn;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class DoubleTypeColumn<T extends DoubleTypeColumn<T>> extends NumberColumn<T, Double>
 {
     private static final DecimalFormat FORMAT = new DecimalFormat("0.0");

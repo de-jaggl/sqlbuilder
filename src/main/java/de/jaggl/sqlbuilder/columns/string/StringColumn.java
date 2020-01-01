@@ -21,6 +21,11 @@ import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.ArrayUtils;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class StringColumn<T extends StringColumn<T>> extends Column
 {
     public StringColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)

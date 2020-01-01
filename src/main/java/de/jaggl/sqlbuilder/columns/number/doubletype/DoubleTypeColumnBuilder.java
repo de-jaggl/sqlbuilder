@@ -5,6 +5,11 @@ import de.jaggl.sqlbuilder.columns.number.NumberColumnBuilder;
 import de.jaggl.sqlbuilder.domain.DoubleSize;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class DoubleTypeColumnBuilder<T extends DoubleTypeColumnBuilder<T, C>, C extends NumberColumn<C, Double>>
         extends NumberColumnBuilder<T, Double, C>
 {

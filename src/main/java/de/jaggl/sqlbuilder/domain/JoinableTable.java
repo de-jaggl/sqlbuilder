@@ -6,6 +6,11 @@ import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class JoinableTable implements Joinable
 {
     private JoinType joinType;

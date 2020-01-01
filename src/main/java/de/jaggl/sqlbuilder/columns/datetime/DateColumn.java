@@ -24,6 +24,11 @@ import de.jaggl.sqlbuilder.conditions.IsNotLike;
 import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class DateColumn extends Column
 {
     public DateColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)

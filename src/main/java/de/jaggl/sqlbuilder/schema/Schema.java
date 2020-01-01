@@ -1,5 +1,10 @@
 package de.jaggl.sqlbuilder.schema;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class Schema
 {
     private String name;

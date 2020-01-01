@@ -6,6 +6,11 @@ import java.util.List;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class CombinedCondition extends Condition
 {
     private List<Condition> conditions = new ArrayList<>();

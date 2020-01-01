@@ -30,6 +30,11 @@ import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class DefaultDialect implements Dialect
 {
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE;

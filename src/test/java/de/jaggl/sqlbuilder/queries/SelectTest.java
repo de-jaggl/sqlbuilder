@@ -22,6 +22,7 @@ import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
 import de.jaggl.sqlbuilder.conditions.Condition;
+import de.jaggl.sqlbuilder.domain.Queryable;
 import de.jaggl.sqlbuilder.domain.Selectable;
 import de.jaggl.sqlbuilder.schema.Schema;
 import de.jaggl.sqlbuilder.schema.Table;
@@ -45,8 +46,10 @@ class SelectTest
     {
         assertThat(select().from(PERSONS).whereNot(LASTNAME.isEqualTo(NICKNAME).and(FORENAME.isNull()).and(NICKNAME.isNotIn("a", "b", "c"))).build(MYSQL))
                 .isEqualTo("SELECT * FROM `dba`.`persons` WHERE NOT (`dba`.`persons`.`lastname` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`forename` IS NULL AND `dba`.`persons`.`nickname` NOT IN ('a', 'b', 'c'))");
-        assertThat(select().from(PERSONS).whereNot(LASTNAME.isEqualTo(NICKNAME).and(FORENAME.isNull()).and(NICKNAME.isNotIn("a", "b", "c"))).build(SYBASE))
-                .isEqualTo("SELECT * FROM `dba`.`persons` WHERE NOT (`dba`.`persons`.`lastname` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`forename` IS NULL AND `dba`.`persons`.`nickname` NOT IN ('a', 'b', 'c'))");
+        assertThat(select().from(Queryable.plain("persons").as("p"))
+                .whereNot(LASTNAME.isEqualTo(NICKNAME).and(FORENAME.isNull()).and(NICKNAME.isNotIn("a", "b", "c")))
+                .build(SYBASE))
+                        .isEqualTo("SELECT * FROM persons AS `p` WHERE NOT (`dba`.`persons`.`lastname` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`forename` IS NULL AND `dba`.`persons`.`nickname` NOT IN ('a', 'b', 'c'))");
     }
 
     @Test

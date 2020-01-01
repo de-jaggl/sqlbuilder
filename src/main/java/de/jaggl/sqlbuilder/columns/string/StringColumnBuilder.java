@@ -6,6 +6,11 @@ import de.jaggl.sqlbuilder.columns.configurable.DefaultValueColumnBuilder;
 import de.jaggl.sqlbuilder.columns.configurable.NullableColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public abstract class StringColumnBuilder<T extends StringColumnBuilder<T, C>, C extends Column> extends ColumnBuilder<C>
         implements NullableColumnBuilder<T>, DefaultValueColumnBuilder<T, CharSequence>
 {
