@@ -129,9 +129,8 @@ public class Select implements Query
         return this;
     }
 
-    public Select select(Selectable selectable, Selectable... furtherSelectables)
+    public Select select(Selectable... furtherSelectables)
     {
-        select(selectable);
         for (var furtherSelectable : furtherSelectables)
         {
             select(furtherSelectable);
