@@ -35,6 +35,8 @@ jobs:
         run: mvn -DskipUTs -Dgpg.skip=true jacoco:restore-instrumented-classes verify
 
       - name: sonar-analyse
+        env:		
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mvn sonar:sonar \
             -Dsonar.host.url=https://sonarcloud.io/ \
