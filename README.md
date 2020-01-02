@@ -35,7 +35,7 @@ SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
