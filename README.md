@@ -5,6 +5,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=sqale_index)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![Gitter](https://badges.gitter.im/de-jaggl/community.svg)](https://gitter.im/de-jaggl/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![javadoc](https://javadoc.io/badge2/de.jaggl.sqlbuilder/sqlbuilder-core/javadoc.svg)](https://javadoc.io/doc/de.jaggl.sqlbuilder/sqlbuilder-core)
 
 A Java-Library to build SQL-Statements
 
