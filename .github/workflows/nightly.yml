@@ -1,0 +1,48 @@
+name: nightly
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: setup-java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: checkout
+        uses: actions/checkout@v1
+
+      - name: caching
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+
+      - name: compile
+        run: mvn clean compile test-compile
+
+      - name: unit-tests
+        run: mvn surefire:test
+
+      - name: integration-tests
+        run: mvn -DskipUTs -Dgpg.skip=true jacoco:restore-instrumented-classes verify
+
+      - name: sonar-analyse
+        env:		
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn sonar:sonar \
+            -Dsonar.host.url=https://sonarcloud.io/ \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.organization=de-jaggl \
+            -Dsonar.projectKey=de-jaggl_sqlbuilder \
+            -Dsonar.java.binaries=./target/classes
+
+      - name: pom-analyse
+        run: mvn enforcer:enforce
