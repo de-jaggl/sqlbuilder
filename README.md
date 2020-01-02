@@ -7,6 +7,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=sqale_index)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
+[![GitHub](https://img.shields.io/github/license/de-jaggl/sqlbuilder)](https://github.com/de-jaggl/sqlbuilder/blob/master/LICENSE)
 [![Gitter](https://badges.gitter.im/de-jaggl/community.svg)](https://gitter.im/de-jaggl/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 A Java-Library to build SQL-Statements
