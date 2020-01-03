@@ -6,24 +6,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.jaggl.sqlbuilder.columns.Column;
+import de.jaggl.sqlbuilder.columns.datetime.DateColumn;
 import de.jaggl.sqlbuilder.columns.datetime.DateColumnBuilder;
+import de.jaggl.sqlbuilder.columns.datetime.DateTimeColumn;
 import de.jaggl.sqlbuilder.columns.datetime.DateTimeColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.doubletype.DecimalColumn;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DecimalColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.doubletype.FloatColumn;
 import de.jaggl.sqlbuilder.columns.number.doubletype.FloatColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.integer.BigIntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.BigIntColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.IntColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.integer.MediumIntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.MediumIntColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.integer.SmallIntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.SmallIntColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.integer.TinyIntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.TinyIntColumnBuilder;
+import de.jaggl.sqlbuilder.columns.string.CharColumn;
 import de.jaggl.sqlbuilder.columns.string.CharColumnBuilder;
+import de.jaggl.sqlbuilder.columns.string.TextColumn;
 import de.jaggl.sqlbuilder.columns.string.TextColumnBuilder;
+import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumnBuilder;
 import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.dialect.Dialect;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.JoinableTable;
 import de.jaggl.sqlbuilder.domain.Queryable;
+import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.Getter;
@@ -78,76 +92,166 @@ public class Table implements Queryable
         return alias != null ? BuilderUtils.columnApostrophe(alias, context) : getFullName(context);
     }
 
+    /**
+     * Creates a clone from the current {@link Table} but with the given alias
+     *
+     * @param alias the alias for the {@link Table}
+     * @return the created {@link Table}-clone with the alias
+     */
     public Table as(@SuppressWarnings("hiding") String alias)
     {
         return new Table(schema, name, alias);
     }
 
+    /**
+     * Creates a {@link JoinableTable} to be used in {@link Select#join(JoinableTable)} on the given {@link Condition}
+     *
+     * @param condition the {@link Condition} on which the join should be done
+     * @return the {@link JoinableTable}
+     */
     public JoinableTable on(Condition condition)
     {
         return new JoinableTable(null, this, condition);
     }
 
+    /**
+     * Creates a {@link BigIntColumnBuilder} to build a {@link BigIntColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link BigIntColumn} to be build
+     * @return the {@link BigIntColumnBuilder} to build a {@link BigIntColumn} from
+     */
     public BigIntColumnBuilder bigIntColumn(String columnName)
     {
         return new BigIntColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link CharColumnBuilder} to build a {@link CharColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link CharColumn} to be build
+     * @return the {@link CharColumnBuilder} to build a {@link CharColumn} from
+     */
     public CharColumnBuilder charColumn(String columnName)
     {
         return new CharColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link DecimalColumnBuilder} to build a {@link DecimalColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link DecimalColumn} to be build
+     * @return the {@link DecimalColumnBuilder} to build a {@link DecimalColumn} from
+     */
     public DecimalColumnBuilder decimalColumn(String columnName)
     {
         return new DecimalColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link DoubleColumnBuilder} to build a {@link DoubleColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link DoubleColumn} to be build
+     * @return the {@link DoubleColumnBuilder} to build a {@link DoubleColumn} from
+     */
     public DoubleColumnBuilder doubleColumn(String columnName)
     {
         return new DoubleColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link FloatColumnBuilder} to build a {@link FloatColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link FloatColumn} to be build
+     * @return the {@link FloatColumnBuilder} to build a {@link FloatColumn} from
+     */
     public FloatColumnBuilder floatColumn(String columnName)
     {
         return new FloatColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link IntColumnBuilder} to build a {@link IntColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link IntColumn} to be build
+     * @return the {@link IntColumnBuilder} to build a {@link IntColumn} from
+     */
     public IntColumnBuilder intColumn(String columnName)
     {
         return new IntColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link MediumIntColumnBuilder} to build a {@link MediumIntColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link MediumIntColumn} to be build
+     * @return the {@link MediumIntColumnBuilder} to build a {@link MediumIntColumn} from
+     */
     public MediumIntColumnBuilder mediumIntColumn(String columnName)
     {
         return new MediumIntColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link SmallIntColumnBuilder} to build a {@link SmallIntColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link SmallIntColumn} to be build
+     * @return the {@link SmallIntColumnBuilder} to build a {@link SmallIntColumn} from
+     */
     public SmallIntColumnBuilder smallIntColumn(String columnName)
     {
         return new SmallIntColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link TextColumnBuilder} to build a {@link TextColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link TextColumn} to be build
+     * @return the {@link TextColumnBuilder} to build a {@link TextColumn} from
+     */
     public TextColumnBuilder textColumn(String columnName)
     {
         return new TextColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link TinyIntColumnBuilder} to build a {@link TinyIntColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link TinyIntColumn} to be build
+     * @return the {@link TinyIntColumnBuilder} to build a {@link TinyIntColumn} from
+     */
     public TinyIntColumnBuilder tinyIntColumn(String columnName)
     {
         return new TinyIntColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link VarCharColumnBuilder} to build a {@link VarCharColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link VarCharColumn} to be build
+     * @return the {@link VarCharColumnBuilder} to build a {@link VarCharColumn} from
+     */
     public VarCharColumnBuilder varCharColumn(String columnName)
     {
         return new VarCharColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link DateColumnBuilder} to build a {@link DateColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link DateColumn} to be build
+     * @return the {@link DateColumnBuilder} to build a {@link DateColumn} from
+     */
     public DateColumnBuilder dateColumn(String columnName)
     {
         return new DateColumnBuilder(this, columnName);
     }
 
+    /**
+     * Creates a {@link DateTimeColumnBuilder} to build a {@link DateTimeColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link DateTimeColumn} to be build
+     * @return the {@link DateTimeColumnBuilder} to build a {@link DateTimeColumn} from
+     */
     public DateTimeColumnBuilder dateTimeColumn(String columnName)
     {
         return new DateTimeColumnBuilder(this, columnName);
@@ -163,16 +267,35 @@ public class Table implements Queryable
         return column;
     }
 
-    public String buildCreateTable(Dialect syntax, Indentation indentation)
+    /**
+     * Builds a CREATE-TABLE-statement for the current {@link Table} with the given {@link Dialect} and {@link Indentation}
+     *
+     * @param dialect the {@link Dialect} to build the statement with
+     * @param indentation the {@link Indentation} to build the statement with
+     * @return the CREATE-TABLE-statement
+     */
+    public String buildCreateTable(Dialect dialect, Indentation indentation)
     {
-        return syntax.buildCreate(this, indentation);
+        return dialect.buildCreate(this, indentation);
     }
 
-    public String buildCreateTable(Dialect syntax)
+    /**
+     * Builds a CREATE-TABLE-statement for the current {@link Table} with the given {@link Dialect} without indentation
+     *
+     * @param dialect the {@link Dialect} to build the statement with
+     * @return the CREATE-TABLE-statement
+     */
+    public String buildCreateTable(Dialect dialect)
     {
-        return syntax.buildCreate(this, Indentation.disabled());
+        return dialect.buildCreate(this, Indentation.disabled());
     }
 
+    /**
+     * Creates a {@link Table} with the given name
+     *
+     * @param name the name for the {@link Table}
+     * @return the created {@link Table}
+     */
     public static Table create(String name)
     {
         return new Table(name);

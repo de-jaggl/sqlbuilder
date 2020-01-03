@@ -206,7 +206,7 @@ public abstract class DefaultDialect implements Dialect
 
     /**
      * @param builder the {@link StringBuilder} to append the distinct
-     * @param isDinstinct whether to append the distinct or not
+     * @param isDistinct whether to append the distinct or not
      * @param context may be used in extending implementation
      * @param indentation may be used in extending implementation
      */
