@@ -3,6 +3,7 @@ package de.jaggl.sqlbuilder.queries;
 import static de.jaggl.sqlbuilder.conditions.CombinedCondition.getCopy;
 import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE;
 import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE_NOT;
+import static lombok.AccessLevel.PACKAGE;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,23 +21,24 @@ import de.jaggl.sqlbuilder.domain.ValuableFunction;
 import de.jaggl.sqlbuilder.functions.Function;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@RequiredArgsConstructor(access = PACKAGE)
+@Getter
+@ToString
 public class Update implements Query
 {
-    private Table table;
+    private final Table table;
     private Map<Column, Valuable> values = new LinkedHashMap<>();
     private Condition where;
     private ConditionType whereConditionType;
-
-    Update(Table table)
-    {
-        this.table = table;
-    }
 
     Update(Update update)
     {
@@ -44,26 +46,6 @@ public class Update implements Query
         values = update.values != null ? new LinkedHashMap<>(update.values) : null;
         where = getCopy(update.where);
         whereConditionType = update.whereConditionType;
-    }
-
-    public Table getTable()
-    {
-        return table;
-    }
-
-    public Map<Column, Valuable> getValues()
-    {
-        return values;
-    }
-
-    public Condition getWhere()
-    {
-        return where;
-    }
-
-    public ConditionType getWhereConditionType()
-    {
-        return whereConditionType;
     }
 
     public Update set(StringColumn<?> column, CharSequence value)

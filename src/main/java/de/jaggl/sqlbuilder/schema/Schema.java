@@ -1,23 +1,22 @@
 package de.jaggl.sqlbuilder.schema;
 
+import static lombok.AccessLevel.PRIVATE;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor(access = PRIVATE)
+@Getter
+@ToString
 public class Schema
 {
     private String name;
-
-    private Schema(String name)
-    {
-        this.name = name;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
 
     public Table table(String tableName)
     {

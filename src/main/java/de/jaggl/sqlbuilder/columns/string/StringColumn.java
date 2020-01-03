@@ -20,12 +20,14 @@ import de.jaggl.sqlbuilder.conditions.IsNotLike;
 import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.ArrayUtils;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@ToString(callSuper = true)
 public abstract class StringColumn<T extends StringColumn<T>> extends Column
 {
     public StringColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)

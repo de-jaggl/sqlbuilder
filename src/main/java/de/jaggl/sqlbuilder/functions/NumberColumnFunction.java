@@ -14,12 +14,14 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.columns.number.NumberColumn;
 import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.conditions.GenericCondition;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@ToString(callSuper = true)
 public abstract class NumberColumnFunction extends ColumnFunction
 {
     public NumberColumnFunction(Column column, String definition)

@@ -29,12 +29,14 @@ import de.jaggl.sqlbuilder.queries.Update;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@Slf4j
 public abstract class DefaultDialect implements Dialect
 {
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE;
@@ -45,42 +47,47 @@ public abstract class DefaultDialect implements Dialect
     @Override
     public final String build(Insert insert, Indentation indentation)
     {
+        log.debug("building insert-statement {} / {}", insert, indentation);
         var context = new BuildingContext(this, indentation.getDelimiter());
         var builder = new StringBuilder(indentation.getIndent());
         appendInsertStatement(builder, insert, context, indentation);
-        return builder.toString();
+        return build(builder);
     }
 
     @Override
     public final String build(Update update, Indentation indentation)
     {
+        log.debug("building update-statement {} / {}", update, indentation);
         var context = new BuildingContext(this, indentation.getDelimiter());
         var builder = new StringBuilder(indentation.getIndent());
         appendUpdateStatement(builder, update, context, indentation);
-        return builder.toString();
+        return build(builder);
     }
 
     @Override
     public final String build(Delete delete, Indentation indentation)
     {
+        log.debug("building delete-statement {} / {}", delete, indentation);
         var context = new BuildingContext(this, indentation.getDelimiter());
         var builder = new StringBuilder(indentation.getIndent());
         appendDeleteStatement(builder, delete, context, indentation);
-        return builder.toString();
+        return build(builder);
     }
 
     @Override
     public final String build(Select select, Indentation indentation)
     {
+        log.debug("building select-statement {} / {}", select, indentation);
         var context = new BuildingContext(this, indentation.getDelimiter());
         var builder = new StringBuilder(indentation.getIndent());
         appendSelectStatement(builder, select, context, indentation);
-        return builder.toString();
+        return build(builder);
     }
 
     @Override
     public String buildCreate(Table table, Indentation indentation)
     {
+        log.debug("building createTable-statement {} / {}", table, indentation);
         var context = new BuildingContext(this, indentation.getDelimiter());
         var builder = new StringBuilder();
         builder.append(context.getDialect().getLabels().getCreateTable()).append(" ").append(table.getFullName(context));
@@ -107,7 +114,7 @@ public abstract class DefaultDialect implements Dialect
             builder.append(indentation.getDelimiter());
         }
         builder.append(")");
-        return builder.toString();
+        return build(builder);
     }
 
     String buildColumnDefinition(ColumnDefinition definition, BuildingContext context, Indentation indentation)
@@ -370,6 +377,13 @@ public abstract class DefaultDialect implements Dialect
                     .append(" ")
                     .append(BuilderUtils.columnApostrophe(alias, context));
         }
+    }
+
+    private static String build(StringBuilder builder)
+    {
+        var sql = builder.toString();
+        log.debug("build sql-statement {}", sql);
+        return sql;
     }
 
     @Override

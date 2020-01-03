@@ -23,12 +23,14 @@ import de.jaggl.sqlbuilder.conditions.IsLike;
 import de.jaggl.sqlbuilder.conditions.IsNotLike;
 import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.schema.Table;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@ToString(callSuper = true)
 public class DateTimeColumn extends Column
 {
     public DateTimeColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
@@ -39,12 +41,6 @@ public class DateTimeColumn extends Column
     public DateTimeColumn as(String alias)
     {
         return new DateTimeColumn(table, name, alias, columnDefinition);
-    }
-
-    @Override
-    public ColumnDefinition getColumnDefinition()
-    {
-        return columnDefinition;
     }
 
     public GenericCondition isEqualTo(LocalDateTime value)

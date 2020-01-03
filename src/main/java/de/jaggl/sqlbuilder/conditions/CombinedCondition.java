@@ -1,33 +1,31 @@
 package de.jaggl.sqlbuilder.conditions;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@Getter
+@ToString(callSuper = true)
+@NoArgsConstructor(access = PRIVATE)
 public class CombinedCondition extends Condition
 {
     private List<Condition> conditions = new ArrayList<>();
 
-    private CombinedCondition()
-    {
-        // nothing to do here
-    }
-
     public CombinedCondition(Condition condition)
     {
         this.conditions.add(condition);
-    }
-
-    public List<Condition> getConditions()
-    {
-        return conditions;
     }
 
     public void append(Condition condition)

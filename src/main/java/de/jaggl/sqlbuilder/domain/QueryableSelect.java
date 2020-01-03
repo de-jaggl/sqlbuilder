@@ -2,22 +2,23 @@ package de.jaggl.sqlbuilder.domain;
 
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@ToString
 public class QueryableSelect implements Queryable
 {
     private Select select;
-    private String alias;
 
-    public QueryableSelect(Select select, String alias)
-    {
-        this.select = select;
-        this.alias = alias;
-    }
+    @Getter
+    private String alias;
 
     @Override
     public String getValue(BuildingContext context, Indentation indentation)
@@ -35,11 +36,5 @@ public class QueryableSelect implements Queryable
         }
         builder.append(")");
         return builder.toString();
-    }
-
-    @Override
-    public String getAlias()
-    {
-        return alias;
     }
 }

@@ -14,12 +14,18 @@ import de.jaggl.sqlbuilder.domain.Selectable;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@Getter
+@ToString
 public abstract class Column implements Groupable, Selectable, Definable
 {
     protected Table table;
@@ -29,40 +35,10 @@ public abstract class Column implements Groupable, Selectable, Definable
 
     protected ColumnDefinition columnDefinition;
 
-    public Column(Table table, String name, String alias, ColumnDefinition columnDefinition)
-    {
-        this.table = table;
-        this.name = name;
-        this.alias = alias;
-        this.columnDefinition = columnDefinition;
-    }
-
-    @Override
-    public ColumnDefinition getColumnDefinition()
-    {
-        return columnDefinition;
-    }
-
     @Override
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return getFullNameOrAlias(context);
-    }
-
-    @Override
-    public String getAlias()
-    {
-        return alias;
-    }
-
-    public Table getTable()
-    {
-        return table;
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     public String getFullName(BuildingContext context)

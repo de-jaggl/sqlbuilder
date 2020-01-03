@@ -1,33 +1,28 @@
 package de.jaggl.sqlbuilder.domain;
 
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@ToString
 public class PlainQueryable implements Queryable
 {
     private String value;
-    private String alias;
 
-    public PlainQueryable(String value, String alias)
-    {
-        this.alias = alias;
-        this.value = value;
-    }
+    @Getter
+    private String alias;
 
     @Override
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return value;
-    }
-
-    @Override
-    public String getAlias()
-    {
-        return alias;
     }
 
     public Queryable as(@SuppressWarnings("hiding") String alias)

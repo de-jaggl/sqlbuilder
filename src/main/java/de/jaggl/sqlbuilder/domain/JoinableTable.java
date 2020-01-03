@@ -5,39 +5,31 @@ import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@ToString
 public class JoinableTable implements Joinable
 {
     private JoinType joinType;
-    private Table table;
-    private Condition condition;
 
-    public JoinableTable(JoinType joinType, Table table, Condition condition)
-    {
-        this.joinType = joinType;
-        this.table = table;
-        this.condition = condition;
-    }
+    @Getter
+    private Table table;
+
+    @Getter
+    private Condition condition;
 
     @Override
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return buildJoin(joinType, table.getFullName(context), table.getAlias(), condition, context, indentation);
-    }
-
-    public Table getTable()
-    {
-        return table;
-    }
-
-    public Condition getCondition()
-    {
-        return condition;
     }
 
     private static String buildJoin(JoinType joinType, String plainJoinable, String alias, Condition condition, BuildingContext context,

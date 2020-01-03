@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.queries;
 
+import static lombok.AccessLevel.PACKAGE;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -14,35 +16,27 @@ import de.jaggl.sqlbuilder.domain.ValuableFunction;
 import de.jaggl.sqlbuilder.functions.Function;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@NoArgsConstructor(access = PACKAGE)
+@Getter
+@ToString
 public class Insert implements Query
 {
     private Table table;
     private Map<Column, Valuable> values = new LinkedHashMap<>();
 
-    Insert()
-    {
-    }
-
     Insert(Insert insert)
     {
         table = insert.table;
         values = insert.values != null ? new LinkedHashMap<>(insert.values) : null;
-    }
-
-    public Table getTable()
-    {
-        return table;
-    }
-
-    public Map<Column, Valuable> getValues()
-    {
-        return values;
     }
 
     public Insert into(Table insertTable)

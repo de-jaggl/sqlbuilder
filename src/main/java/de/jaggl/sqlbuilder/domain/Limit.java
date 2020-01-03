@@ -1,28 +1,25 @@
 package de.jaggl.sqlbuilder.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@ToString
 public class Limit
 {
     private long value;
-    private long offset;
 
-    public Limit(long limit, long offset)
-    {
-        value = limit;
-        this.offset = offset;
-    }
+    @Getter
+    private long offset;
 
     public long getLimit()
     {
         return value;
-    }
-
-    public long getOffset()
-    {
-        return offset;
     }
 }

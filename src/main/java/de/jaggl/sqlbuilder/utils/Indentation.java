@@ -1,26 +1,26 @@
 package de.jaggl.sqlbuilder.utils;
 
+import static lombok.AccessLevel.PRIVATE;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor(access = PRIVATE)
+@RequiredArgsConstructor(access = PRIVATE)
+@ToString
 public class Indentation
 {
-    private boolean enabled;
-    private int currentIndentation;
+    @Getter
+    private final boolean enabled;
 
-    private Indentation(boolean enabled, int currentIndentation)
-    {
-        this.enabled = enabled;
-        this.currentIndentation = currentIndentation >= 0 ? currentIndentation : 0;
-    }
-
-    private Indentation(boolean enabled)
-    {
-        this.enabled = enabled;
-        currentIndentation = 0;
-    }
+    private int currentIndentation = 0;
 
     public String getIndent()
     {
@@ -55,11 +55,6 @@ public class Indentation
     public static Indentation indent(boolean indent)
     {
         return new Indentation(indent);
-    }
-
-    public boolean isEnabled()
-    {
-        return enabled;
     }
 
     private static String repeat(String input, int count)

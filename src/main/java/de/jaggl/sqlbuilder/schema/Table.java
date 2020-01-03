@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.schema;
 
+import static lombok.AccessLevel.PACKAGE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,25 +26,26 @@ import de.jaggl.sqlbuilder.domain.JoinableTable;
 import de.jaggl.sqlbuilder.domain.Queryable;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@RequiredArgsConstructor(access = PACKAGE)
+@Getter
+@ToString
 public class Table implements Queryable
 {
     private Schema schema;
-    private String name;
+    private final String name;
 
     private String alias;
 
     private List<Column> columns;
-
-    Table(String name)
-    {
-        this.name = name;
-    }
 
     Table(Schema schema, String name)
     {
@@ -57,26 +60,10 @@ public class Table implements Queryable
         this.alias = alias;
     }
 
-    public Schema getSchema()
-    {
-        return schema;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
     @Override
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return getFullName(context);
-    }
-
-    @Override
-    public String getAlias()
-    {
-        return alias;
     }
 
     public String getFullName(BuildingContext context)
@@ -88,11 +75,6 @@ public class Table implements Queryable
     public String getFullNameOrAlias(BuildingContext context)
     {
         return alias != null ? BuilderUtils.columnApostrophe(alias, context) : getFullName(context);
-    }
-
-    public List<Column> getColumns()
-    {
-        return columns;
     }
 
     public Table as(@SuppressWarnings("hiding") String alias)

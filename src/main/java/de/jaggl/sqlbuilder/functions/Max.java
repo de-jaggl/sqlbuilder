@@ -1,12 +1,14 @@
 package de.jaggl.sqlbuilder.functions;
 
 import de.jaggl.sqlbuilder.columns.Column;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@ToString(callSuper = true)
 public class Max extends NumberColumnFunction
 {
     public Max(Column column)

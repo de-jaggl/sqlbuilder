@@ -1,18 +1,18 @@
 package de.jaggl.sqlbuilder.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@ToString
 public class IntSize implements Size
 {
     private final int value;
-
-    private IntSize(int value)
-    {
-        this.value = value;
-    }
 
     @Override
     public String getValue()

@@ -11,19 +11,17 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.functions.Function;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BuilderUtils
 {
-    private BuilderUtils()
-    {
-        // private constructor to hide the public one
-    }
-
     public static String getValued(Object value, BuildingContext context, Indentation indentation)
     {
         return getValued(value, "", "", context, indentation);

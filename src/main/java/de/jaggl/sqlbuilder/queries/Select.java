@@ -20,12 +20,16 @@ import de.jaggl.sqlbuilder.domain.Queryable;
 import de.jaggl.sqlbuilder.domain.QueryableSelect;
 import de.jaggl.sqlbuilder.domain.Selectable;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@Getter
+@ToString
 public class Select implements Query
 {
     private boolean distinct;
@@ -61,61 +65,6 @@ public class Select implements Query
         havingConditionType = select.havingConditionType;
         orderBys = select.orderBys != null ? new ArrayList<>(select.orderBys) : null;
         limitation = select.limitation;
-    }
-
-    public boolean isDistinct()
-    {
-        return distinct;
-    }
-
-    public List<Selectable> getSelectables()
-    {
-        return selectables;
-    }
-
-    public Queryable getFrom()
-    {
-        return from;
-    }
-
-    public List<Joinable> getJoins()
-    {
-        return joins;
-    }
-
-    public Condition getWhere()
-    {
-        return where;
-    }
-
-    public ConditionType getWhereConditionType()
-    {
-        return whereConditionType;
-    }
-
-    public List<Groupable> getGroupBys()
-    {
-        return groupBys;
-    }
-
-    public Condition getHaving()
-    {
-        return having;
-    }
-
-    public ConditionType getHavingConditionType()
-    {
-        return havingConditionType;
-    }
-
-    public List<OrderBy> getOrderBys()
-    {
-        return orderBys;
-    }
-
-    public Limit getLimitation()
-    {
-        return limitation;
     }
 
     public Select distinct()

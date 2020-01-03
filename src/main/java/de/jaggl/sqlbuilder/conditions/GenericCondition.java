@@ -9,12 +9,14 @@ import de.jaggl.sqlbuilder.dialect.Labels;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@ToString(callSuper = true)
 public class GenericCondition extends Condition
 {
     private GenericConditionType type;

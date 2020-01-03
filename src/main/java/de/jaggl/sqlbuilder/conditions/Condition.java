@@ -9,12 +9,18 @@ import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.ConcatenationType;
 import de.jaggl.sqlbuilder.domain.ConditionType;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@Getter
+@Setter
+@ToString
 public abstract class Condition
 {
     private ConditionType type;
@@ -46,26 +52,6 @@ public abstract class Condition
         }
         builder.append(doBuild(context, indentation));
         return builder.toString();
-    }
-
-    public ConditionType getType()
-    {
-        return type;
-    }
-
-    public void setType(ConditionType type)
-    {
-        this.type = type;
-    }
-
-    public ConcatenationType getConcatenation()
-    {
-        return concatenation;
-    }
-
-    public void setConcatenation(ConcatenationType concatenation)
-    {
-        this.concatenation = concatenation;
     }
 
     public Condition and(Condition other)

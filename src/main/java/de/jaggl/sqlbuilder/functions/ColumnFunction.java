@@ -7,37 +7,26 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.conditions.GenericCondition;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@RequiredArgsConstructor
+@ToString
 public abstract class ColumnFunction implements Function
 {
-    protected Column column;
-    protected String definition;
+    protected final Column column;
+    protected final String definition;
 
+    @Getter
     private String alias;
-
-    public ColumnFunction(Column column, String definition)
-    {
-        this.column = column;
-        this.definition = definition;
-    }
-
-    public ColumnFunction(Column column, String definition, String alias)
-    {
-        this.column = column;
-        this.definition = definition;
-        this.alias = alias;
-    }
-
-    @Override
-    public String getAlias()
-    {
-        return alias;
-    }
 
     @Override
     public String getValue(BuildingContext context, Indentation indentation)

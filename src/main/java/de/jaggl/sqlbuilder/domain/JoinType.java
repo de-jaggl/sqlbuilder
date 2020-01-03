@@ -1,10 +1,17 @@
 package de.jaggl.sqlbuilder.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@AllArgsConstructor
+@Getter
+@ToString
 public enum JoinType
 {
     LEFT("LEFT"),
@@ -16,14 +23,4 @@ public enum JoinType
     FULL_OUTER("FULL OUTER");
 
     private String value;
-
-    private JoinType(String value)
-    {
-        this.value = value;
-    }
-
-    public String getValue()
-    {
-        return value;
-    }
 }

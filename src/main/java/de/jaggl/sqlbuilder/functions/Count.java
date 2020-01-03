@@ -3,12 +3,14 @@ package de.jaggl.sqlbuilder.functions;
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
+import lombok.ToString;
 
 /**
  * @author Martin Schumacher
  *
  * @since 2.0.0
  */
+@ToString(callSuper = true)
 public class Count extends NumberColumnFunction
 {
     public Count(Column column)
