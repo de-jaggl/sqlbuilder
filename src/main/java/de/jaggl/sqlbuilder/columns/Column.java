@@ -25,9 +25,10 @@ import lombok.ToString;
  */
 @AllArgsConstructor
 @Getter
-@ToString(exclude = "table")
+@ToString
 public abstract class Column implements Groupable, Selectable, Definable
 {
+    @ToString.Exclude
     protected Table table;
     protected String name;
 

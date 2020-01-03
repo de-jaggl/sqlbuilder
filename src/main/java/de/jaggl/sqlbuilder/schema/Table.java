@@ -45,6 +45,7 @@ public class Table implements Queryable
 
     private String alias;
 
+    @ToString.Exclude
     private List<Column> columns;
 
     Table(Schema schema, String name)
