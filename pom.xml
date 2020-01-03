@@ -53,6 +53,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
     <slf4j.version>1.7.30</slf4j.version>
+    <logback.version>1.2.3</logback.version>
     <assertj.version>3.11.1</assertj.version>
     <junit.version>5.3.2</junit.version>
     <lombok.version>1.18.10</lombok.version>
@@ -98,9 +99,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.version}</version>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
