@@ -1,9 +1,8 @@
-name: build
+name: review
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build:
@@ -43,7 +42,10 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.organization=de-jaggl \
             -Dsonar.projectKey=de-jaggl_sqlbuilder \
-            -Dsonar.java.binaries=./target/classes
+            -Dsonar.pullrequest.key=${GITHUB_PULL_REQUEST} \
+            -Dsonar.pullrequest.branch=${GITHUB_REF} \
+            -Dsonar.java.binaries=./target/classes \
+            -Dsonar.analysis.mode=preview
 
       - name: pom-analyse
         run: mvn enforcer:enforce
