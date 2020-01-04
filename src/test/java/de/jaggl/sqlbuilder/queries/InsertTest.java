@@ -39,9 +39,8 @@ class InsertTest
                 .set(SIZE, 175.89)
                 .set(LASTNAME, "Schumacher");
 
-        System.out.println(insert.build(MYSQL, enabled()));
-        System.out.println();
-        System.out.println(insert.build(SYBASE, enabled()));
+        insert.println(MYSQL, enabled());
+        insert.println(SYBASE, enabled());
 
         assertThat(insert.build())
                 .isEqualTo("INSERT INTO `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`forename` = 'Martin', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89, `persons`.`lastname` = 'Schumacher'");

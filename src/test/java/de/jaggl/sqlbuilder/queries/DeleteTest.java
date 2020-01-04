@@ -31,9 +31,8 @@ class DeleteTest
                                 .or(LASTNAME.isEqualTo("Kuenzel"))))
                 .limit(10);
 
-        System.out.println(delete.build(MYSQL, enabled()));
-        System.out.println();
-        System.out.println(delete.build(SYBASE, enabled()));
+        delete.println(MYSQL, enabled());
+        delete.println(SYBASE, enabled());
 
         assertThat(delete.build(MYSQL))
                 .isEqualTo("DELETE FROM `persons` WHERE (`persons`.`lastname` NOT LIKE 'Nils%' AND MIN(`persons`.`age`) >= 50 AND (`persons`.`lastname` = 'Schumacher' OR `persons`.`lastname` = 'Kuenzel')) LIMIT 10");
@@ -78,9 +77,8 @@ class DeleteTest
     {
         var delete = deleteFrom(PERSONS).whereNot(LASTNAME.isLike("Nils", AFTER));
 
-        System.out.println(delete.build(MYSQL, enabled()));
-        System.out.println();
-        System.out.println(delete.build(SYBASE, enabled()));
+        delete.println(MYSQL, enabled());
+        delete.println(SYBASE, enabled());
 
         assertThat(delete.build(MYSQL)).isEqualTo("DELETE FROM `persons` WHERE NOT `persons`.`lastname` LIKE 'Nils%'");
 

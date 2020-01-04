@@ -18,7 +18,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.1.1</version>
+  <version>2.2.0</version>
 </dependency>
 ```
 
@@ -56,19 +56,10 @@ To get the SQL-statement as a string, call `build()` instead of `print()`
   - CREATE TABLE
   
 - Type-safe query-building. Currently supported column-datatypes are:
-	- DATE
-	- DATETIME
-	- DECIMAL
-	- DOUBLE
-	- FLOAT
-	- BIGINT
-	- INT
-	- MEDIUMINT
-	- SMALLINT
-	- TINYINT
-	- CHAR
-	- TEXT
-	- VARCHAR
+	- CHAR, VARCHAR, TEXT
+	- INT, BIGINT, MEDIUMINT, SMALLINT, TINYINT
+	- DOUBLE, FLOAT, DECIMAL
+	- DATE, DATETIME
 	
 - Supports SQL-Functions, currently supported are:
 	- SUM
