@@ -3,6 +3,9 @@ package de.jaggl.sqlbuilder.queries;
 import static de.jaggl.sqlbuilder.utils.Indentation.disabled;
 
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import de.jaggl.sqlbuilder.dialect.Dialect;
 import de.jaggl.sqlbuilder.utils.Indentation;
@@ -154,5 +157,20 @@ public interface Query
     default void println(PrintStream printStream, String dialectName, Indentation indentation)
     {
         println(printStream, Dialect.forName(dialectName), indentation);
+    }
+
+    default PreparedStatement prepare(Connection connection) throws SQLException
+    {
+        return connection.prepareStatement(build());
+    }
+
+    default PreparedStatement prepare(Connection connection, Dialect dialect) throws SQLException
+    {
+        return connection.prepareStatement(build(dialect));
+    }
+
+    default PreparedStatement prepare(Connection connection, String dialectName) throws SQLException
+    {
+        return connection.prepareStatement(build(dialectName));
     }
 }
