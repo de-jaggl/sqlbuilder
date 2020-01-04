@@ -42,7 +42,6 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.organization=de-jaggl \
             -Dsonar.projectKey=de-jaggl_sqlbuilder \
-            -Dsonar.pullrequest.key=${GITHUB_PULL_REQUEST} \
             -Dsonar.pullrequest.branch=${GITHUB_REF} \
             -Dsonar.java.binaries=./target/classes
 
