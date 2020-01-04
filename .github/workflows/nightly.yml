@@ -42,8 +42,7 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.organization=de-jaggl \
             -Dsonar.projectKey=de-jaggl_sqlbuilder \
-            -Dsonar.java.binaries=./target/classes \
-            -Dsonar.analysis.mode=preview
+            -Dsonar.java.binaries=./target/classes
 
       - name: pom-analyse
         run: mvn enforcer:enforce
