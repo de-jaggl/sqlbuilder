@@ -45,9 +45,8 @@ class UpdateTest
                         .and(LASTNAME.isEqualTo("Schumacher")
                                 .or(plain("IsNull(COL, '') != ''"))));
 
-        System.out.println(update.build(MYSQL, enabled()));
-        System.out.println();
-        System.out.println(update.build(SYBASE, enabled()));
+        update.println(MYSQL, enabled());
+        update.println(SYBASE, enabled());
 
         assertThat(update.build(MYSQL))
                 .isEqualTo("UPDATE `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`lastname` = 'Schumacher', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89 WHERE (`persons`.`lastname` NOT LIKE 'Nils%' AND MIN(`persons`.`age`) >= 50 AND (`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != ''))");

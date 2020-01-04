@@ -22,11 +22,11 @@ import de.jaggl.sqlbuilder.domain.Queryable;
 import de.jaggl.sqlbuilder.domain.QueryableSelect;
 import de.jaggl.sqlbuilder.domain.Selectable;
 import de.jaggl.sqlbuilder.domain.Valuable;
+import de.jaggl.sqlbuilder.queries.CreateTable;
 import de.jaggl.sqlbuilder.queries.Delete;
 import de.jaggl.sqlbuilder.queries.Insert;
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.queries.Update;
-import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.extern.slf4j.Slf4j;
@@ -85,11 +85,12 @@ public abstract class DefaultDialect implements Dialect
     }
 
     @Override
-    public String buildCreate(Table table, Indentation indentation)
+    public String build(CreateTable createTable, Indentation indentation)
     {
-        log.debug("building createTable-statement {} / {}", table, indentation);
+        log.debug("building createTable-statement {} / {}", createTable, indentation);
         var context = new BuildingContext(this, indentation.getDelimiter());
         var builder = new StringBuilder();
+        var table = createTable.getTable();
         builder.append(context.getDialect().getLabels().getCreateTable()).append(" ").append(table.getFullName(context));
         builder.append(indentation.getDelimiter()).append("(");
         if (indentation.isEnabled())

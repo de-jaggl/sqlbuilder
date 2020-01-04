@@ -96,9 +96,8 @@ class SelectTest
                 .orderDescendingBy(FORENAME)
                 .limit(100, 10);
 
-        System.out.println(select.build(MYSQL, enabled()));
-        System.out.println();
-        System.out.println(select.build(SYBASE, enabled()));
+        select.println(MYSQL, enabled());
+        select.println(SYBASE, enabled());
 
         assertThat(select.build(MYSQL))
                 .isEqualTo("SELECT DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC LIMIT 10, 100");

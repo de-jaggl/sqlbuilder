@@ -4,11 +4,11 @@ import static java.lang.System.getProperty;
 
 import java.time.format.DateTimeFormatter;
 
+import de.jaggl.sqlbuilder.queries.CreateTable;
 import de.jaggl.sqlbuilder.queries.Delete;
 import de.jaggl.sqlbuilder.queries.Insert;
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.queries.Update;
-import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
 /**
@@ -28,7 +28,7 @@ public interface Dialect
 
     String build(Select select, Indentation indentation);
 
-    String buildCreate(Table configuredTable, Indentation indentation);
+    String build(CreateTable createTable, Indentation indentation);
 
     DateTimeFormatter getDateFormatter();
 

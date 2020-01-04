@@ -32,14 +32,14 @@ class CreateTableTest
     @Test
     void testCreateTable()
     {
-        System.out.println(PERSONS.buildCreateTable(MYSQL, enabled()));
-        System.out.println();
-        System.out.println(PERSONS.buildCreateTable(SYBASE, enabled()));
+        var createTable = PERSONS.buildCreateTable();
+        createTable.println();
+        createTable.println(SYBASE, enabled());
 
-        assertThat(PERSONS.buildCreateTable(MYSQL))
+        assertThat(createTable.build(MYSQL))
                 .isEqualTo("CREATE TABLE `dba`.`persons` (`forename` VARCHAR(50), `lastname` VARCHAR(50) DEFAULT NULL, `nickname` VARCHAR(30) DEFAULT 'Schubi', `age` INT(5) UNSIGNED NOT NULL AUTO_INCREMENT, `size` DOUBLE(2,2) UNSIGNED NOT NULL DEFAULT 55.8, `birthday` DATE NOT NULL, `happening` DATETIME NOT NULL)");
 
-        assertThat(PERSONS.buildCreateTable(MYSQL, enabled()))
+        assertThat(createTable.build(MYSQL, enabled()))
                 .isEqualTo("CREATE TABLE `dba`.`persons`\n" //
                         + "(\n" //
                         + "  `forename` VARCHAR(50),\n" //
@@ -51,7 +51,9 @@ class CreateTableTest
                         + "  `happening` DATETIME NOT NULL\n" //
                         + ")");
 
-        assertThat(PERSONS.buildCreateTable(MYSQL)).isEqualTo(PERSONS.buildCreateTable(SYBASE));
-        assertThat(PERSONS.buildCreateTable(MYSQL, enabled())).isEqualTo(PERSONS.buildCreateTable(SYBASE, enabled()));
+        assertThat(createTable.build(MYSQL)).isEqualTo(createTable.build(SYBASE));
+        assertThat(createTable.build(MYSQL, enabled())).isEqualTo(createTable.build(SYBASE, enabled()));
+
+        assertThat(CreateTable.copy(createTable).build(MYSQL)).isEqualTo(createTable.build(MYSQL));
     }
 }

@@ -33,10 +33,11 @@ import de.jaggl.sqlbuilder.columns.string.TextColumnBuilder;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumnBuilder;
 import de.jaggl.sqlbuilder.conditions.Condition;
-import de.jaggl.sqlbuilder.dialect.Dialect;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.JoinableTable;
 import de.jaggl.sqlbuilder.domain.Queryable;
+import de.jaggl.sqlbuilder.queries.CreateTable;
+import de.jaggl.sqlbuilder.queries.Queries;
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
@@ -268,26 +269,13 @@ public class Table implements Queryable
     }
 
     /**
-     * Builds a CREATE-TABLE-statement for the current {@link Table} with the given {@link Dialect} and {@link Indentation}
+     * Creates a {@link CreateTable} for the current {@link Table}
      *
-     * @param dialect the {@link Dialect} to build the statement with
-     * @param indentation the {@link Indentation} to build the statement with
-     * @return the CREATE-TABLE-statement
+     * @return the created {@link CreateTable}
      */
-    public String buildCreateTable(Dialect dialect, Indentation indentation)
+    public CreateTable buildCreateTable()
     {
-        return dialect.buildCreate(this, indentation);
-    }
-
-    /**
-     * Builds a CREATE-TABLE-statement for the current {@link Table} with the given {@link Dialect} without indentation
-     *
-     * @param dialect the {@link Dialect} to build the statement with
-     * @return the CREATE-TABLE-statement
-     */
-    public String buildCreateTable(Dialect dialect)
-    {
-        return dialect.buildCreate(this, Indentation.disabled());
+        return Queries.createTable(this);
     }
 
     /**
