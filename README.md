@@ -18,7 +18,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
 </dependency>
 ```
 
