@@ -12,7 +12,18 @@
 
 A Java-Library to build SQL-Statements
 
+### Dependency
+
+```xml
+<dependency>
+  <groupId>de.jaggl.sqlbuilder</groupId>
+  <artifactId>sqlbuilder-core</artifactId>
+  <version>2.1.0</version>
+</dependency>
+```
+
 ### Simple Example
+
 ```java
 private static final Table PERSONS = Table.create("persons");
 private static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").build();
@@ -30,15 +41,6 @@ This will output:
 SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 ```
 To get the SQL-statement as a string, call `build()` instead of `print()`
-
-###	Dependency
-```xml
-<dependency>
-  <groupId>de.jaggl.sqlbuilder</groupId>
-  <artifactId>sqlbuilder-core</artifactId>
-  <version>2.0.0</version>
-</dependency>
-```
 
 ### Features
 
@@ -79,6 +81,7 @@ To get the SQL-statement as a string, call `build()` instead of `print()`
 - Build queries with or without indentation
 
 ### Choose Dialect
+
 By default the MySQL-Dialect is chosen. To change the Dialect, you can pass your wanted Dialect to the `print()` or `build()`-method. The known Dialects are collected in the Utility-Class `Dialects`. Simple Example for choose the known Sybase-Dialect:
 ```java
 Queries.select()
@@ -93,6 +96,7 @@ SELECT TOP 100 START AT 11 * FROM `persons`
 It is also possible to glabally change the default-Dialect. To do so, set the system-property `sqlbuilder.defaultDialect` to the name of the Dialect you want.
 
 ### Indentation
+
 Just add `Indentation.enabled()` to the `print()` or `build()`-method as follows:
 ```java
 Queries.select()
