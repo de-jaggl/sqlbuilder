@@ -19,7 +19,9 @@ public abstract class ColumnTest<C extends Column, B extends ColumnBuilder<C>> e
     void testColumnConditions()
     {
         assertCondition(column -> column.isEqualTo(getOtherColumn())).isEqualTo("= `table`.`other`");
+        assertCondition(column -> column.eq(getOtherColumn())).isEqualTo("= `table`.`other`");
         assertCondition(column -> column.isNotEqualTo(getOtherColumn())).isEqualTo("!= `table`.`other`");
+        assertCondition(column -> column.nEq(getOtherColumn())).isEqualTo("!= `table`.`other`");
         assertCondition(column -> column.isNull()).isEqualTo("IS NULL");
         assertCondition(column -> column.isNotNull()).isEqualTo("IS NOT NULL");
     }

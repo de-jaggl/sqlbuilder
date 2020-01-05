@@ -18,7 +18,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.2.0</version>
+  <version>2.3.0</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ public static final void main(String[] args)
 {
   Queries.select()
   	.from(PERSONS)
-  	.where(LASTNAME.isEqualTo("Doe"))
+  	.where(LASTNAME.eq("Doe"))
   	.print();
 }	
 ```
@@ -92,7 +92,7 @@ Just add `Indentation.enabled()` to the `print()` or `build()`-method as follows
 ```java
 Queries.select()
   .from(PERSONS)
-  .where(LASTNAME.isEqualTo("Doe"))
+  .where(LASTNAME.eq("Doe"))
   .print(Indentation.enabled());
 ```
 This will output:

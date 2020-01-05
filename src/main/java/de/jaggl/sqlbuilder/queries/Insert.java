@@ -36,7 +36,7 @@ public class Insert implements Query
     Insert(Insert insert)
     {
         table = insert.table;
-        values = insert.values != null ? new LinkedHashMap<>(insert.values) : null;
+        values = new LinkedHashMap<>(insert.values);
     }
 
     public Insert into(Table insertTable)

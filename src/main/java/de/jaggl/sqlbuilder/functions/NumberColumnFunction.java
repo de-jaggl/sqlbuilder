@@ -34,49 +34,94 @@ public abstract class NumberColumnFunction extends ColumnFunction
         super(column, definition, alias);
     }
 
-    public Condition isEqualTo(Number number)
+    public Condition isEqualTo(Number value)
     {
-        return number == null ? new GenericCondition(IS_NULL, this) : new GenericCondition(IS_EQUAL_TO, this, number);
+        return value == null ? new GenericCondition(IS_NULL, this) : new GenericCondition(IS_EQUAL_TO, this, value);
     }
 
-    public Condition isEqualTo(long number)
+    public Condition eq(Number value)
     {
-        return new GenericCondition(IS_EQUAL_TO, this, Long.valueOf(number));
+        return isEqualTo(value);
     }
 
-    public Condition isEqualTo(double number)
+    public Condition isEqualTo(long value)
     {
-        return new GenericCondition(IS_EQUAL_TO, this, Double.valueOf(number));
+        return new GenericCondition(IS_EQUAL_TO, this, Long.valueOf(value));
     }
 
-    public Condition isNotEqualTo(Number number)
+    public Condition eq(long value)
     {
-        return number == null ? new GenericCondition(IS_NOT_NULL, this) : new GenericCondition(IS_NOT_EQUAL_TO, this, number);
+        return isEqualTo(value);
     }
 
-    public Condition isNotEqualTo(long number)
+    public Condition isEqualTo(double value)
     {
-        return new GenericCondition(IS_NOT_EQUAL_TO, this, Long.valueOf(number));
+        return new GenericCondition(IS_EQUAL_TO, this, Double.valueOf(value));
     }
 
-    public Condition isNotEqualTo(double number)
+    public Condition eq(double value)
     {
-        return new GenericCondition(IS_NOT_EQUAL_TO, this, Double.valueOf(number));
+        return isEqualTo(value);
     }
 
-    public Condition isGreaterThan(Number number)
+    public Condition isNotEqualTo(Number value)
     {
-        return new GenericCondition(IS_GREATER_THAN, this, number);
+        return value == null ? new GenericCondition(IS_NOT_NULL, this) : new GenericCondition(IS_NOT_EQUAL_TO, this, value);
     }
 
-    public Condition isGreaterThan(long number)
+    public Condition nEq(Number value)
     {
-        return new GenericCondition(IS_GREATER_THAN, this, Long.valueOf(number));
+        return isNotEqualTo(value);
     }
 
-    public Condition isGreaterThan(double number)
+    public Condition isNotEqualTo(long value)
     {
-        return new GenericCondition(IS_GREATER_THAN, this, Double.valueOf(number));
+        return new GenericCondition(IS_NOT_EQUAL_TO, this, Long.valueOf(value));
+    }
+
+    public Condition nEq(long value)
+    {
+        return isNotEqualTo(value);
+    }
+
+    public Condition isNotEqualTo(double value)
+    {
+        return new GenericCondition(IS_NOT_EQUAL_TO, this, Double.valueOf(value));
+    }
+
+    public Condition nEq(double value)
+    {
+        return isNotEqualTo(value);
+    }
+
+    public Condition isGreaterThan(Number value)
+    {
+        return new GenericCondition(IS_GREATER_THAN, this, value);
+    }
+
+    public Condition gt(Number value)
+    {
+        return isGreaterThan(value);
+    }
+
+    public Condition isGreaterThan(long value)
+    {
+        return new GenericCondition(IS_GREATER_THAN, this, Long.valueOf(value));
+    }
+
+    public Condition gt(long value)
+    {
+        return isGreaterThan(value);
+    }
+
+    public Condition isGreaterThan(double value)
+    {
+        return new GenericCondition(IS_GREATER_THAN, this, Double.valueOf(value));
+    }
+
+    public Condition gt(double value)
+    {
+        return isGreaterThan(value);
     }
 
     public Condition isGreaterThan(NumberColumn<?, ?> otherColumn)
@@ -84,19 +129,39 @@ public abstract class NumberColumnFunction extends ColumnFunction
         return new GenericCondition(IS_GREATER_THAN, this, otherColumn);
     }
 
-    public Condition isGreaterThanOrEqualTo(Number number)
+    public Condition gt(NumberColumn<?, ?> otherColumn)
     {
-        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, number);
+        return isGreaterThan(otherColumn);
     }
 
-    public Condition isGreaterThanOrEqualTo(long number)
+    public Condition isGreaterThanOrEqualTo(Number value)
     {
-        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, Long.valueOf(number));
+        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, value);
     }
 
-    public Condition isGreaterThanOrEqualTo(double number)
+    public Condition gtEq(Number value)
     {
-        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, Double.valueOf(number));
+        return isGreaterThanOrEqualTo(value);
+    }
+
+    public Condition isGreaterThanOrEqualTo(long value)
+    {
+        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, Long.valueOf(value));
+    }
+
+    public Condition gtEq(long value)
+    {
+        return isGreaterThanOrEqualTo(value);
+    }
+
+    public Condition isGreaterThanOrEqualTo(double value)
+    {
+        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, Double.valueOf(value));
+    }
+
+    public Condition gtEq(double value)
+    {
+        return isGreaterThanOrEqualTo(value);
     }
 
     public Condition isGreaterThanOrEqualTo(NumberColumn<?, ?> otherColumn)
@@ -104,19 +169,39 @@ public abstract class NumberColumnFunction extends ColumnFunction
         return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, otherColumn);
     }
 
-    public Condition isLessThan(Number number)
+    public Condition gtEq(NumberColumn<?, ?> otherColumn)
     {
-        return new GenericCondition(IS_LESS_THAN, this, number);
+        return isGreaterThanOrEqualTo(otherColumn);
     }
 
-    public Condition isLessThan(long number)
+    public Condition isLessThan(Number value)
     {
-        return new GenericCondition(IS_LESS_THAN, this, Long.valueOf(number));
+        return new GenericCondition(IS_LESS_THAN, this, value);
     }
 
-    public Condition isLessThan(double number)
+    public Condition lt(Number value)
     {
-        return new GenericCondition(IS_LESS_THAN, this, Double.valueOf(number));
+        return isLessThan(value);
+    }
+
+    public Condition isLessThan(long value)
+    {
+        return new GenericCondition(IS_LESS_THAN, this, Long.valueOf(value));
+    }
+
+    public Condition lt(long value)
+    {
+        return isLessThan(value);
+    }
+
+    public Condition isLessThan(double value)
+    {
+        return new GenericCondition(IS_LESS_THAN, this, Double.valueOf(value));
+    }
+
+    public Condition lt(double value)
+    {
+        return isLessThan(value);
     }
 
     public Condition isLessThan(NumberColumn<?, ?> otherColumn)
@@ -124,24 +209,49 @@ public abstract class NumberColumnFunction extends ColumnFunction
         return new GenericCondition(IS_LESS_THAN, this, otherColumn);
     }
 
-    public Condition isLessThanOrEqualTo(Number number)
+    public Condition lt(NumberColumn<?, ?> otherColumn)
     {
-        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, number);
+        return isLessThan(otherColumn);
     }
 
-    public Condition isLessThanOrEqualTo(long number)
+    public Condition isLessThanOrEqualTo(Number value)
     {
-        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, Long.valueOf(number));
+        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, value);
     }
 
-    public Condition isLessThanOrEqualTo(double number)
+    public Condition ltEq(Number value)
     {
-        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, Double.valueOf(number));
+        return isLessThanOrEqualTo(value);
+    }
+
+    public Condition isLessThanOrEqualTo(long value)
+    {
+        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, Long.valueOf(value));
+    }
+
+    public Condition ltEq(long value)
+    {
+        return isLessThanOrEqualTo(value);
+    }
+
+    public Condition isLessThanOrEqualTo(double value)
+    {
+        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, Double.valueOf(value));
+    }
+
+    public Condition ltEq(double value)
+    {
+        return isLessThanOrEqualTo(value);
     }
 
     public Condition isLessThanOrEqualTo(NumberColumn<?, ?> otherColumn)
     {
         return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, otherColumn);
+    }
+
+    public Condition ltEq(NumberColumn<?, ?> otherColumn)
+    {
+        return isLessThanOrEqualTo(otherColumn);
     }
 
     public Condition isBetween(Number value1, Number value2)

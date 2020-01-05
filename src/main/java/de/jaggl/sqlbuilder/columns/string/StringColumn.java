@@ -40,9 +40,31 @@ public abstract class StringColumn<T extends StringColumn<T>> extends Column
         return value == null ? new GenericCondition(IS_NULL, this) : new GenericCondition(IS_EQUAL_TO, this, value);
     }
 
+    /**
+     * Alias for {@link #isEqualTo(String)} for shorter statements
+     *
+     * @param value the value to compare equality against
+     * @return the {@link Condition}
+     */
+    public Condition eq(String value)
+    {
+        return isEqualTo(value);
+    }
+
     public Condition isNotEqualTo(String value)
     {
         return value == null ? new GenericCondition(IS_NOT_NULL, this) : new GenericCondition(IS_NOT_EQUAL_TO, this, value);
+    }
+
+    /**
+     * Alias for {@link #isNotEqualTo(String)} for shorter statements
+     *
+     * @param value the value to compare equality against
+     * @return the {@link Condition}
+     */
+    public Condition nEq(String value)
+    {
+        return isNotEqualTo(value);
     }
 
     public Condition isIn(Collection<CharSequence> values)

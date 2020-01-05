@@ -7,6 +7,7 @@ import static de.jaggl.sqlbuilder.domain.LikeType.AFTER;
 import static de.jaggl.sqlbuilder.functions.Function.min;
 import static de.jaggl.sqlbuilder.functions.Function.now;
 import static de.jaggl.sqlbuilder.queries.Queries.update;
+import static de.jaggl.sqlbuilder.queries.Update.clearWheres;
 import static de.jaggl.sqlbuilder.utils.Indentation.enabled;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -75,5 +76,23 @@ class UpdateTest
         assertThat(update.build(MYSQL, enabled())).isEqualTo(update.build(SYBASE, enabled()));
 
         assertThat(Update.copy(update).build(MYSQL)).isEqualTo(update.build(MYSQL));
+    }
+
+    @Test
+    void testBuildUpdateWithWhereNot()
+    {
+        var update = update(PERSONS).set(NICKNAME, FORENAME).whereNot(LASTNAME.eq("Schumacher"));
+
+        assertThat(update.build()).isEqualTo("UPDATE `persons` SET `persons`.`nickname` = `persons`.`forename` WHERE NOT `persons`.`lastname` = 'Schumacher'");
+    }
+
+    @Test
+    void testClearWheres()
+    {
+        var update = update(PERSONS).set(NICKNAME, FORENAME).where(LASTNAME.eq("Schumacher"));
+
+        assertThat(update.getWhere()).isNotNull();
+        clearWheres(update);
+        assertThat(update.getWhere()).isNull();
     }
 }

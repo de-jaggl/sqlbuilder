@@ -8,6 +8,13 @@ import static de.jaggl.sqlbuilder.functions.Function.min;
 import static de.jaggl.sqlbuilder.functions.Function.sum;
 import static de.jaggl.sqlbuilder.queries.Queries.select;
 import static de.jaggl.sqlbuilder.queries.Queries.selectDistinct;
+import static de.jaggl.sqlbuilder.queries.Select.clearGroupBys;
+import static de.jaggl.sqlbuilder.queries.Select.clearHavings;
+import static de.jaggl.sqlbuilder.queries.Select.clearJoins;
+import static de.jaggl.sqlbuilder.queries.Select.clearLimit;
+import static de.jaggl.sqlbuilder.queries.Select.clearOrdering;
+import static de.jaggl.sqlbuilder.queries.Select.clearSelects;
+import static de.jaggl.sqlbuilder.queries.Select.clearWheres;
 import static de.jaggl.sqlbuilder.utils.Indentation.enabled;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,6 +39,10 @@ class SelectTest
     public static final Schema DBA = Schema.create("dba");
 
     public static final Table PERSONS = DBA.table("persons");
+
+    public static final Table GROUPS = DBA.table("groups");
+
+    public static final VarCharColumn NAME = GROUPS.varCharColumn("name").build();
 
     public static final VarCharColumn FORENAME = PERSONS.varCharColumn("forename").size(50).nullable().build();
     public static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").size(50).defaultNull().build();
@@ -67,7 +78,8 @@ class SelectTest
 
         subCondition = subCondition.and(FORENAME.isNotNull());
 
-        var select = selectDistinct(FORENAME, LASTNAME, SIZE.as("Gr\\ö`ße"), Selectable.plain("IsNull(`COL`, '')").as("Color"), sum(AGE).as("ageSum"))
+        var select = selectDistinct(FORENAME, LASTNAME, SIZE.as("Gr\\ö`ße"))
+                .select(Selectable.plain("IsNull(`COL`, '')").as("Color"), sum(AGE).as("ageSum"))
                 .from(select(count(FORENAME).as("foreCount")).from(PERSONS).as("sub"))
                 .leftOuterJoin(PERSONS.as("q")
                         .on(FORENAME.isEqualTo(NICKNAME)
@@ -228,5 +240,106 @@ class SelectTest
                         + "  `dba`.`persons`.`forename` DESC");
 
         assertThat(Select.copy(select).build(MYSQL)).isEqualTo(select.build(MYSQL));
+    }
+
+    @Test
+    void testSimplestCopy()
+    {
+        assertThat(Select.copy(select().from(PERSONS)).build()).isEqualTo(select().from(PERSONS).build());
+    }
+
+    @Test
+    void testClearSelects()
+    {
+        var select = select(LASTNAME).from(PERSONS);
+
+        assertThat(select.getSelectables()).isNotNull();
+        clearSelects(select);
+        assertThat(select.getSelectables()).isNull();
+    }
+
+    @Test
+    void testClearJoins()
+    {
+        var select = select(LASTNAME).from(PERSONS).leftJoin(GROUPS.on(NICKNAME.eq(FORENAME)));
+
+        assertThat(select.getJoins()).isNotNull();
+        clearJoins(select);
+        assertThat(select.getJoins()).isNull();
+    }
+
+    @Test
+    void testClearWheres()
+    {
+        var select = select(LASTNAME).from(PERSONS).where(FORENAME.isNull());
+
+        assertThat(select.getWhere()).isNotNull();
+        clearWheres(select);
+        assertThat(select.getWhere()).isNull();
+    }
+
+    @Test
+    void testClearGroupBys()
+    {
+        var select = select(LASTNAME).from(PERSONS).groupBy(FORENAME);
+
+        assertThat(select.getGroupBys()).isNotNull();
+        clearGroupBys(select);
+        assertThat(select.getGroupBys()).isNull();
+    }
+
+    @Test
+    void testClearHavings()
+    {
+        var select = select(LASTNAME).from(PERSONS).havingNot(count().gt(10));
+
+        assertThat(select.getHaving()).isNotNull();
+        clearHavings(select);
+        assertThat(select.getHaving()).isNull();
+    }
+
+    @Test
+    void testClearOrdering()
+    {
+        var select = select(LASTNAME).from(PERSONS).orderBy(LASTNAME);
+
+        assertThat(select.getOrderBys()).isNotNull();
+        clearOrdering(select);
+        assertThat(select.getOrderBys()).isNull();
+    }
+
+    @Test
+    void testClearLimit()
+    {
+        var select = select(LASTNAME).from(PERSONS).limit(5);
+
+        assertThat(select.getLimitation()).isNotNull();
+        clearLimit(select);
+        assertThat(select.getLimitation()).isNull();
+    }
+
+    @Test
+    void testJoins()
+    {
+        assertThat(select().from(PERSONS).join(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
+
+        assertThat(select().from(PERSONS).leftJoin(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` LEFT JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
+
+        assertThat(select().from(PERSONS).rightJoin(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` RIGHT JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
+
+        assertThat(select().from(PERSONS).innerJoin(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` INNER JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
+
+        assertThat(select().from(PERSONS).leftOuterJoin(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` LEFT OUTER JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
+
+        assertThat(select().from(PERSONS).rightOuterJoin(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` RIGHT OUTER JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
+
+        assertThat(select().from(PERSONS).fullOuterJoin(GROUPS.on(NAME.eq(LASTNAME))).build())
+                .isEqualTo("SELECT * FROM `dba`.`persons` FULL OUTER JOIN `dba`.`groups` ON `dba`.`groups`.`name` = `dba`.`persons`.`lastname`");
     }
 }
