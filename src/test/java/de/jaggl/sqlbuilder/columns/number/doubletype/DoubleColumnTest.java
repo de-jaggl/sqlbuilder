@@ -8,7 +8,8 @@ import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.testsupport.ColumnAliasTestSupport;
 import de.jaggl.sqlbuilder.testsupport.Consumers;
 
-class DoubleColumnTest extends DoubleTypeColumnTest<DoubleColumn, DoubleColumnBuilder> implements ColumnAliasTestSupport<DoubleColumn, DoubleColumnBuilder>
+class DoubleColumnTest extends DoubleTypeColumnTest<DoubleColumn, DoubleColumnBuilder>
+        implements ColumnAliasTestSupport<DoubleColumn, DoubleColumnBuilder, Double>
 {
     @Override
     public DoubleColumnBuilder getColumnBuilder(Table table, String name)

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import de.jaggl.sqlbuilder.columns.ColumnTest;
 import de.jaggl.sqlbuilder.schema.Table;
 
-class StringColumnTest<C extends StringColumn<?>, B extends StringColumnBuilder<B, C>> extends ColumnTest<C, B>
+class StringColumnTest<C extends StringColumn<?>, B extends StringColumnBuilder<B, C>> extends ColumnTest<C, B, CharSequence>
 {
     @SuppressWarnings("unchecked")
     @Override

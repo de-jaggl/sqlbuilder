@@ -18,7 +18,7 @@ import de.jaggl.sqlbuilder.queries.Queries;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
-public abstract class ColumnTestSupport<C extends Column, B extends ColumnBuilder<C>>
+public abstract class ColumnTestSupport<C extends Column, B extends ColumnBuilder<C, B, V>, V>
 {
     protected abstract B getColumnBuilder(Table table, String name);
 

@@ -7,7 +7,7 @@ import de.jaggl.sqlbuilder.columns.ColumnTest;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
-public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuilder<C>, T extends Number> extends ColumnTest<C, B>
+public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuilder<C, B, T>, T extends Number> extends ColumnTest<C, B, T>
 {
     @SuppressWarnings("unchecked")
     @Override

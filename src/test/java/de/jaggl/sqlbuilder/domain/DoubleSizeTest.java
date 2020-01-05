@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class DoubleSizeTest
+class DoubleSizeTest
 {
     @Test
-    public void testValueOf()
+    void testValueOf()
     {
         assertThat(DoubleSize.valueOf(null)).isNull();
     }

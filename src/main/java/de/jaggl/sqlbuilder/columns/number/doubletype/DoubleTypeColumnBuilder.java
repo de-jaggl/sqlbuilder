@@ -20,19 +20,9 @@ public abstract class DoubleTypeColumnBuilder<T extends DoubleTypeColumnBuilder<
         super(table, name);
     }
 
-    @SuppressWarnings("unchecked")
     public T defaultValue(double value)
     {
-        isDefaultNull = false;
-        defaultValue = Double.valueOf(value);
-        return (T) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public T size(double value)
-    {
-        this.size = DoubleSize.valueOf(Double.valueOf(value));
-        return (T) this;
+        return defaultValue(Double.valueOf(value));
     }
 
     @SuppressWarnings("unchecked")
@@ -40,5 +30,10 @@ public abstract class DoubleTypeColumnBuilder<T extends DoubleTypeColumnBuilder<
     {
         this.size = DoubleSize.valueOf(value);
         return (T) this;
+    }
+
+    public T size(double value)
+    {
+        return size(Double.valueOf(value));
     }
 }

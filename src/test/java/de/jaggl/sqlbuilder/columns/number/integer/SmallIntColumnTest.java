@@ -9,7 +9,7 @@ import de.jaggl.sqlbuilder.testsupport.ColumnAliasTestSupport;
 import de.jaggl.sqlbuilder.testsupport.Consumers;
 
 class SmallIntColumnTest extends IntegerColumnTest<SmallIntColumn, SmallIntColumnBuilder>
-        implements ColumnAliasTestSupport<SmallIntColumn, SmallIntColumnBuilder>
+        implements ColumnAliasTestSupport<SmallIntColumn, SmallIntColumnBuilder, Integer>
 {
     @Override
     public SmallIntColumnBuilder getColumnBuilder(Table table, String name)

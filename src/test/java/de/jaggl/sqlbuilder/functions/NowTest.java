@@ -11,23 +11,15 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
-import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.testsupport.OtherColumnTestSupport;
 
-class NowTest implements OtherColumnTestSupport<DoubleColumn, DoubleColumnBuilder>
+class NowTest implements OtherColumnTestSupport
 {
     private static final Table TABLE = Table.create("table");
 
-    @Override
-    public DoubleColumnBuilder getColumnBuilder(Table table, String name)
-    {
-        return new DoubleColumnBuilder(table, name);
-    }
-
     @Test
-    public void testNow()
+    void testNow()
     {
         assertThat(select(now().as("alias")).from(TABLE).build(MYSQL)).isEqualTo("SELECT NOW() AS `alias` FROM `table`");
 

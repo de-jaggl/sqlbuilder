@@ -8,19 +8,11 @@ import java.util.function.Supplier;
 
 import org.assertj.core.api.AbstractStringAssert;
 
-import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
-import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumnBuilder;
 import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.schema.Table;
 
-public abstract class FunctionConditionTestSupport implements OtherColumnTestSupport<DoubleColumn, DoubleColumnBuilder>
+public abstract class FunctionConditionTestSupport implements OtherColumnTestSupport
 {
-    @Override
-    public DoubleColumnBuilder getColumnBuilder(Table table, String name)
-    {
-        return new DoubleColumnBuilder(table, name);
-    }
-
     private static final Table TABLE = Table.create("table");
 
     protected AbstractStringAssert<?> assertCondition(Supplier<Condition> functionFunction)
