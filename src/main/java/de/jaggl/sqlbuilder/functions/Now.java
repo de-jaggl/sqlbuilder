@@ -1,5 +1,9 @@
 package de.jaggl.sqlbuilder.functions;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.Temporal;
+
+import de.jaggl.sqlbuilder.conditions.DateTimeConditions;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.AllArgsConstructor;
@@ -15,8 +19,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Now implements Function
+public class Now implements Function, DateTimeConditions
 {
+    @Override
+    public java.util.function.Function<ZonedDateTime, Temporal> getDateConversion()
+    {
+        return ZonedDateTime::toLocalDateTime;
+    }
+
     @Getter
     private String alias;
 
