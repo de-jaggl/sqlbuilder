@@ -23,6 +23,8 @@ public class QueryTest
     {
         var query = select().from(create("table"));
 
+        assertThat(query).isNotNull();
+
         query.print();
         System.out.println();
         query.println();
