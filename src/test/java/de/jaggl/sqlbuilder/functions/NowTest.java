@@ -5,6 +5,10 @@ import static de.jaggl.sqlbuilder.functions.Function.now;
 import static de.jaggl.sqlbuilder.queries.Queries.select;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
@@ -23,8 +27,12 @@ class NowTest implements OtherColumnTestSupport<DoubleColumn, DoubleColumnBuilde
     }
 
     @Test
-    public void testCount()
+    public void testNow()
     {
         assertThat(select(now().as("alias")).from(TABLE).build(MYSQL)).isEqualTo("SELECT NOW() AS `alias` FROM `table`");
+
+        assertThat(select().from(TABLE)
+                .where(Function.now().isBefore(Date.from(LocalDateTime.of(2020, 1, 5, 19, 41, 54).atZone(ZoneId.systemDefault()).toInstant())))
+                .build(MYSQL)).isEqualTo("SELECT * FROM `table` WHERE NOW() < '2020-01-05 19:41:54.000000'");
     }
 }

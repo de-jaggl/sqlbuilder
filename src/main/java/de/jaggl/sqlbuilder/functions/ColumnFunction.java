@@ -1,10 +1,7 @@
 package de.jaggl.sqlbuilder.functions;
 
-import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_EQUAL_TO;
-import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_NOT_EQUAL_TO;
-
 import de.jaggl.sqlbuilder.columns.Column;
-import de.jaggl.sqlbuilder.conditions.GenericCondition;
+import de.jaggl.sqlbuilder.conditions.EqualityConditions;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.AllArgsConstructor;
@@ -20,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
-public abstract class ColumnFunction implements Function
+public abstract class ColumnFunction implements Function, EqualityConditions
 {
     protected final Column column;
     protected final String definition;
@@ -32,25 +29,5 @@ public abstract class ColumnFunction implements Function
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return definition + "(" + column.getFullNameOrAlias(context) + ")";
-    }
-
-    public GenericCondition isEqualTo(Column otherColumn)
-    {
-        return new GenericCondition(IS_EQUAL_TO, this, otherColumn);
-    }
-
-    public GenericCondition eq(Column otherColumn)
-    {
-        return isEqualTo(otherColumn);
-    }
-
-    public GenericCondition isNotEqualTo(Column otherColumn)
-    {
-        return new GenericCondition(IS_NOT_EQUAL_TO, this, otherColumn);
-    }
-
-    public GenericCondition nEq(Column otherColumn)
-    {
-        return isNotEqualTo(otherColumn);
     }
 }
