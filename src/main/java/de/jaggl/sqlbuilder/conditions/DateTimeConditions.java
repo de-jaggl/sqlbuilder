@@ -9,7 +9,6 @@ import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionTy
 import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_NOT_EQUAL_TO;
 import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_NOT_NULL;
 import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_NULL;
-import static de.jaggl.sqlbuilder.domain.LikeType.NONE;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,9 +19,8 @@ import java.util.Date;
 import java.util.function.Function;
 
 import de.jaggl.sqlbuilder.columns.Column;
-import de.jaggl.sqlbuilder.domain.LikeType;
 
-public interface DateTimeConditions
+public interface DateTimeConditions extends LikeConditions
 {
     Function<ZonedDateTime, Temporal> getDateConversion();
 
@@ -124,36 +122,6 @@ public interface DateTimeConditions
     default Condition isBeforeOrEqualTo(Column otherColumn)
     {
         return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, otherColumn);
-    }
-
-    default Condition isLike(CharSequence value)
-    {
-        return value == null ? new GenericCondition(IS_NULL, this) : new IsLike(this, value, NONE);
-    }
-
-    default Condition isLike(CharSequence value, LikeType likeType)
-    {
-        return value == null ? new GenericCondition(IS_NULL, this) : new IsLike(this, value, likeType);
-    }
-
-    default Condition isLike(Column otherColumn)
-    {
-        return new IsLike(this, otherColumn, NONE);
-    }
-
-    default Condition isNotLike(CharSequence value)
-    {
-        return value == null ? new GenericCondition(IS_NOT_NULL, this) : new IsNotLike(this, value, NONE);
-    }
-
-    default Condition isNotLike(CharSequence value, LikeType likeType)
-    {
-        return value == null ? new GenericCondition(IS_NOT_NULL, this) : new IsNotLike(this, value, likeType);
-    }
-
-    default Condition isNotLike(Column otherColumn)
-    {
-        return new IsNotLike(this, otherColumn, NONE);
     }
 
     default Condition isBetween(LocalDate value1, LocalDate value2)
