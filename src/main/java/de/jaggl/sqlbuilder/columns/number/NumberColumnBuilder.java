@@ -1,9 +1,6 @@
 package de.jaggl.sqlbuilder.columns.number;
 
 import de.jaggl.sqlbuilder.columns.ColumnBuilder;
-import de.jaggl.sqlbuilder.columns.configurable.DefaultValueColumnBuilder;
-import de.jaggl.sqlbuilder.columns.configurable.NullableColumnBuilder;
-import de.jaggl.sqlbuilder.columns.configurable.UnsignableColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
 /**
@@ -11,13 +8,9 @@ import de.jaggl.sqlbuilder.schema.Table;
  *
  * @since 2.0.0
  */
-public abstract class NumberColumnBuilder<T extends NumberColumnBuilder<T, N, C>, N extends Number, C extends NumberColumn<C, N>> extends ColumnBuilder<C>
-        implements NullableColumnBuilder<T>, DefaultValueColumnBuilder<T, N>, UnsignableColumnBuilder<T>
+public abstract class NumberColumnBuilder<T extends NumberColumnBuilder<T, N, C>, N extends Number, C extends NumberColumn<C, N>> extends ColumnBuilder<C, T, N>
 {
-    protected boolean isNullable = true;
-    protected boolean isDefaultNull = true;
     protected boolean isUnsigned;
-    protected N defaultValue;
 
     public NumberColumnBuilder(Table table, String name)
     {
@@ -25,46 +18,14 @@ public abstract class NumberColumnBuilder<T extends NumberColumnBuilder<T, N, C>
     }
 
     @SuppressWarnings("unchecked")
-    @Override
-    public T nullable(boolean nullable)
-    {
-        isNullable = nullable;
-        return (T) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
     public T unsigned(boolean unsigned)
     {
         isUnsigned = unsigned;
         return (T) this;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public T defaultValue(N value)
+    public T unsigned()
     {
-        isDefaultNull = false;
-        defaultValue = value;
-        return (T) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public T defaultNull()
-    {
-        isNullable = true;
-        defaultValue = null;
-        isDefaultNull = true;
-        return (T) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public T noDefault()
-    {
-        defaultValue = null;
-        isDefaultNull = false;
-        return (T) this;
+        return unsigned(true);
     }
 }

@@ -16,7 +16,8 @@ import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.testsupport.ColumnAliasTestSupport;
 import de.jaggl.sqlbuilder.testsupport.Consumers;
 
-class DateTimeColumnTest extends ColumnTest<DateTimeColumn, DateTimeColumnBuilder> implements ColumnAliasTestSupport<DateTimeColumn, DateTimeColumnBuilder>
+class DateTimeColumnTest extends ColumnTest<DateTimeColumn, DateTimeColumnBuilder, LocalDateTime>
+        implements ColumnAliasTestSupport<DateTimeColumn, DateTimeColumnBuilder, LocalDateTime>
 {
     @Override
     public DateTimeColumnBuilder getColumnBuilder(Table table, String name)

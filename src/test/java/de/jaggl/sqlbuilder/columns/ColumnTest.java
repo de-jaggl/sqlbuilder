@@ -6,7 +6,7 @@ import de.jaggl.sqlbuilder.columns.string.VarCharColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.testsupport.ColumnTestSupport;
 
-public abstract class ColumnTest<C extends Column, B extends ColumnBuilder<C>> extends ColumnTestSupport<C, B>
+public abstract class ColumnTest<C extends Column, B extends ColumnBuilder<C, B, V>, V> extends ColumnTestSupport<C, B, V>
 {
     @SuppressWarnings("unchecked")
     @Override

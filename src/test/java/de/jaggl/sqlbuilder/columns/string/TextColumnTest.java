@@ -8,7 +8,7 @@ import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.testsupport.ColumnAliasTestSupport;
 import de.jaggl.sqlbuilder.testsupport.Consumers;
 
-class TextColumnTest extends StringColumnTest<TextColumn, TextColumnBuilder> implements ColumnAliasTestSupport<TextColumn, TextColumnBuilder>
+class TextColumnTest extends StringColumnTest<TextColumn, TextColumnBuilder> implements ColumnAliasTestSupport<TextColumn, TextColumnBuilder, CharSequence>
 {
     @Override
     public TextColumnBuilder getColumnBuilder(Table table, String name)

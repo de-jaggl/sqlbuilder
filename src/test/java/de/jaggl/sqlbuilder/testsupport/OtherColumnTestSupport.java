@@ -1,20 +1,18 @@
 package de.jaggl.sqlbuilder.testsupport;
 
 import de.jaggl.sqlbuilder.columns.Column;
-import de.jaggl.sqlbuilder.columns.ColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
-public interface OtherColumnTestSupport<C extends Column, B extends ColumnBuilder<C>>
+public interface OtherColumnTestSupport
 {
-    B getColumnBuilder(Table table, String name);
-
-    default C getOtherColumn()
+    default Column getOtherColumn()
     {
-        return getColumnBuilder(Table.create("table"), "other").build();
+        return new DoubleColumnBuilder(Table.create("table"), "other").build();
     }
 
-    default C getOtherColumn2()
+    default Column getOtherColumn2()
     {
-        return getColumnBuilder(Table.create("table"), "other2").build();
+        return new DoubleColumnBuilder(Table.create("table"), "other2").build();
     }
 }

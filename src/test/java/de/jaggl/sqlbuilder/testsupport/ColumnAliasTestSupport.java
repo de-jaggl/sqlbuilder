@@ -13,7 +13,7 @@ import de.jaggl.sqlbuilder.columns.ColumnBuilder;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.schema.Table;
 
-public interface ColumnAliasTestSupport<C extends Column, B extends ColumnBuilder<C>>
+public interface ColumnAliasTestSupport<C extends Column, B extends ColumnBuilder<C, B, V>, V>
 {
     B getColumnBuilder(Table table, String name);
 

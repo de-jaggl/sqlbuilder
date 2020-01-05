@@ -9,7 +9,7 @@ import de.jaggl.sqlbuilder.testsupport.ColumnAliasTestSupport;
 import de.jaggl.sqlbuilder.testsupport.Consumers;
 
 class MediumIntColumnTest extends IntegerColumnTest<MediumIntColumn, MediumIntColumnBuilder>
-        implements ColumnAliasTestSupport<MediumIntColumn, MediumIntColumnBuilder>
+        implements ColumnAliasTestSupport<MediumIntColumn, MediumIntColumnBuilder, Integer>
 {
     @Override
     public MediumIntColumnBuilder getColumnBuilder(Table table, String name)
