@@ -45,13 +45,21 @@ class DateColumnTest extends ColumnTest<DateColumn, DateColumnBuilder> implement
     void testDateColumnConditions()
     {
         assertCondition(column -> column.isEqualTo(LocalDate.of(1981, 12, 29))).isEqualTo("= '1981-12-29'");
+        assertCondition(column -> column.eq(LocalDate.of(1981, 12, 29))).isEqualTo("= '1981-12-29'");
         assertCondition(column -> column.isEqualTo(toDate(LocalDate.of(1981, 12, 29)))).isEqualTo("= '1981-12-29'");
+        assertCondition(column -> column.eq(toDate(LocalDate.of(1981, 12, 29)))).isEqualTo("= '1981-12-29'");
         assertCondition(column -> column.isEqualTo((LocalDate) null)).isEqualTo("IS NULL");
+        assertCondition(column -> column.eq((LocalDate) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isEqualTo((Date) null)).isEqualTo("IS NULL");
+        assertCondition(column -> column.eq((Date) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isNotEqualTo(LocalDate.of(1981, 12, 29))).isEqualTo("!= '1981-12-29'");
+        assertCondition(column -> column.nEq(LocalDate.of(1981, 12, 29))).isEqualTo("!= '1981-12-29'");
         assertCondition(column -> column.isNotEqualTo(toDate(LocalDate.of(1981, 12, 29)))).isEqualTo("!= '1981-12-29'");
+        assertCondition(column -> column.nEq(toDate(LocalDate.of(1981, 12, 29)))).isEqualTo("!= '1981-12-29'");
         assertCondition(column -> column.isNotEqualTo((LocalDate) null)).isEqualTo("IS NOT NULL");
+        assertCondition(column -> column.nEq((LocalDate) null)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isNotEqualTo((Date) null)).isEqualTo("IS NOT NULL");
+        assertCondition(column -> column.nEq((Date) null)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isLike("1981-12-%")).isEqualTo("LIKE '1981-12-%'");
         assertCondition(column -> column.isLike((String) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isLike("-12-29", BEFORE)).isEqualTo("LIKE '%-12-29'");

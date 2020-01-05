@@ -39,8 +39,18 @@ public abstract class ColumnFunction implements Function
         return new GenericCondition(IS_EQUAL_TO, this, otherColumn);
     }
 
+    public GenericCondition eq(Column otherColumn)
+    {
+        return isEqualTo(otherColumn);
+    }
+
     public GenericCondition isNotEqualTo(Column otherColumn)
     {
         return new GenericCondition(IS_NOT_EQUAL_TO, this, otherColumn);
+    }
+
+    public GenericCondition nEq(Column otherColumn)
+    {
+        return isNotEqualTo(otherColumn);
     }
 }

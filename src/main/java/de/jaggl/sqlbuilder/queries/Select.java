@@ -1,5 +1,16 @@
 package de.jaggl.sqlbuilder.queries;
 
+import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE;
+import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE_NOT;
+import static de.jaggl.sqlbuilder.domain.JoinType.FULL_OUTER;
+import static de.jaggl.sqlbuilder.domain.JoinType.INNER;
+import static de.jaggl.sqlbuilder.domain.JoinType.LEFT;
+import static de.jaggl.sqlbuilder.domain.JoinType.LEFT_OUTER;
+import static de.jaggl.sqlbuilder.domain.JoinType.RIGHT;
+import static de.jaggl.sqlbuilder.domain.JoinType.RIGHT_OUTER;
+import static de.jaggl.sqlbuilder.domain.OrderDirection.ASC;
+import static de.jaggl.sqlbuilder.domain.OrderDirection.DESC;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +20,6 @@ import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.dialect.Dialect;
 import de.jaggl.sqlbuilder.domain.ConditionType;
 import de.jaggl.sqlbuilder.domain.Groupable;
-import de.jaggl.sqlbuilder.domain.JoinType;
 import de.jaggl.sqlbuilder.domain.Joinable;
 import de.jaggl.sqlbuilder.domain.JoinableTable;
 import de.jaggl.sqlbuilder.domain.Limit;
@@ -115,45 +125,45 @@ public class Select implements Query
 
     public Select leftJoin(JoinableTable table)
     {
-        return addJoin(new JoinableTable(JoinType.LEFT, table.getTable(), table.getCondition()));
+        return addJoin(new JoinableTable(LEFT, table.getTable(), table.getCondition()));
     }
 
     public Select rightJoin(JoinableTable table)
     {
-        return addJoin(new JoinableTable(JoinType.RIGHT, table.getTable(), table.getCondition()));
+        return addJoin(new JoinableTable(RIGHT, table.getTable(), table.getCondition()));
     }
 
     public Select innerJoin(JoinableTable table)
     {
-        return addJoin(new JoinableTable(JoinType.INNER, table.getTable(), table.getCondition()));
+        return addJoin(new JoinableTable(INNER, table.getTable(), table.getCondition()));
     }
 
     public Select leftOuterJoin(JoinableTable table)
     {
-        return addJoin(new JoinableTable(JoinType.LEFT_OUTER, table.getTable(), table.getCondition()));
+        return addJoin(new JoinableTable(LEFT_OUTER, table.getTable(), table.getCondition()));
     }
 
     public Select rightOuterJoin(JoinableTable table)
     {
-        return addJoin(new JoinableTable(JoinType.RIGHT_OUTER, table.getTable(), table.getCondition()));
+        return addJoin(new JoinableTable(RIGHT_OUTER, table.getTable(), table.getCondition()));
     }
 
     public Select fullOuterJoin(JoinableTable table)
     {
-        return addJoin(new JoinableTable(JoinType.FULL_OUTER, table.getTable(), table.getCondition()));
+        return addJoin(new JoinableTable(FULL_OUTER, table.getTable(), table.getCondition()));
     }
 
     public Select where(Condition condition)
     {
         where = condition;
-        whereConditionType = ConditionType.WHERE;
+        whereConditionType = WHERE;
         return this;
     }
 
     public Select whereNot(Condition condition)
     {
         where = condition;
-        whereConditionType = ConditionType.WHERE_NOT;
+        whereConditionType = WHERE_NOT;
         return this;
     }
 
@@ -198,14 +208,14 @@ public class Select implements Query
     public Select having(Condition condition)
     {
         having = condition;
-        havingConditionType = ConditionType.WHERE;
+        havingConditionType = WHERE;
         return this;
     }
 
     public Select havingNot(Condition condition)
     {
         having = condition;
-        havingConditionType = ConditionType.WHERE_NOT;
+        havingConditionType = WHERE_NOT;
         return this;
     }
 
@@ -216,12 +226,12 @@ public class Select implements Query
 
     public Select orderAscendingBy(Column column)
     {
-        return orderBy(column, OrderDirection.ASC);
+        return orderBy(column, ASC);
     }
 
     public Select orderDescendingBy(Column column)
     {
-        return orderBy(column, OrderDirection.DESC);
+        return orderBy(column, DESC);
     }
 
     public Select orderBy(Column column, OrderDirection direction)

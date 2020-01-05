@@ -43,7 +43,7 @@ public class Update implements Query
     Update(Update update)
     {
         table = update.table;
-        values = update.values != null ? new LinkedHashMap<>(update.values) : null;
+        values = new LinkedHashMap<>(update.values);
         where = getCopy(update.where);
         whereConditionType = update.whereConditionType;
     }

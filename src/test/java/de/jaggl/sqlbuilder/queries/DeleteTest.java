@@ -4,6 +4,8 @@ import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
 import static de.jaggl.sqlbuilder.dialect.Dialects.SYBASE;
 import static de.jaggl.sqlbuilder.domain.LikeType.AFTER;
 import static de.jaggl.sqlbuilder.functions.Function.min;
+import static de.jaggl.sqlbuilder.queries.Delete.clearLimit;
+import static de.jaggl.sqlbuilder.queries.Delete.clearWheres;
 import static de.jaggl.sqlbuilder.queries.Queries.deleteFrom;
 import static de.jaggl.sqlbuilder.utils.Indentation.enabled;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -88,5 +90,25 @@ class DeleteTest
                         + "WHERE NOT `persons`.`lastname` LIKE 'Nils%'");
 
         assertThat(Delete.copy(delete).build(MYSQL)).isEqualTo(delete.build(MYSQL));
+    }
+
+    @Test
+    void testClearWheres()
+    {
+        var delete = deleteFrom(PERSONS).where(LASTNAME.eq("Nils"));
+
+        assertThat(delete.getWhere()).isNotNull();
+        clearWheres(delete);
+        assertThat(delete.getWhere()).isNull();
+    }
+
+    @Test
+    void testClearLimit()
+    {
+        var delete = deleteFrom(PERSONS).limit(5);
+
+        assertThat(delete.getLimitation()).isNotNull();
+        clearLimit(delete);
+        assertThat(delete.getLimitation()).isNull();
     }
 }

@@ -46,13 +46,21 @@ class DateTimeColumnTest extends ColumnTest<DateTimeColumn, DateTimeColumnBuilde
     void testDateTimeColumnConditions()
     {
         assertCondition(column -> column.isEqualTo(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.eq(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("= '1981-12-29 21:03:51.000000'");
         assertCondition(column -> column.isEqualTo(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.eq(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("= '1981-12-29 21:03:51.000000'");
         assertCondition(column -> column.isEqualTo((LocalDateTime) null)).isEqualTo("IS NULL");
+        assertCondition(column -> column.eq((LocalDateTime) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isEqualTo((Date) null)).isEqualTo("IS NULL");
+        assertCondition(column -> column.eq((Date) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isNotEqualTo(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("!= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.nEq(LocalDateTime.of(1981, 12, 29, 21, 3, 51))).isEqualTo("!= '1981-12-29 21:03:51.000000'");
         assertCondition(column -> column.isNotEqualTo(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("!= '1981-12-29 21:03:51.000000'");
+        assertCondition(column -> column.nEq(toDate(LocalDateTime.of(1981, 12, 29, 21, 3, 51)))).isEqualTo("!= '1981-12-29 21:03:51.000000'");
         assertCondition(column -> column.isNotEqualTo((LocalDateTime) null)).isEqualTo("IS NOT NULL");
+        assertCondition(column -> column.nEq((LocalDateTime) null)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isNotEqualTo((Date) null)).isEqualTo("IS NOT NULL");
+        assertCondition(column -> column.nEq((Date) null)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isLike("1981-12-%")).isEqualTo("LIKE '1981-12-%'");
         assertCondition(column -> column.isLike((String) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isLike("-12-29", BEFORE)).isEqualTo("LIKE '%-12-29'");

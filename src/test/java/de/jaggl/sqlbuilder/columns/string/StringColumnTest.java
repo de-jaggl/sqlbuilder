@@ -24,9 +24,13 @@ class StringColumnTest<C extends StringColumn<?>, B extends StringColumnBuilder<
     void testStringColumnConditions()
     {
         assertCondition(column -> column.isEqualTo("ABC")).isEqualTo("= 'ABC'");
+        assertCondition(column -> column.eq("ABC")).isEqualTo("= 'ABC'");
         assertCondition(column -> column.isEqualTo((String) null)).isEqualTo("IS NULL");
+        assertCondition(column -> column.eq((String) null)).isEqualTo("IS NULL");
         assertCondition(column -> column.isNotEqualTo("ABC")).isEqualTo("!= 'ABC'");
+        assertCondition(column -> column.nEq("ABC")).isEqualTo("!= 'ABC'");
         assertCondition(column -> column.isNotEqualTo((String) null)).isEqualTo("IS NOT NULL");
+        assertCondition(column -> column.nEq((String) null)).isEqualTo("IS NOT NULL");
         assertCondition(column -> column.isIn("a", "b", "c")).isEqualTo("IN ('a', 'b', 'c')");
         assertCondition(column -> column.isIn(List.of("a", "b", "c"))).isEqualTo("IN ('a', 'b', 'c')");
         assertCondition(column -> column.isNotIn("a", "b", "c")).isEqualTo("NOT IN ('a', 'b', 'c')");

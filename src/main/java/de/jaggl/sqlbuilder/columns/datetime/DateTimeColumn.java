@@ -48,6 +48,11 @@ public class DateTimeColumn extends Column
         return value == null ? new GenericCondition(IS_NULL, this) : new GenericCondition(IS_EQUAL_TO, this, value);
     }
 
+    public GenericCondition eq(LocalDateTime value)
+    {
+        return isEqualTo(value);
+    }
+
     public GenericCondition isEqualTo(Date value)
     {
         return value == null ? new GenericCondition(IS_NULL, this) : new GenericCondition(IS_EQUAL_TO, this, value
@@ -56,9 +61,19 @@ public class DateTimeColumn extends Column
                 .toLocalDateTime());
     }
 
+    public GenericCondition eq(Date value)
+    {
+        return isEqualTo(value);
+    }
+
     public GenericCondition isNotEqualTo(LocalDateTime value)
     {
         return value == null ? new GenericCondition(IS_NOT_NULL, this) : new GenericCondition(IS_NOT_EQUAL_TO, this, value);
+    }
+
+    public GenericCondition nEq(LocalDateTime value)
+    {
+        return isNotEqualTo(value);
     }
 
     public GenericCondition isNotEqualTo(Date value)
@@ -67,6 +82,11 @@ public class DateTimeColumn extends Column
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime());
+    }
+
+    public GenericCondition nEq(Date value)
+    {
+        return isNotEqualTo(value);
     }
 
     public GenericCondition isAfter(LocalDateTime value)

@@ -12,6 +12,8 @@ class ColumnFunctionTest extends FunctionConditionTestSupport
     void testColumnFunctionConditions()
     {
         assertCondition(() -> count().isEqualTo(getOtherColumn())).isEqualTo("COUNT(*) = `table`.`other`");
+        assertCondition(() -> count().eq(getOtherColumn())).isEqualTo("COUNT(*) = `table`.`other`");
         assertCondition(() -> count().isNotEqualTo(getOtherColumn())).isEqualTo("COUNT(*) != `table`.`other`");
+        assertCondition(() -> count().nEq(getOtherColumn())).isEqualTo("COUNT(*) != `table`.`other`");
     }
 }
