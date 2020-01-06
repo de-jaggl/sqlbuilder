@@ -6,7 +6,7 @@ import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.Getter;
 
 @Getter
-public class CreateTable implements Query
+public class CreateTable implements ExecutableQuery
 {
     private Table table;
 

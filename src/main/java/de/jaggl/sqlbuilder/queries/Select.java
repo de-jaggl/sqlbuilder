@@ -40,7 +40,7 @@ import lombok.ToString;
  */
 @Getter
 @ToString
-public class Select implements Query
+public class Select implements QueryableQuery
 {
     private boolean distinct;
     private List<Selectable> selectables;

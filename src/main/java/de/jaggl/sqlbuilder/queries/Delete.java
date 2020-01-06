@@ -23,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = PACKAGE)
 @Getter
 @ToString
-public class Delete implements Query
+public class Delete implements UpdatebleQuery
 {
     private Table table;
     private Condition where;
