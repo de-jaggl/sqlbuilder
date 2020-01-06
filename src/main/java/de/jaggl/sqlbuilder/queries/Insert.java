@@ -28,7 +28,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = PACKAGE)
 @Getter
 @ToString
-public class Insert implements Query
+public class Insert implements UpdatebleQuery
 {
     private Table table;
     private Map<Column, Valuable> values = new LinkedHashMap<>();

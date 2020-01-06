@@ -5,6 +5,10 @@
 [![Nightly build](https://github.com/de-jaggl/sqlbuilder/workflows/nightly/badge.svg)](https://github.com/de-jaggl/sqlbuilder/actions)
 [![javadoc](https://javadoc.io/badge2/de.jaggl.sqlbuilder/sqlbuilder-core/javadoc.svg?)](https://javadoc.io/doc/de.jaggl.sqlbuilder/sqlbuilder-core)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=security_rating)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=ncloc)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=de-jaggl_sqlbuilder&metric=sqale_index)](https://sonarcloud.io/dashboard?id=de-jaggl_sqlbuilder)
 [![GitHub](https://img.shields.io/github/license/de-jaggl/sqlbuilder)](https://github.com/de-jaggl/sqlbuilder/blob/master/LICENSE)
@@ -18,7 +22,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.4.2</version>
+  <version>2.5.0</version>
 </dependency>
 ```
 

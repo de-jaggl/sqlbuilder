@@ -33,7 +33,7 @@ import lombok.ToString;
 @RequiredArgsConstructor(access = PACKAGE)
 @Getter
 @ToString
-public class Update implements Query
+public class Update implements UpdatebleQuery
 {
     private final Table table;
     private Map<Column, Valuable> values = new LinkedHashMap<>();
