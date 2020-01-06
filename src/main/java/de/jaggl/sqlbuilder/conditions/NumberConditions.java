@@ -11,6 +11,7 @@ import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionTy
 import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_NULL;
 
 import de.jaggl.sqlbuilder.columns.Column;
+import de.jaggl.sqlbuilder.domain.Placeholder;
 
 public interface NumberConditions
 {
@@ -114,6 +115,16 @@ public interface NumberConditions
         return isLessThan(otherColumn);
     }
 
+    default Condition isLessThan(Placeholder placeholder)
+    {
+        return new GenericCondition(IS_LESS_THAN, this, placeholder);
+    }
+
+    default Condition lt(Placeholder placeholder)
+    {
+        return isLessThan(placeholder);
+    }
+
     default Condition isGreaterThan(Number value)
     {
         return new GenericCondition(IS_GREATER_THAN, this, value);
@@ -152,6 +163,16 @@ public interface NumberConditions
     default Condition gt(Column otherColumn)
     {
         return isGreaterThan(otherColumn);
+    }
+
+    default Condition isGreaterThan(Placeholder placeholder)
+    {
+        return new GenericCondition(IS_GREATER_THAN, this, placeholder);
+    }
+
+    default Condition gt(Placeholder placeholder)
+    {
+        return isGreaterThan(placeholder);
     }
 
     default Condition isLessThanOrEqualTo(Number value)
@@ -194,6 +215,16 @@ public interface NumberConditions
         return isLessThanOrEqualTo(otherColumn);
     }
 
+    default Condition isLessThanOrEqualTo(Placeholder placeholder)
+    {
+        return new GenericCondition(IS_LESS_THAN_OR_EQUAL_TO, this, placeholder);
+    }
+
+    default Condition ltEq(Placeholder placeholder)
+    {
+        return isLessThanOrEqualTo(placeholder);
+    }
+
     default Condition isGreaterThanOrEqualTo(Number value)
     {
         return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, value);
@@ -232,6 +263,16 @@ public interface NumberConditions
     default Condition gtEq(Column otherColumn)
     {
         return isGreaterThanOrEqualTo(otherColumn);
+    }
+
+    default Condition isGreaterThanOrEqualTo(Placeholder placeholder)
+    {
+        return new GenericCondition(IS_GREATER_THAN_OR_EQUAL_TO, this, placeholder);
+    }
+
+    default Condition gtEq(Placeholder placeholder)
+    {
+        return isGreaterThanOrEqualTo(placeholder);
     }
 
     default Condition isBetween(Number value1, Number value2)
@@ -282,5 +323,45 @@ public interface NumberConditions
     default Condition isBetween(double value, Column otherColumn)
     {
         return new GenericCondition(IS_BETWEEN, this, Double.valueOf(value), otherColumn);
+    }
+
+    default Condition isBetween(long value, Placeholder placeholder)
+    {
+        return new GenericCondition(IS_BETWEEN, this, Long.valueOf(value), placeholder);
+    }
+
+    default Condition isBetween(double value, Placeholder placeholder)
+    {
+        return new GenericCondition(IS_BETWEEN, this, Double.valueOf(value), placeholder);
+    }
+
+    default Condition isBetween(Column otherColumn, Placeholder placeholder)
+    {
+        return new GenericCondition(IS_BETWEEN, this, otherColumn, placeholder);
+    }
+
+    default Condition isBetween(Placeholder placeholder, Number value)
+    {
+        return new GenericCondition(IS_BETWEEN, this, placeholder, value);
+    }
+
+    default Condition isBetween(Placeholder placeholder, long value)
+    {
+        return new GenericCondition(IS_BETWEEN, this, placeholder, Long.valueOf(value));
+    }
+
+    default Condition isBetween(Placeholder placeholder, double value)
+    {
+        return new GenericCondition(IS_BETWEEN, this, placeholder, Double.valueOf(value));
+    }
+
+    default Condition isBetween(Number value, Placeholder placeholder)
+    {
+        return new GenericCondition(IS_BETWEEN, this, value, placeholder);
+    }
+
+    default Condition isBetween(Placeholder placeholder, Column otherColumn)
+    {
+        return new GenericCondition(IS_BETWEEN, this, placeholder, otherColumn);
     }
 }

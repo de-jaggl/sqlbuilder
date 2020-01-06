@@ -7,8 +7,9 @@ import java.text.MessageFormat;
 import java.util.Collection;
 
 import de.jaggl.sqlbuilder.domain.BuildingContext;
+import de.jaggl.sqlbuilder.domain.Placeholder;
 import de.jaggl.sqlbuilder.utils.Indentation;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -16,18 +17,32 @@ import lombok.ToString;
  *
  * @since 2.0.0
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @ToString(callSuper = true)
 public class IsIn extends Condition
 {
-    private Object value;
-    private Collection<Object> values;
+    private final Object value;
+    private final Collection<Object> values;
+
+    private Placeholder placeholder;
+
+    public IsIn(Object value, Placeholder placeholder)
+    {
+        this.value = value;
+        this.values = null;
+        this.placeholder = placeholder;
+    }
 
     @Override
     protected String doBuild(BuildingContext context, Indentation indentation)
     {
-        return MessageFormat.format(context.getDialect().getLabels().getIsIn(), getValued(value, context, indentation), values.stream()
-                .map(item -> getValued(item, context, indentation))
-                .collect(joining(", ")));
+        if (values != null)
+        {
+            return MessageFormat.format(context.getDialect().getLabels().getIsIn(), getValued(value, context, indentation), values.stream()
+                    .map(item -> getValued(item, context, indentation))
+                    .collect(joining(", ")));
+        }
+        return MessageFormat
+                .format(context.getDialect().getLabels().getIsIn(), getValued(value, context, indentation), getValued(placeholder, context, indentation));
     }
 }

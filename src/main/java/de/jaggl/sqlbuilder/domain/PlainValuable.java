@@ -1,8 +1,11 @@
 package de.jaggl.sqlbuilder.domain;
 
+import static lombok.AccessLevel.PACKAGE;
+
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
@@ -14,7 +17,8 @@ import lombok.ToString;
 @ToString
 public class PlainValuable implements Valuable
 {
-    private Object value;
+    @Getter(PACKAGE)
+    protected Object value;
 
     @Override
     public String getValue(BuildingContext context, Indentation indentation)

@@ -4,6 +4,7 @@ import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionTy
 import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionType.IS_NOT_EQUAL_TO;
 
 import de.jaggl.sqlbuilder.columns.Column;
+import de.jaggl.sqlbuilder.domain.Placeholder;
 
 public interface EqualityConditions
 {
@@ -23,6 +24,16 @@ public interface EqualityConditions
         return isEqualTo(otherColumn);
     }
 
+    default Condition isEqualTo(Placeholder placeholder)
+    {
+        return new GenericCondition(IS_EQUAL_TO, this, placeholder);
+    }
+
+    default Condition eq(Placeholder placeholder)
+    {
+        return isEqualTo(placeholder);
+    }
+
     default Condition isNotEqualTo(Column otherColumn)
     {
         return new GenericCondition(IS_NOT_EQUAL_TO, this, otherColumn);
@@ -37,5 +48,15 @@ public interface EqualityConditions
     default Condition nEq(Column otherColumn)
     {
         return isNotEqualTo(otherColumn);
+    }
+
+    default Condition isNotEqualTo(Placeholder placeholder)
+    {
+        return new GenericCondition(IS_NOT_EQUAL_TO, this, placeholder);
+    }
+
+    default Condition nEq(Placeholder placeholder)
+    {
+        return isNotEqualTo(placeholder);
     }
 }

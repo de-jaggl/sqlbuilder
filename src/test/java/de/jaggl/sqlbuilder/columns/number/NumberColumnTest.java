@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.columns.number;
 
+import static de.jaggl.sqlbuilder.domain.Placeholder.placeholder;
+
 import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.ColumnBuilder;
@@ -43,6 +45,8 @@ public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuil
         assertCondition(column -> column.lt(Double.valueOf(123.123))).isEqualTo("< 123.123");
         assertCondition(column -> column.isLessThan(getOtherColumn())).isEqualTo("< `table`.`other`");
         assertCondition(column -> column.lt(getOtherColumn())).isEqualTo("< `table`.`other`");
+        assertCondition(column -> column.isLessThan(placeholder())).isEqualTo("< ?");
+        assertCondition(column -> column.lt(placeholder())).isEqualTo("< ?");
         assertCondition(column -> column.isLessThanOrEqualTo(123)).isEqualTo("<= 123");
         assertCondition(column -> column.ltEq(123)).isEqualTo("<= 123");
         assertCondition(column -> column.isLessThanOrEqualTo(123.123)).isEqualTo("<= 123.123");
@@ -51,6 +55,8 @@ public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuil
         assertCondition(column -> column.ltEq(Double.valueOf(123.123))).isEqualTo("<= 123.123");
         assertCondition(column -> column.isLessThanOrEqualTo(getOtherColumn())).isEqualTo("<= `table`.`other`");
         assertCondition(column -> column.ltEq(getOtherColumn())).isEqualTo("<= `table`.`other`");
+        assertCondition(column -> column.isLessThanOrEqualTo(placeholder())).isEqualTo("<= ?");
+        assertCondition(column -> column.ltEq(placeholder())).isEqualTo("<= ?");
         assertCondition(column -> column.isGreaterThan(123)).isEqualTo("> 123");
         assertCondition(column -> column.gt(123)).isEqualTo("> 123");
         assertCondition(column -> column.isGreaterThan(123.123)).isEqualTo("> 123.123");
@@ -59,6 +65,8 @@ public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuil
         assertCondition(column -> column.gt(Double.valueOf(123.123))).isEqualTo("> 123.123");
         assertCondition(column -> column.isGreaterThan(getOtherColumn())).isEqualTo("> `table`.`other`");
         assertCondition(column -> column.gt(getOtherColumn())).isEqualTo("> `table`.`other`");
+        assertCondition(column -> column.isGreaterThan(placeholder())).isEqualTo("> ?");
+        assertCondition(column -> column.gt(placeholder())).isEqualTo("> ?");
         assertCondition(column -> column.isGreaterThanOrEqualTo(123)).isEqualTo(">= 123");
         assertCondition(column -> column.gtEq(123)).isEqualTo(">= 123");
         assertCondition(column -> column.isGreaterThanOrEqualTo(123.123)).isEqualTo(">= 123.123");
@@ -67,6 +75,8 @@ public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuil
         assertCondition(column -> column.gtEq(Double.valueOf(123.123))).isEqualTo(">= 123.123");
         assertCondition(column -> column.isGreaterThanOrEqualTo(getOtherColumn())).isEqualTo(">= `table`.`other`");
         assertCondition(column -> column.gtEq(getOtherColumn())).isEqualTo(">= `table`.`other`");
+        assertCondition(column -> column.isGreaterThanOrEqualTo(placeholder())).isEqualTo(">= ?");
+        assertCondition(column -> column.gtEq(placeholder())).isEqualTo(">= ?");
         assertCondition(column -> column.isBetween(123, 456)).isEqualTo("BETWEEN 123 AND 456");
         assertCondition(column -> column.isBetween(123.123, 456.456)).isEqualTo("BETWEEN 123.123 AND 456.456");
         assertCondition(column -> column.isBetween(Double.valueOf(123.123), Double.valueOf(456.456))).isEqualTo("BETWEEN 123.123 AND 456.456");
@@ -77,5 +87,13 @@ public class NumberColumnTest<C extends NumberColumn<C, T>, B extends ColumnBuil
         assertCondition(column -> column.isBetween(getOtherColumn(), 123.123)).isEqualTo("BETWEEN `table`.`other` AND 123.123");
         assertCondition(column -> column.isBetween(getOtherColumn(), Double.valueOf(123.123))).isEqualTo("BETWEEN `table`.`other` AND 123.123");
         assertCondition(column -> column.isBetween(getOtherColumn(), getOtherColumn2())).isEqualTo("BETWEEN `table`.`other` AND `table`.`other2`");
+        assertCondition(column -> column.isBetween(123, placeholder())).isEqualTo("BETWEEN 123 AND ?");
+        assertCondition(column -> column.isBetween(123.123, placeholder())).isEqualTo("BETWEEN 123.123 AND ?");
+        assertCondition(column -> column.isBetween(Double.valueOf(123.123), placeholder())).isEqualTo("BETWEEN 123.123 AND ?");
+        assertCondition(column -> column.isBetween(getOtherColumn(), placeholder())).isEqualTo("BETWEEN `table`.`other` AND ?");
+        assertCondition(column -> column.isBetween(placeholder(), getOtherColumn())).isEqualTo("BETWEEN ? AND `table`.`other`");
+        assertCondition(column -> column.isBetween(placeholder(), 123)).isEqualTo("BETWEEN ? AND 123");
+        assertCondition(column -> column.isBetween(placeholder(), 123.123)).isEqualTo("BETWEEN ? AND 123.123");
+        assertCondition(column -> column.isBetween(placeholder(), Double.valueOf(123.123))).isEqualTo("BETWEEN ? AND 123.123");
     }
 }

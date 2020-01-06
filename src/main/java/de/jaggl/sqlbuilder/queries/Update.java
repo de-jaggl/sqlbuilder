@@ -50,37 +50,37 @@ public class Update implements UpdatebleQuery
 
     public Update set(StringColumn<?> column, CharSequence value)
     {
-        return addValue(column, new PlainValuable(value));
+        return set(column, new PlainValuable(value));
     }
 
     public Update set(NumberColumn<?, ?> column, Number value)
     {
-        return addValue(column, new PlainValuable(value));
+        return set(column, new PlainValuable(value));
     }
 
     public Update set(NumberColumn<?, ?> column, long value)
     {
-        return addValue(column, new PlainValuable(Long.valueOf(value)));
+        return set(column, new PlainValuable(Long.valueOf(value)));
     }
 
     public Update set(NumberColumn<?, ?> column, double value)
     {
-        return addValue(column, new PlainValuable(Double.valueOf(value)));
+        return set(column, new PlainValuable(Double.valueOf(value)));
     }
 
     public Update set(Column column, Function function)
     {
-        return addValue(column, new ValuableFunction(function));
+        return set(column, new ValuableFunction(function));
     }
 
     public Update set(Column column, Column otherColumn)
     {
-        return addValue(column, new ValuableColumn(otherColumn));
+        return set(column, new ValuableColumn(otherColumn));
     }
 
-    private Update addValue(Column column, Valuable value)
+    public Update set(Column column, Valuable valuable)
     {
-        values.put(column, value);
+        values.put(column, valuable);
         return this;
     }
 
