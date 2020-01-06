@@ -8,6 +8,7 @@ import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionTy
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import de.jaggl.sqlbuilder.domain.Placeholder;
 import de.jaggl.sqlbuilder.utils.ArrayUtils;
 
 public interface StringConditions extends LikeConditions
@@ -54,6 +55,11 @@ public interface StringConditions extends LikeConditions
         return new IsIn(this, ArrayUtils.toList(value, furtherValues));
     }
 
+    default Condition isIn(Placeholder placeholder)
+    {
+        return new IsIn(this, placeholder);
+    }
+
     default Condition isNotIn(Collection<CharSequence> values)
     {
         return new IsNotIn(this, values.stream().map(value -> (Object) value).collect(Collectors.toList()));
@@ -62,5 +68,10 @@ public interface StringConditions extends LikeConditions
     default Condition isNotIn(CharSequence value, CharSequence... furtherValues)
     {
         return new IsNotIn(this, ArrayUtils.toList(value, furtherValues));
+    }
+
+    default Condition isNotIn(Placeholder placeholder)
+    {
+        return new IsNotIn(this, placeholder);
     }
 }

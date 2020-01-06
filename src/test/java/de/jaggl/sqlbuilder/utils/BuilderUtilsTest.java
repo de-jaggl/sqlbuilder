@@ -1,6 +1,7 @@
 package de.jaggl.sqlbuilder.utils;
 
 import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
+import static de.jaggl.sqlbuilder.domain.Placeholder.placeholder;
 import static de.jaggl.sqlbuilder.functions.Function.now;
 import static de.jaggl.sqlbuilder.utils.BuilderUtils.getValued;
 import static de.jaggl.sqlbuilder.utils.Indentation.disabled;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.domain.BuildingContext;
+import de.jaggl.sqlbuilder.domain.Plain;
 import de.jaggl.sqlbuilder.schema.Schema;
 
 class BuilderUtilsTest
@@ -25,6 +27,8 @@ class BuilderUtilsTest
         assertThat(getValued(null, context, disabled())).isEqualTo("NULL");
         assertThat(getValued(forename, context, disabled())).isEqualTo("`dba`.`persons`.`forename`");
         assertThat(getValued(now(), context, disabled())).isEqualTo("NOW()");
+        assertThat(getValued(new Plain("plain"), context, disabled())).isEqualTo("plain");
+        assertThat(getValued(placeholder(), context, disabled())).isEqualTo("?");
         assertThat(getValued(Integer.valueOf(8), context, disabled())).isEqualTo("8");
         assertThat(getValued(Long.valueOf(8), context, disabled())).isEqualTo("8");
         assertThat(getValued(Double.valueOf(55.8), context, disabled())).isEqualTo("55.8");

@@ -10,4 +10,9 @@ import de.jaggl.sqlbuilder.utils.Indentation;
 public interface Valuable
 {
     String getValue(BuildingContext context, Indentation indentation);
+
+    public static PlainValuable plain(String value)
+    {
+        return new PlainValuable(new Plain(value));
+    }
 }

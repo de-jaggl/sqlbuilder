@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.LikeType;
+import de.jaggl.sqlbuilder.domain.Placeholder;
+import de.jaggl.sqlbuilder.domain.Plain;
 import de.jaggl.sqlbuilder.functions.Function;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,14 @@ public final class BuilderUtils
         if (Function.class.isAssignableFrom(value.getClass()))
         {
             return ((Function) value).getValue(context, indentation);
+        }
+        if (Plain.class.isAssignableFrom(value.getClass()))
+        {
+            return ((Plain) value).getValue();
+        }
+        if (Placeholder.class.isAssignableFrom(value.getClass()))
+        {
+            return ((Placeholder) value).getValue(context, indentation);
         }
         if (Number.class.isAssignableFrom(value.getClass()))
         {
