@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.functions;
 
+import static java.sql.Types.INTEGER;
+
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.utils.Indentation;
@@ -32,5 +34,11 @@ public class Count extends NumberColumnFunction
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return definition + "(" + (column != null ? column.getFullNameOrAlias(context) : "*") + ")";
+    }
+
+    @Override
+    public int getSqlType()
+    {
+        return INTEGER;
     }
 }

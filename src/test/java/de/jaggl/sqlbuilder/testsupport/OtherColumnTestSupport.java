@@ -2,6 +2,7 @@ package de.jaggl.sqlbuilder.testsupport;
 
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumnBuilder;
+import de.jaggl.sqlbuilder.columns.number.integer.IntColumnBuilder;
 import de.jaggl.sqlbuilder.schema.Table;
 
 public interface OtherColumnTestSupport
@@ -13,6 +14,6 @@ public interface OtherColumnTestSupport
 
     default Column getOtherColumn2()
     {
-        return new DoubleColumnBuilder(Table.create("table"), "other2").build();
+        return new IntColumnBuilder(Table.create("table"), "other2").build();
     }
 }

@@ -14,8 +14,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public abstract class StringColumn<T extends StringColumn<T>> extends Column implements StringConditions
 {
-    public StringColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
+    public StringColumn(Table table, String name, String alias, ColumnDefinition columnDefinition, int sqlType)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, sqlType);
     }
 }

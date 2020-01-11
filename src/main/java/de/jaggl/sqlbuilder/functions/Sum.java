@@ -25,4 +25,10 @@ public class Sum extends NumberColumnFunction
     {
         return new Sum(column, alias);
     }
+
+    @Override
+    public int getSqlType()
+    {
+        return column.getSqlType();
+    }
 }

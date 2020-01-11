@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.columns.datetime;
 
+import static java.sql.Types.DATE;
+
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
 import java.util.function.Function;
@@ -26,7 +28,7 @@ public class DateColumn extends Column implements DateTimeConditions
 
     public DateColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, DATE);
     }
 
     public DateColumn as(String alias)

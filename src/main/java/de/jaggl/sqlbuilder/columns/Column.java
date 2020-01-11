@@ -6,6 +6,7 @@ import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.Definable;
 import de.jaggl.sqlbuilder.domain.Groupable;
 import de.jaggl.sqlbuilder.domain.Selectable;
+import de.jaggl.sqlbuilder.domain.SqlTypeSupplier;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
@@ -21,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @ToString
-public abstract class Column implements Groupable, Selectable, Definable, NullableConditions, EqualityConditions
+public abstract class Column implements Groupable, Selectable, Definable, NullableConditions, EqualityConditions, SqlTypeSupplier
 {
     @ToString.Exclude
     protected Table table;
@@ -30,6 +31,8 @@ public abstract class Column implements Groupable, Selectable, Definable, Nullab
     private String alias;
 
     protected ColumnDefinition columnDefinition;
+
+    private int sqlType;
 
     @Override
     public String getValue(BuildingContext context, Indentation indentation)

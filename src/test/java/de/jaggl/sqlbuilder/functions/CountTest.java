@@ -3,6 +3,7 @@ package de.jaggl.sqlbuilder.functions;
 import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
 import static de.jaggl.sqlbuilder.functions.Function.count;
 import static de.jaggl.sqlbuilder.queries.Queries.select;
+import static java.sql.Types.INTEGER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -19,5 +20,11 @@ class CountTest implements OtherColumnTestSupport
     {
         assertThat(select(count().as("alias")).from(TABLE).build(MYSQL)).isEqualTo("SELECT COUNT(*) AS `alias` FROM `table`");
         assertThat(select(count(getOtherColumn()).as("alias")).from(TABLE).build(MYSQL)).isEqualTo("SELECT COUNT(`table`.`other`) AS `alias` FROM `table`");
+    }
+
+    @Test
+    void testGetSqlType()
+    {
+        assertThat(count().getSqlType()).isEqualTo(INTEGER);
     }
 }

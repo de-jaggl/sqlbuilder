@@ -3,6 +3,7 @@ package de.jaggl.sqlbuilder.functions;
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.Selectable;
+import de.jaggl.sqlbuilder.domain.SqlTypeSupplier;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
 /**
@@ -10,7 +11,7 @@ import de.jaggl.sqlbuilder.utils.Indentation;
  *
  * @since 2.0.0
  */
-public interface Function extends Selectable
+public interface Function extends Selectable, SqlTypeSupplier
 {
     @Override
     String getValue(BuildingContext context, Indentation indentation);

@@ -31,6 +31,7 @@ public class IsIn extends Condition
         this.value = value;
         this.values = null;
         this.placeholder = placeholder;
+        addPlaceholderSqlTypes(resolvePlaceholderSqlTypes(value, placeholder));
     }
 
     @Override

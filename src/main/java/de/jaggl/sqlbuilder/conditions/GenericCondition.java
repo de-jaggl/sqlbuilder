@@ -26,6 +26,7 @@ public class GenericCondition extends Condition
     {
         this.type = type;
         this.values = values;
+        addPlaceholderSqlTypes(resolvePlaceholderSqlTypes(values));
     }
 
     @Override
