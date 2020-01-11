@@ -5,9 +5,14 @@ import static de.jaggl.sqlbuilder.domain.ConcatenationType.OR;
 import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE;
 import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE_NOT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.ConcatenationType;
 import de.jaggl.sqlbuilder.domain.ConditionType;
+import de.jaggl.sqlbuilder.domain.Placeholder;
+import de.jaggl.sqlbuilder.domain.SqlTypeSupplier;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,12 +24,16 @@ import lombok.ToString;
  * @since 2.0.0
  */
 @Getter
-@Setter
 @ToString
 public abstract class Condition
 {
+    @Setter
     private ConditionType type;
+
+    @Setter
     private ConcatenationType concatenation;
+
+    private List<Integer> placeholderSqlTypes;
 
     protected abstract String doBuild(BuildingContext context, Indentation indentation);
 
@@ -94,5 +103,38 @@ public abstract class Condition
     public static Condition plain(String plainCondition)
     {
         return new PlainCondition(plainCondition);
+    }
+
+    protected void addPlaceholderSqlTypes(List<Integer> sqlTypes)
+    {
+        if (sqlTypes != null)
+        {
+            if (placeholderSqlTypes == null)
+            {
+                placeholderSqlTypes = new ArrayList<>();
+            }
+            placeholderSqlTypes.addAll(sqlTypes);
+        }
+    }
+
+    protected static List<Integer> resolvePlaceholderSqlTypes(Object... values)
+    {
+        List<Integer> placeholderSqlTypes = new ArrayList<>();
+        if (values.length > 1 && SqlTypeSupplier.class.isAssignableFrom(values[0].getClass()))
+        {
+            for (int i = 1; i < values.length; i++)
+            {
+                if (values[i] != null && Placeholder.class.isAssignableFrom(values[i].getClass()))
+                {
+                    placeholderSqlTypes.add(Integer.valueOf(((SqlTypeSupplier) values[0]).getSqlType()));
+                }
+            }
+        }
+        return placeholderSqlTypes;
+    }
+
+    public List<Integer> getPlaceholderSqlTypes()
+    {
+        return placeholderSqlTypes;
     }
 }

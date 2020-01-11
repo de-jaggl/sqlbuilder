@@ -25,4 +25,10 @@ public class Min extends NumberColumnFunction
     {
         return new Min(column, alias);
     }
+
+    @Override
+    public int getSqlType()
+    {
+        return column.getSqlType();
+    }
 }

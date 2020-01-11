@@ -9,6 +9,7 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.columns.number.NumberColumn;
 import de.jaggl.sqlbuilder.columns.string.StringColumn;
 import de.jaggl.sqlbuilder.dialect.Dialect;
+import de.jaggl.sqlbuilder.domain.Placeholder;
 import de.jaggl.sqlbuilder.domain.PlainValuable;
 import de.jaggl.sqlbuilder.domain.Valuable;
 import de.jaggl.sqlbuilder.domain.ValuableColumn;
@@ -63,6 +64,11 @@ public class Insert implements UpdatebleQuery
     public Insert set(NumberColumn<?, ?> column, double value)
     {
         return addValue(column, new PlainValuable(Double.valueOf(value)));
+    }
+
+    public Insert set(Column column, Placeholder placeholder)
+    {
+        return addValue(column, placeholder);
     }
 
     public Insert set(Column column, Function function)

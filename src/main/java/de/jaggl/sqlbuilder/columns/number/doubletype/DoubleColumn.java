@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.columns.number.doubletype;
 
+import static java.sql.Types.DOUBLE;
+
 import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.schema.Table;
 import lombok.ToString;
@@ -14,7 +16,7 @@ public class DoubleColumn extends DoubleTypeColumn<DoubleColumn>
 {
     public DoubleColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, DOUBLE);
     }
 
     public DoubleColumn as(String alias)

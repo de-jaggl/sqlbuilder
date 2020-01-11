@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.functions;
 
+import static java.sql.Types.TIMESTAMP;
+
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
 
@@ -39,5 +41,11 @@ public class Now implements Function, DateTimeConditions
     public String getValue(BuildingContext context, Indentation indentation)
     {
         return "NOW()";
+    }
+
+    @Override
+    public int getSqlType()
+    {
+        return TIMESTAMP;
     }
 }

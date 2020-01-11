@@ -25,4 +25,10 @@ public class Max extends NumberColumnFunction
     {
         return new Max(column, alias);
     }
+
+    @Override
+    public int getSqlType()
+    {
+        return column.getSqlType();
+    }
 }

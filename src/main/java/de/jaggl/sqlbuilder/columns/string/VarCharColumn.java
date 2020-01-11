@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.columns.string;
 
+import static java.sql.Types.VARCHAR;
+
 import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.schema.Table;
 import lombok.ToString;
@@ -14,7 +16,7 @@ public class VarCharColumn extends StringColumn<VarCharColumn>
 {
     VarCharColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, VARCHAR);
     }
 
     public VarCharColumn as(String alias)

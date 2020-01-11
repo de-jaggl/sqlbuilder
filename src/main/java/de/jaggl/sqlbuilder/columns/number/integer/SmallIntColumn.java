@@ -1,5 +1,7 @@
 package de.jaggl.sqlbuilder.columns.number.integer;
 
+import static java.sql.Types.SMALLINT;
+
 import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.schema.Table;
 import lombok.ToString;
@@ -14,7 +16,7 @@ public class SmallIntColumn extends IntegerColumn<SmallIntColumn>
 {
     public SmallIntColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, SMALLINT);
     }
 
     public SmallIntColumn as(String alias)

@@ -24,8 +24,8 @@ public abstract class DoubleTypeColumn<T extends DoubleTypeColumn<T>> extends Nu
         FORMAT.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.GERMAN));
     }
 
-    public DoubleTypeColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
+    public DoubleTypeColumn(Table table, String name, String alias, ColumnDefinition columnDefinition, int sqlType)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, sqlType);
     }
 }

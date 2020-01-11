@@ -26,11 +26,13 @@ public class CombinedCondition extends Condition
     public CombinedCondition(Condition condition)
     {
         this.conditions.add(condition);
+        addPlaceholderSqlTypes(condition.getPlaceholderSqlTypes());
     }
 
     public void append(Condition condition)
     {
         conditions.add(condition);
+        addPlaceholderSqlTypes(condition.getPlaceholderSqlTypes());
     }
 
     @Override
@@ -77,6 +79,7 @@ public class CombinedCondition extends Condition
             copy.conditions = conditions;
             copy.setType(condition.getType());
             copy.setConcatenation(condition.getConcatenation());
+            copy.addPlaceholderSqlTypes(condition.getPlaceholderSqlTypes());
             return copy;
         }
         return condition;

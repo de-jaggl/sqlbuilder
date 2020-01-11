@@ -3,6 +3,7 @@ package de.jaggl.sqlbuilder.functions;
 import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
 import static de.jaggl.sqlbuilder.functions.Function.now;
 import static de.jaggl.sqlbuilder.queries.Queries.select;
+import static java.sql.Types.TIMESTAMP;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
@@ -26,5 +27,11 @@ class NowTest implements OtherColumnTestSupport
         assertThat(select().from(TABLE)
                 .where(Function.now().isBefore(Date.from(LocalDateTime.of(2020, 1, 5, 19, 41, 54).atZone(ZoneId.systemDefault()).toInstant())))
                 .build(MYSQL)).isEqualTo("SELECT * FROM `table` WHERE NOW() < '2020-01-05 19:41:54.000000'");
+    }
+
+    @Test
+    void testGetSqlType()
+    {
+        assertThat(now().getSqlType()).isEqualTo(TIMESTAMP);
     }
 }

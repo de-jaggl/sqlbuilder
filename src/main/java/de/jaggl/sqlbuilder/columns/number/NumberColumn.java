@@ -14,8 +14,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public abstract class NumberColumn<T extends NumberColumn<T, N>, N extends Number> extends Column implements NumberConditions
 {
-    public NumberColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
+    public NumberColumn(Table table, String name, String alias, ColumnDefinition columnDefinition, int sqlType)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, sqlType);
     }
 }

@@ -25,4 +25,10 @@ public class Avg extends NumberColumnFunction
     {
         return new Avg(column, alias);
     }
+
+    @Override
+    public int getSqlType()
+    {
+        return column.getSqlType();
+    }
 }

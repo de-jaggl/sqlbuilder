@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public abstract class IntegerColumn<T extends IntegerColumn<T>> extends NumberColumn<T, Integer>
 {
-    public IntegerColumn(Table table, String name, String alias, ColumnDefinition columnDefinition)
+    public IntegerColumn(Table table, String name, String alias, ColumnDefinition columnDefinition, int sqlType)
     {
-        super(table, name, alias, columnDefinition);
+        super(table, name, alias, columnDefinition, sqlType);
     }
 }
