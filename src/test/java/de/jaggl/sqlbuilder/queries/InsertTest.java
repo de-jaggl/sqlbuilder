@@ -11,8 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.datetime.DateColumn;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
+import de.jaggl.sqlbuilder.columns.number.integer.BigIntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
+import de.jaggl.sqlbuilder.domain.Placeholder;
 import de.jaggl.sqlbuilder.schema.Table;
 
 class InsertTest
@@ -26,6 +28,7 @@ class InsertTest
     public static final DoubleColumn SIZE = PERSONS.doubleColumn("size").build();
     public static final IntColumn COUNT = PERSONS.intColumn("count").build();
     public static final DateColumn BIRTHDAY = PERSONS.dateColumn("birthday").build();
+    public static final BigIntColumn NUMBERS = PERSONS.bigIntColumn("numbers").build();
 
     @Test
     void testBuildInsert()
@@ -37,13 +40,14 @@ class InsertTest
                 .set(COUNT, Integer.valueOf(5))
                 .set(AGE, 38)
                 .set(SIZE, 175.89)
+                .set(NUMBERS, Placeholder.placeholder(NUMBERS))
                 .set(LASTNAME, "Schumacher");
 
         insert.println(MYSQL, enabled());
         insert.println(SYBASE, enabled());
 
         assertThat(insert.build())
-                .isEqualTo("INSERT INTO `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`forename` = 'Martin', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89, `persons`.`lastname` = 'Schumacher'");
+                .isEqualTo("INSERT INTO `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`forename` = 'Martin', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89, `persons`.`numbers` = :numbers, `persons`.`lastname` = 'Schumacher'");
 
         assertThat(insert.build(enabled()))
                 .isEqualTo("INSERT INTO\n" //
@@ -55,6 +59,7 @@ class InsertTest
                         + "  `persons`.`count` = 5,\n" //
                         + "  `persons`.`age` = 38,\n" //
                         + "  `persons`.`size` = 175.89,\n" //
+                        + "  `persons`.`numbers` = :numbers,\n" //
                         + "  `persons`.`lastname` = 'Schumacher'");
 
         assertThat(insert.build(MYSQL)).isEqualTo(insert.build(SYBASE));
