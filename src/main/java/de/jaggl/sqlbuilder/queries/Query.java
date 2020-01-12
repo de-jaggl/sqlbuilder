@@ -10,6 +10,11 @@ import java.sql.SQLException;
 import de.jaggl.sqlbuilder.dialect.Dialect;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.3.0
+ */
 public interface Query
 {
     String build(Dialect dialect, Indentation indentation);

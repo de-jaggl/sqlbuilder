@@ -13,6 +13,11 @@ import static de.jaggl.sqlbuilder.conditions.GenericCondition.GenericConditionTy
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.Placeholder;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.1.0
+ */
 public interface NumberConditions
 {
     default Condition isEqualTo(Number value)

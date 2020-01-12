@@ -37,7 +37,7 @@ class CreateTableTest
         createTable.println(SYBASE, enabled());
 
         assertThat(createTable.build(MYSQL))
-                .isEqualTo("CREATE TABLE `dba`.`persons` (`forename` VARCHAR(50), `lastname` VARCHAR(50) DEFAULT NULL, `nickname` VARCHAR(30) DEFAULT 'Schubi', `age` INT(5) UNSIGNED NOT NULL AUTO_INCREMENT, `size` DOUBLE(2,2) UNSIGNED NOT NULL DEFAULT 55.8, `birthday` DATE NOT NULL, `happening` DATETIME NOT NULL)");
+                .isEqualTo("CREATE TABLE `dba`.`persons` (`forename` VARCHAR(50), `lastname` VARCHAR(50) DEFAULT NULL, `nickname` VARCHAR(30) DEFAULT 'Schubi', `age` INT(5) UNSIGNED NOT NULL AUTO_INCREMENT, `size` DOUBLE(2,2) UNSIGNED NOT NULL DEFAULT 55.8, `birthday` DATE NOT NULL, `happening` DATETIME NOT NULL, PRIMARY KEY (`age`))");
 
         assertThat(createTable.build(MYSQL, enabled()))
                 .isEqualTo("CREATE TABLE `dba`.`persons`\n" //
@@ -48,7 +48,8 @@ class CreateTableTest
                         + "  `age` INT(5) UNSIGNED NOT NULL AUTO_INCREMENT,\n" //
                         + "  `size` DOUBLE(2,2) UNSIGNED NOT NULL DEFAULT 55.8,\n" //
                         + "  `birthday` DATE NOT NULL,\n" //
-                        + "  `happening` DATETIME NOT NULL\n" //
+                        + "  `happening` DATETIME NOT NULL,\n" //
+                        + "  PRIMARY KEY (`age`)\n" //
                         + ")");
 
         assertThat(createTable.build(MYSQL)).isEqualTo(createTable.build(SYBASE));

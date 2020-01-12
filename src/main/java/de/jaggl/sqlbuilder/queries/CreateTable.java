@@ -5,6 +5,11 @@ import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.Getter;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.4.0
+ */
 @Getter
 public class CreateTable implements ExecutableQuery
 {

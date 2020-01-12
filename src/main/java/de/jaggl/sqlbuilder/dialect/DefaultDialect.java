@@ -110,6 +110,15 @@ public abstract class DefaultDialect implements Dialect
             builder.append(buildColumnDefinition(column.getColumnDefinition(), context, indentation));
             isFirst = false;
         }
+        createTable.getTable()
+                .getColumns()
+                .stream()
+                .filter(col -> col.getColumnDefinition().isAutoIncrement())
+                .findFirst()
+                .ifPresent(column -> builder.append(",")
+                        .append(indentation.getDelimiter())
+                        .append(indentation.indent().getIndent())
+                        .append("PRIMARY KEY (" + BuilderUtils.columnApostrophe(column.getName(), context) + ")"));
         if (indentation.isEnabled())
         {
             builder.append(indentation.getDelimiter());

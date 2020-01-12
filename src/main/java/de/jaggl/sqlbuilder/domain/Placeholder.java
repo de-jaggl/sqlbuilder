@@ -2,6 +2,11 @@ package de.jaggl.sqlbuilder.domain;
 
 import de.jaggl.sqlbuilder.columns.Column;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.5.0
+ */
 public class Placeholder extends PlainValuable
 {
     private Placeholder(String value)

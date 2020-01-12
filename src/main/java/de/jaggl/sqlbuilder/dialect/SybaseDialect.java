@@ -11,6 +11,11 @@ import de.jaggl.sqlbuilder.queries.Delete;
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.0.0
+ */
 public class SybaseDialect extends DefaultDialect
 {
     private static final SybaseDialect instance;

@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 import de.jaggl.sqlbuilder.domain.Placeholder;
 import de.jaggl.sqlbuilder.utils.ArrayUtils;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.1.0
+ */
 public interface StringConditions extends LikeConditions
 {
     default Condition isEqualTo(String value)

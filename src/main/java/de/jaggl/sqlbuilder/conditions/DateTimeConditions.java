@@ -21,6 +21,11 @@ import java.util.function.Function;
 import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.Placeholder;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.1.0
+ */
 public interface DateTimeConditions extends LikeConditions
 {
     Function<ZonedDateTime, Temporal> getDateConversion();

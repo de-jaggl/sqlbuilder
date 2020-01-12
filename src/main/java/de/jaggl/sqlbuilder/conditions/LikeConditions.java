@@ -8,6 +8,11 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.domain.LikeType;
 import de.jaggl.sqlbuilder.domain.Placeholder;
 
+/**
+ * @author Martin Schumacher
+ *
+ * @since 2.1.0
+ */
 public interface LikeConditions
 {
     default Condition isLike(CharSequence value)
