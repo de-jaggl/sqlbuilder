@@ -9,7 +9,7 @@ import de.jaggl.sqlbuilder.queryexecutor.QueryExecutor;
  */
 public interface UpdatebleQuery extends Query
 {
-    default int execute(QueryExecutor queryExecutor)
+    default long execute(QueryExecutor queryExecutor)
     {
         return queryExecutor.execute(this);
     }

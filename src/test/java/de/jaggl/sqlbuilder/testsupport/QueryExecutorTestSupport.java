@@ -1,6 +1,7 @@
 package de.jaggl.sqlbuilder.testsupport;
 
 import de.jaggl.sqlbuilder.queries.ExecutableQuery;
+import de.jaggl.sqlbuilder.queries.Insert;
 import de.jaggl.sqlbuilder.queries.UpdatebleQuery;
 import de.jaggl.sqlbuilder.queryexecutor.QueryExecutor;
 import de.jaggl.sqlbuilder.queryexecutor.RowExtractor;
@@ -29,9 +30,15 @@ public class QueryExecutorTestSupport
         }
 
         @Override
-        public int execute(UpdatebleQuery updatebleQuery)
+        public long execute(UpdatebleQuery updatebleQuery)
         {
             return 5;
+        }
+
+        @Override
+        public long executeAndReturnKey(Insert insert)
+        {
+            return 3;
         }
 
         @Override

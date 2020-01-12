@@ -15,6 +15,7 @@ import de.jaggl.sqlbuilder.domain.Valuable;
 import de.jaggl.sqlbuilder.domain.ValuableColumn;
 import de.jaggl.sqlbuilder.domain.ValuableFunction;
 import de.jaggl.sqlbuilder.functions.Function;
+import de.jaggl.sqlbuilder.queryexecutor.QueryExecutor;
 import de.jaggl.sqlbuilder.schema.Table;
 import de.jaggl.sqlbuilder.utils.Indentation;
 import lombok.Getter;
@@ -96,5 +97,10 @@ public class Insert implements UpdatebleQuery
     public static Insert copy(Insert insert)
     {
         return new Insert(insert);
+    }
+
+    public long executeAndReturnKey(QueryExecutor queryExecutor)
+    {
+        return queryExecutor.executeAndReturnKey(this);
     }
 }

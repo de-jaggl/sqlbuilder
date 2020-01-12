@@ -1,5 +1,6 @@
 package de.jaggl.sqlbuilder.queries;
 
+import static de.jaggl.sqlbuilder.queries.Queries.insertInto;
 import static de.jaggl.sqlbuilder.queries.Queries.update;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,5 +22,13 @@ class UpdatebleQueryTest extends QueryExecutorTestSupport
         var queryExecutor = new MyQueryExecutor();
 
         assertThat(update(TABLE).set(LASTNAME, "Schumacher").execute(queryExecutor)).isEqualTo(5);
+    }
+
+    @Test
+    void testInsertQuery()
+    {
+        var queryExecutor = new MyQueryExecutor();
+
+        assertThat(insertInto(TABLE).set(LASTNAME, "Schumacher").executeAndReturnKey(queryExecutor)).isEqualTo(3);
     }
 }

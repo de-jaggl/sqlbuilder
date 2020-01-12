@@ -1,6 +1,7 @@
 package de.jaggl.sqlbuilder.queryexecutor;
 
 import de.jaggl.sqlbuilder.queries.ExecutableQuery;
+import de.jaggl.sqlbuilder.queries.Insert;
 import de.jaggl.sqlbuilder.queries.UpdatebleQuery;
 
 /**
@@ -14,7 +15,9 @@ public interface QueryExecutor
 
     <T> SelectQueryExecutor<T> select(Class<T> elementType);
 
-    int execute(UpdatebleQuery updatebleQuery);
+    long execute(UpdatebleQuery updatebleQuery);
+
+    long executeAndReturnKey(Insert insert);
 
     void execute(ExecutableQuery executableQuery);
 }

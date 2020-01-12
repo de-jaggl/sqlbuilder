@@ -22,7 +22,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.6.3</version>
+  <version>2.6.4</version>
 </dependency>
 ```
 
@@ -30,7 +30,8 @@ A Java-Library to build SQL-Statements
 
 ```java
 private static final Table PERSONS = Table.create("persons");
-private static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").build();
+private static final VarCharColumn FORENAME = PERSONS.varCharColumn("forename").size(50).build();
+private static final VarCharColumn LASTNAME = PERSONS.varCharColumn("lastname").size(50).build();
 
 public static final void main(String[] args)
 {
@@ -45,6 +46,48 @@ This will output:
 SELECT * FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 ```
 To get the SQL-statement as a string, call `build()` instead of `print()`
+
+#### Some other examples:
+
+```java
+Queries.insertInto(PERSONS)
+	.set(FORENAME, "John")
+	.set(LASTNAME, "Doe")
+	.print();
+```
+Output:
+```sql
+INSERT INTO `persons` SET `persons`.`forename` = 'John', `persons`.`lastname` = 'Doe'
+```
+
+```java
+Queries.update(PERSONS)
+	.set(FORENAME, "John")
+	.where(LASTNAME.eq("Doe"))
+	.print();
+```
+Output:
+```sql
+UPDATE `persons` SET `persons`.`forename` = 'John', WHERE `persons`.`lastname` = 'Doe'
+```
+
+```java
+Queries.deleteFrom(PERSONS)
+	.where(LASTNAME.eq("Doe"))
+	.print();
+```
+Output:
+```sql
+DELETE FROM `persons` WHERE `persons`.`lastname` = 'Doe'
+```
+
+```java
+PERSONS.buildCreateTable().println()
+```
+Output:
+```sql
+CREATE TABLE `persons` (`forename` VARCHAR(50) DEFAULT NULL, `lastname` VARCHAR(50) DEFAULT NULL)
+```
 
 ### Features
 
