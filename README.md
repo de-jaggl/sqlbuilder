@@ -49,42 +49,42 @@ To get the SQL-statement as a string, call `build()` instead of `print()`
 
 #### Some other examples:
 
+Insert:
 ```java
 Queries.insertInto(PERSONS)
 	.set(FORENAME, "John")
 	.set(LASTNAME, "Doe")
 	.print();
 ```
-Output:
 ```sql
 INSERT INTO `persons` SET `persons`.`forename` = 'John', `persons`.`lastname` = 'Doe'
 ```
 
+Update:
 ```java
 Queries.update(PERSONS)
 	.set(FORENAME, "John")
 	.where(LASTNAME.eq("Doe"))
 	.print();
 ```
-Output:
 ```sql
 UPDATE `persons` SET `persons`.`forename` = 'John', WHERE `persons`.`lastname` = 'Doe'
 ```
 
+Delete:
 ```java
 Queries.deleteFrom(PERSONS)
 	.where(LASTNAME.eq("Doe"))
 	.print();
 ```
-Output:
 ```sql
 DELETE FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 ```
 
+Create table:
 ```java
 PERSONS.buildCreateTable().println()
 ```
-Output:
 ```sql
 CREATE TABLE `persons` (`forename` VARCHAR(50) DEFAULT NULL, `lastname` VARCHAR(50) DEFAULT NULL)
 ```
