@@ -1,6 +1,6 @@
 # SQLbuilder
 
-[![Maven Central](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/de/jaggl/sqlbuilder/sqlbuilder-core/maven-metadata.xml.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22de.jaggl.sqlbuilder%22%20AND%20a%3A%22sqlbuilder-core%22)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.jaggl.sqlbuilder/sqlbuilder-core/badge.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22de.jaggl.sqlbuilder%22%20AND%20a%3A%22sqlbuilder-core%22)
 [![Release](https://github.com/de-jaggl/sqlbuilder/workflows/release/badge.svg)](https://github.com/de-jaggl/sqlbuilder/actions)
 [![Nightly build](https://github.com/de-jaggl/sqlbuilder/workflows/nightly/badge.svg)](https://github.com/de-jaggl/sqlbuilder/actions)
 [![javadoc](https://javadoc.io/badge2/de.jaggl.sqlbuilder/sqlbuilder-core/javadoc.svg?)](https://javadoc.io/doc/de.jaggl.sqlbuilder/sqlbuilder-core)
