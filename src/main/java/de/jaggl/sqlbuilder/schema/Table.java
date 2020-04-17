@@ -36,8 +36,6 @@ import de.jaggl.sqlbuilder.conditions.Condition;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.JoinableTable;
 import de.jaggl.sqlbuilder.domain.Queryable;
-import de.jaggl.sqlbuilder.queries.CreateTable;
-import de.jaggl.sqlbuilder.queries.Queries;
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.utils.BuilderUtils;
 import de.jaggl.sqlbuilder.utils.Indentation;
@@ -266,16 +264,6 @@ public class Table implements Queryable
         }
         columns.add(column);
         return column;
-    }
-
-    /**
-     * Creates a {@link CreateTable} for the current {@link Table}
-     *
-     * @return the created {@link CreateTable}
-     */
-    public CreateTable buildCreateTable()
-    {
-        return Queries.createTable(this);
     }
 
     /**

@@ -2,6 +2,7 @@ package de.jaggl.sqlbuilder.queries;
 
 import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
 import static de.jaggl.sqlbuilder.dialect.Dialects.SYBASE;
+import static de.jaggl.sqlbuilder.queries.Queries.createTable;
 import static de.jaggl.sqlbuilder.utils.Indentation.enabled;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,7 +33,7 @@ class CreateTableTest
     @Test
     void testCreateTable()
     {
-        var createTable = PERSONS.buildCreateTable();
+        var createTable = createTable(PERSONS);
         createTable.println();
         createTable.println(SYBASE, enabled());
 

@@ -50,7 +50,7 @@ public interface StringConditions extends LikeConditions
         return isNotEqualTo(value);
     }
 
-    default Condition isIn(Collection<CharSequence> values)
+    default Condition isIn(Collection<String> values)
     {
         return new IsIn(this, values.stream().map(value -> (Object) value).collect(Collectors.toList()));
     }
@@ -65,7 +65,7 @@ public interface StringConditions extends LikeConditions
         return new IsIn(this, placeholder);
     }
 
-    default Condition isNotIn(Collection<CharSequence> values)
+    default Condition isNotIn(Collection<String> values)
     {
         return new IsNotIn(this, values.stream().map(value -> (Object) value).collect(Collectors.toList()));
     }

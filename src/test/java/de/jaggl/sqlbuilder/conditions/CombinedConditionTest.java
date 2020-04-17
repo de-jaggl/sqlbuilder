@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class CombinedConditionTest
+class CombinedConditionTest
 {
     @Test
-    public void testGetCopy()
+    void testGetCopy()
     {
         assertThat(CombinedCondition.getCopy(null)).isNull();
     }

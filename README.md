@@ -1,6 +1,6 @@
 # SQLbuilder
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.jaggl.sqlbuilder/sqlbuilder-core/badge.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22de.jaggl.sqlbuilder%22%20AND%20a%3A%22sqlbuilder-core%22)
+[![Maven Central](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/de/jaggl/sqlbuilder/sqlbuilder-core/maven-metadata.xml.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22de.jaggl.sqlbuilder%22%20AND%20a%3A%22sqlbuilder-core%22)
 [![Release](https://github.com/de-jaggl/sqlbuilder/workflows/release/badge.svg)](https://github.com/de-jaggl/sqlbuilder/actions)
 [![Nightly build](https://github.com/de-jaggl/sqlbuilder/workflows/nightly/badge.svg)](https://github.com/de-jaggl/sqlbuilder/actions)
 [![javadoc](https://javadoc.io/badge2/de.jaggl.sqlbuilder/sqlbuilder-core/javadoc.svg?)](https://javadoc.io/doc/de.jaggl.sqlbuilder/sqlbuilder-core)
@@ -22,7 +22,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.6.5</version>
+  <version>2.6.6</version>
 </dependency>
 ```
 
@@ -83,7 +83,7 @@ DELETE FROM `persons` WHERE `persons`.`lastname` = 'Doe'
 
 Create table:
 ```java
-PERSONS.buildCreateTable().println()
+Queries.createTable(PERSONS).println()
 ```
 ```sql
 CREATE TABLE `persons` (`forename` VARCHAR(50) DEFAULT NULL, `lastname` VARCHAR(50) DEFAULT NULL)
@@ -118,9 +118,9 @@ CREATE TABLE `persons` (`forename` VARCHAR(50) DEFAULT NULL, `lastname` VARCHAR(
 	
 - Build queries with or without indentation
 
-### Choose Dialect
+### Choose dialect
 
-By default the MySQL-Dialect is chosen. To change the Dialect, you can pass your wanted Dialect to the `print()` or `build()`-method. The known Dialects are collected in the Utility-Class `Dialects`. Simple Example for choose the known Sybase-Dialect:
+By default the MySQL-dialect is chosen. To change the dialect, you can pass your wanted dialect to the `print()` or `build()`-method. The known dialects are collected in the Utility-Class `Dialects`. Simple example for choose the known Sybase-dialect:
 ```java
 Queries.select()
   .from(PERSONS)
@@ -131,7 +131,7 @@ This will output:
 ```sql
 SELECT TOP 100 START AT 11 * FROM `persons`
 ```
-It is also possible to glabally change the default-Dialect. To do so, set the system-property `sqlbuilder.defaultDialect` to the name of the Dialect you want.
+It is also possible to globally change the default-Dialect. To do so, set the system-property `sqlbuilder.defaultDialect` to the name of the Dialect you want.
 
 ### Indentation
 

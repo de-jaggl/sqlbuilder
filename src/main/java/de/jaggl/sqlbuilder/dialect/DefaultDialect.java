@@ -12,6 +12,7 @@ import de.jaggl.sqlbuilder.columns.Column;
 import de.jaggl.sqlbuilder.columns.ColumnDefinition;
 import de.jaggl.sqlbuilder.conditions.CombinedCondition;
 import de.jaggl.sqlbuilder.conditions.Condition;
+import de.jaggl.sqlbuilder.conditions.EmptyCondition;
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.ConditionType;
 import de.jaggl.sqlbuilder.domain.Groupable;
@@ -273,7 +274,7 @@ public abstract class DefaultDialect implements Dialect
     protected void appendConditions(String keyword, StringBuilder builder, Condition condition, ConditionType whereConditionType, BuildingContext context,
             Indentation indentation)
     {
-        if (condition != null)
+        if (condition != null && !EmptyCondition.class.isAssignableFrom(condition.getClass()))
         {
             builder.append(context.getDelimiter())
                     .append(indentation.getIndent())

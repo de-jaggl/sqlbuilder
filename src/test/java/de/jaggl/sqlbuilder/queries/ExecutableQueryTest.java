@@ -1,5 +1,6 @@
 package de.jaggl.sqlbuilder.queries;
 
+import static de.jaggl.sqlbuilder.queries.Queries.createTable;
 import static org.powermock.api.easymock.PowerMock.createStrictMock;
 import static org.powermock.api.easymock.PowerMock.replayAll;
 import static org.powermock.api.easymock.PowerMock.verifyAll;
@@ -22,7 +23,7 @@ class ExecutableQueryTest extends QueryExecutorTestSupport
         runnable.run();
 
         replayAll();
-        TABLE.buildCreateTable().execute(queryExecutor);
+        createTable(TABLE).execute(queryExecutor);
         verifyAll();
     }
 }

@@ -1,5 +1,6 @@
 package de.jaggl.sqlbuilder.queries;
 
+import static de.jaggl.sqlbuilder.conditions.Condition.emptyCondition;
 import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
 import static de.jaggl.sqlbuilder.dialect.Dialects.SYBASE;
 import static de.jaggl.sqlbuilder.domain.LikeType.AFTER;
@@ -20,6 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -73,10 +76,14 @@ class SelectTest
     @Test
     void testBuildComplexSelect()
     {
-        var subCondition = LASTNAME.isEqualTo("Schumacher")
-                .or(Condition.plain("IsNull(COL, '') != ''"));
+        var subCondition = Condition.emptyCondition();
+
+        subCondition = subCondition.and(LASTNAME.isEqualTo("Schumacher")
+                .or(Condition.plain("IsNull(COL, '') != ''")));
 
         subCondition = subCondition.and(FORENAME.isNotNull());
+
+        List<String> names = Arrays.asList("Schubi", null, "Ronny");
 
         var select = selectDistinct(FORENAME, LASTNAME, SIZE.as("Gr\\ö`ße"))
                 .select(Selectable.plain("IsNull(`COL`, '')").as("Color"), sum(AGE).as("ageSum"))
@@ -87,7 +94,7 @@ class SelectTest
                 .leftJoin(PERSONS.on(AGE.isEqualTo(FORENAME)))
                 .where(FORENAME.isNotEqualTo(LASTNAME)
                         .andNot(LASTNAME.isEqualTo("Sch'umach\\er"))
-                        .and(NICKNAME.isIn("Schubi", null, "Ronny"))
+                        .and(NICKNAME.isIn(names))
                         .andNot(Condition.plain("IsNull(`COL`, '') != ''"))
                         .and(FORENAME.isNotNull())
                         .or(LASTNAME.isEqualTo("Künzel"))
@@ -240,6 +247,12 @@ class SelectTest
                         + "  `dba`.`persons`.`forename` DESC");
 
         assertThat(Select.copy(select).build(MYSQL)).isEqualTo(select.build(MYSQL));
+    }
+
+    @Test
+    void testWithEmptyCondition()
+    {
+        assertThat(select().from(PERSONS).where(emptyCondition()).build()).isEqualTo("SELECT * FROM `dba`.`persons`");
     }
 
     @Test

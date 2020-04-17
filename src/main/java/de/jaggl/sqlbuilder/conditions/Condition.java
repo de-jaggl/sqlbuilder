@@ -88,6 +88,10 @@ public abstract class Condition
         other.setConcatenation(concatenationType);
         other.setType(conditionType);
         CombinedCondition combined;
+        if (EmptyCondition.class.isAssignableFrom(getClass()))
+        {
+            return other;
+        }
         if (!CombinedCondition.class.isAssignableFrom(getClass()))
         {
             combined = new CombinedCondition(this);
@@ -103,6 +107,11 @@ public abstract class Condition
     public static Condition plain(String plainCondition)
     {
         return new PlainCondition(plainCondition);
+    }
+
+    public static Condition emptyCondition()
+    {
+        return new EmptyCondition();
     }
 
     protected void addPlaceholderSqlTypes(List<Integer> sqlTypes)
