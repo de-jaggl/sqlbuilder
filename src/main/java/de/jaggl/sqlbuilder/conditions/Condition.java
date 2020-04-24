@@ -114,6 +114,11 @@ public abstract class Condition
         return new EmptyCondition();
     }
 
+    public static Condition nested(Condition condition)
+    {
+        return new CombinedCondition(condition);
+    }
+
     protected void addPlaceholderSqlTypes(List<Integer> sqlTypes)
     {
         if (sqlTypes != null)
