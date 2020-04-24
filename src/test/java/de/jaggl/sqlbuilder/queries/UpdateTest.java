@@ -11,9 +11,13 @@ import static de.jaggl.sqlbuilder.queries.Update.clearWheres;
 import static de.jaggl.sqlbuilder.utils.Indentation.enabled;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.datetime.DateColumn;
+import de.jaggl.sqlbuilder.columns.datetime.DateTimeColumn;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.columns.string.VarCharColumn;
@@ -30,6 +34,8 @@ class UpdateTest
     public static final DoubleColumn SIZE = PERSONS.doubleColumn("size").build();
     public static final IntColumn COUNT = PERSONS.intColumn("count").build();
     public static final DateColumn BIRTHDAY = PERSONS.dateColumn("birthday").build();
+    public static final DateColumn DEATHDAY = PERSONS.dateColumn("deathday").build();
+    public static final DateTimeColumn LAST_UPDATE = PERSONS.dateTimeColumn("lastUpdate").build();
 
     @Test
     void testBuildUpdate()
@@ -38,6 +44,8 @@ class UpdateTest
                 .set(NICKNAME, FORENAME)
                 .set(LASTNAME, "Schumacher")
                 .set(BIRTHDAY, now())
+                .set(DEATHDAY, LocalDate.of(2020, 4, 24))
+                .set(LAST_UPDATE, LocalDateTime.of(2020, 4, 24, 13, 53))
                 .set(COUNT, Integer.valueOf(5))
                 .set(AGE, 38)
                 .set(SIZE, 175.89)
@@ -50,7 +58,7 @@ class UpdateTest
         update.println(SYBASE, enabled());
 
         assertThat(update.build(MYSQL))
-                .isEqualTo("UPDATE `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`lastname` = 'Schumacher', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89 WHERE (`persons`.`lastname` NOT LIKE 'Nils%' AND MIN(`persons`.`age`) >= 50 AND (`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != ''))");
+                .isEqualTo("UPDATE `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`lastname` = 'Schumacher', `persons`.`birthday` = NOW(), `persons`.`deathday` = '2020-04-24', `persons`.`lastUpdate` = '2020-04-24 13:53:00.000000', `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89 WHERE (`persons`.`lastname` NOT LIKE 'Nils%' AND MIN(`persons`.`age`) >= 50 AND (`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != ''))");
 
         assertThat(update.build(MYSQL, enabled())).isEqualTo("UPDATE\n" //
                 + "  `persons`\n" //
@@ -58,6 +66,8 @@ class UpdateTest
                 + "  `persons`.`nickname` = `persons`.`forename`,\n" //
                 + "  `persons`.`lastname` = 'Schumacher',\n" //
                 + "  `persons`.`birthday` = NOW(),\n" //
+                + "  `persons`.`deathday` = '2020-04-24',\n" //
+                + "  `persons`.`lastUpdate` = '2020-04-24 13:53:00.000000',\n" //
                 + "  `persons`.`count` = 5,\n" //
                 + "  `persons`.`age` = 38,\n" //
                 + "  `persons`.`size` = 175.89\n" //

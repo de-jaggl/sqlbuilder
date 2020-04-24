@@ -5,10 +5,14 @@ import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE;
 import static de.jaggl.sqlbuilder.domain.ConditionType.WHERE_NOT;
 import static lombok.AccessLevel.PACKAGE;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import de.jaggl.sqlbuilder.columns.Column;
+import de.jaggl.sqlbuilder.columns.datetime.DateColumn;
+import de.jaggl.sqlbuilder.columns.datetime.DateTimeColumn;
 import de.jaggl.sqlbuilder.columns.number.NumberColumn;
 import de.jaggl.sqlbuilder.columns.string.StringColumn;
 import de.jaggl.sqlbuilder.conditions.Condition;
@@ -76,6 +80,16 @@ public class Update implements UpdatebleQuery
     public Update set(Column column, Column otherColumn)
     {
         return set(column, new ValuableColumn(otherColumn));
+    }
+
+    public Update set(DateColumn column, LocalDate value)
+    {
+        return set(column, new PlainValuable(value));
+    }
+
+    public Update set(DateTimeColumn column, LocalDateTime value)
+    {
+        return set(column, new PlainValuable(value));
     }
 
     public Update set(Column column, Valuable valuable)

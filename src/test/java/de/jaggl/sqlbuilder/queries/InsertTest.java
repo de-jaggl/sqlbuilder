@@ -7,9 +7,13 @@ import static de.jaggl.sqlbuilder.queries.Queries.insertInto;
 import static de.jaggl.sqlbuilder.utils.Indentation.enabled;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.columns.datetime.DateColumn;
+import de.jaggl.sqlbuilder.columns.datetime.DateTimeColumn;
 import de.jaggl.sqlbuilder.columns.number.doubletype.DoubleColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.BigIntColumn;
 import de.jaggl.sqlbuilder.columns.number.integer.IntColumn;
@@ -28,6 +32,8 @@ class InsertTest
     public static final DoubleColumn SIZE = PERSONS.doubleColumn("size").build();
     public static final IntColumn COUNT = PERSONS.intColumn("count").build();
     public static final DateColumn BIRTHDAY = PERSONS.dateColumn("birthday").build();
+    public static final DateColumn DEATHDAY = PERSONS.dateColumn("deathday").build();
+    public static final DateTimeColumn LAST_UPDATE = PERSONS.dateTimeColumn("lastUpdate").build();
     public static final BigIntColumn NUMBERS = PERSONS.bigIntColumn("numbers").build();
 
     @Test
@@ -37,6 +43,8 @@ class InsertTest
                 .set(NICKNAME, FORENAME)
                 .set(FORENAME, "Martin")
                 .set(BIRTHDAY, now())
+                .set(DEATHDAY, LocalDate.of(2020, 4, 24))
+                .set(LAST_UPDATE, LocalDateTime.of(2020, 4, 24, 13, 53))
                 .set(COUNT, Integer.valueOf(5))
                 .set(AGE, 38)
                 .set(SIZE, 175.89)
@@ -47,7 +55,7 @@ class InsertTest
         insert.println(SYBASE, enabled());
 
         assertThat(insert.build())
-                .isEqualTo("INSERT INTO `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`forename` = 'Martin', `persons`.`birthday` = NOW(), `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89, `persons`.`numbers` = :numbers, `persons`.`lastname` = 'Schumacher'");
+                .isEqualTo("INSERT INTO `persons` SET `persons`.`nickname` = `persons`.`forename`, `persons`.`forename` = 'Martin', `persons`.`birthday` = NOW(), `persons`.`deathday` = '2020-04-24', `persons`.`lastUpdate` = '2020-04-24 13:53:00.000000', `persons`.`count` = 5, `persons`.`age` = 38, `persons`.`size` = 175.89, `persons`.`numbers` = :numbers, `persons`.`lastname` = 'Schumacher'");
 
         assertThat(insert.build(enabled()))
                 .isEqualTo("INSERT INTO\n" //
@@ -56,6 +64,8 @@ class InsertTest
                         + "  `persons`.`nickname` = `persons`.`forename`,\n" //
                         + "  `persons`.`forename` = 'Martin',\n" //
                         + "  `persons`.`birthday` = NOW(),\n" //
+                        + "  `persons`.`deathday` = '2020-04-24',\n" //
+                        + "  `persons`.`lastUpdate` = '2020-04-24 13:53:00.000000',\n" //
                         + "  `persons`.`count` = 5,\n" //
                         + "  `persons`.`age` = 38,\n" //
                         + "  `persons`.`size` = 175.89,\n" //
