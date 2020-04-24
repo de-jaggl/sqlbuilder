@@ -1,6 +1,7 @@
 package de.jaggl.sqlbuilder.queries;
 
 import static de.jaggl.sqlbuilder.conditions.Condition.emptyCondition;
+import static de.jaggl.sqlbuilder.conditions.Condition.nested;
 import static de.jaggl.sqlbuilder.dialect.Dialects.MYSQL;
 import static de.jaggl.sqlbuilder.dialect.Dialects.SYBASE;
 import static de.jaggl.sqlbuilder.domain.LikeType.AFTER;
@@ -105,6 +106,8 @@ class SelectTest
                         .and(HAPPENING.isEqualTo(LocalDateTime.of(2019, 2, 22, 21, 11)))
                         .and(min(AGE).isGreaterThanOrEqualTo(50))
                         .and(subCondition)
+                        .and(nested(AGE.isEqualTo(FORENAME).and(FORENAME.isNotNull()))
+                                .or(FORENAME.isNull().and(AGE.isEqualTo(12))))
                         .and(BIRTHDAY.isBeforeOrEqualTo(LocalDate.of(2019, 7, 31).minusYears(10))
                                 .or(BIRTHDAY.isLike("2019-05-", AFTER))))
                 .groupBy(LASTNAME, FORENAME)
@@ -119,10 +122,10 @@ class SelectTest
         select.println(SYBASE, enabled());
 
         assertThat(select.build(MYSQL))
-                .isEqualTo("SELECT DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC LIMIT 10, 100");
+                .isEqualTo("SELECT DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND ((`dba`.`persons`.`age` = `dba`.`persons`.`forename` AND `dba`.`persons`.`forename` IS NOT NULL) OR (`dba`.`persons`.`forename` IS NULL AND `dba`.`persons`.`age` = 12)) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC LIMIT 10, 100");
 
         assertThat(select.build(SYBASE))
-                .isEqualTo("SELECT TOP 100 START AT 11 DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC");
+                .isEqualTo("SELECT TOP 100 START AT 11 DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND ((`dba`.`persons`.`age` = `dba`.`persons`.`forename` AND `dba`.`persons`.`forename` IS NOT NULL) OR (`dba`.`persons`.`forename` IS NULL AND `dba`.`persons`.`age` = 12)) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC");
 
         assertThat(select.build(MYSQL, enabled()))
                 .isEqualTo("SELECT DISTINCT\n" //
@@ -166,6 +169,18 @@ class SelectTest
                         + "  )\n" //
                         + "  AND\n" //
                         + "  (\n" //
+                        + "        (\n" //
+                        + "      `dba`.`persons`.`age` = `dba`.`persons`.`forename`\n" //
+                        + "      AND `dba`.`persons`.`forename` IS NOT NULL\n" //
+                        + "    )\n" //
+                        + "    OR\n" //
+                        + "    (\n" //
+                        + "      `dba`.`persons`.`forename` IS NULL\n" //
+                        + "      AND `dba`.`persons`.`age` = 12\n" //
+                        + "    )\n" //
+                        + "  )\n" //
+                        + "  AND\n" //
+                        + "  (\n" //
                         + "    `dba`.`persons`.`birthday` <= '2009-07-31'\n" //
                         + "    OR `dba`.`persons`.`birthday` LIKE '2019-05-%'\n" //
                         + "  )\n" //
@@ -185,7 +200,7 @@ class SelectTest
                         + "LIMIT 10, 100");
 
         assertThat(select.build(SYBASE))
-                .isEqualTo("SELECT TOP 100 START AT 11 DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC");
+                .isEqualTo("SELECT TOP 100 START AT 11 DISTINCT `dba`.`persons`.`forename`, `dba`.`persons`.`lastname`, `dba`.`persons`.`size` AS `Gr\\\\ö\\`ße`, IsNull(`COL`, '') AS `Color`, SUM(`dba`.`persons`.`age`) AS `ageSum` FROM (SELECT COUNT(`dba`.`persons`.`forename`) AS `foreCount` FROM `dba`.`persons`) AS `sub` LEFT OUTER JOIN `dba`.`persons` AS `q` ON (`dba`.`persons`.`forename` = `dba`.`persons`.`nickname` AND `dba`.`persons`.`age` > `dba`.`persons`.`size`) LEFT JOIN `dba`.`persons` ON `dba`.`persons`.`age` = `dba`.`persons`.`forename` WHERE (`dba`.`persons`.`forename` != `dba`.`persons`.`lastname` AND NOT `dba`.`persons`.`lastname` = 'Sch\\'umach\\\\er' AND `dba`.`persons`.`nickname` IN ('Schubi', NULL, 'Ronny') AND NOT IsNull(`COL`, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL OR `dba`.`persons`.`lastname` = 'Künzel' AND `dba`.`persons`.`age` = 12 OR NOT `dba`.`persons`.`size` BETWEEN 40.1234 AND 50.9876 OR `dba`.`persons`.`age` < NULL AND `dba`.`persons`.`lastname` NOT LIKE 'Nils%' AND `dba`.`persons`.`happening` = '2019-02-22 21:11:00.000000' AND MIN(`dba`.`persons`.`age`) >= 50 AND (`dba`.`persons`.`lastname` = 'Schumacher' OR IsNull(COL, '') != '' AND `dba`.`persons`.`forename` IS NOT NULL) AND ((`dba`.`persons`.`age` = `dba`.`persons`.`forename` AND `dba`.`persons`.`forename` IS NOT NULL) OR (`dba`.`persons`.`forename` IS NULL AND `dba`.`persons`.`age` = 12)) AND (`dba`.`persons`.`birthday` <= '2009-07-31' OR `dba`.`persons`.`birthday` LIKE '2019-05-%')) GROUP BY `dba`.`persons`.`lastname`, `dba`.`persons`.`forename`, foreCount HAVING (SUM(`dba`.`persons`.`age`) > 20 AND `dba`.`persons`.`size` BETWEEN 120 AND 150) ORDER BY `dba`.`persons`.`lastname` ASC, `dba`.`persons`.`forename` DESC");
 
         assertThat(select.build(SYBASE, enabled()))
                 .isEqualTo("SELECT TOP 100 START AT 11 DISTINCT\n" //
@@ -226,6 +241,18 @@ class SelectTest
                         + "    `dba`.`persons`.`lastname` = 'Schumacher'\n" //
                         + "    OR IsNull(COL, '') != ''\n" //
                         + "    AND `dba`.`persons`.`forename` IS NOT NULL\n" //
+                        + "  )\n" //
+                        + "  AND\n" //
+                        + "  (\n" //
+                        + "        (\n" //
+                        + "      `dba`.`persons`.`age` = `dba`.`persons`.`forename`\n" //
+                        + "      AND `dba`.`persons`.`forename` IS NOT NULL\n" //
+                        + "    )\n" //
+                        + "    OR\n" //
+                        + "    (\n" //
+                        + "      `dba`.`persons`.`forename` IS NULL\n" //
+                        + "      AND `dba`.`persons`.`age` = 12\n" //
+                        + "    )\n" //
                         + "  )\n" //
                         + "  AND\n" //
                         + "  (\n" //
