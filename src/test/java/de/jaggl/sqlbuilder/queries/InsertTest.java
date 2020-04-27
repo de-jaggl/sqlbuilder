@@ -72,8 +72,12 @@ class InsertTest
                         + "  `persons`.`numbers` = :numbers,\n" //
                         + "  `persons`.`lastname` = 'Schumacher'");
 
-        assertThat(insert.build(MYSQL)).isEqualTo(insert.build(SYBASE));
-        assertThat(insert.build(MYSQL, enabled())).isEqualTo(insert.build(SYBASE, enabled()));
+        assertThat(insert.build(SYBASE))
+                .isEqualTo("INSERT INTO `persons` (`nickname`, `forename`, `birthday`, `deathday`, `lastUpdate`, `count`, `age`, `size`, `numbers`, `lastname`) VALUES (`forename`, 'Martin', NOW(), '2020-04-24', '2020-04-24 13:53:00.000000', 5, 38, 175.89, :numbers, 'Schumacher')");
+        assertThat(insert.build(SYBASE, enabled())).isEqualTo("INSERT INTO `persons`\n" //
+                + "  (`nickname`, `forename`, `birthday`, `deathday`, `lastUpdate`, `count`, `age`, `size`, `numbers`, `lastname`)\n" //
+                + "VALUES\n" //
+                + "  (`forename`, 'Martin', NOW(), '2020-04-24', '2020-04-24 13:53:00.000000', 5, 38, 175.89, :numbers, 'Schumacher')");
 
         assertThat(Insert.copy(insert).build(MYSQL)).isEqualTo(insert.build(MYSQL));
     }

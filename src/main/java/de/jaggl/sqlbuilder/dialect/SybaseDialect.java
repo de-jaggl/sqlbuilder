@@ -1,5 +1,10 @@
 package de.jaggl.sqlbuilder.dialect;
 
+import static de.jaggl.sqlbuilder.utils.BuilderUtils.columnApostrophe;
+
+import java.util.Map;
+
+import de.jaggl.sqlbuilder.columns.Column;
 /**
  * @author Martin Schumacher
  *
@@ -7,7 +12,10 @@ package de.jaggl.sqlbuilder.dialect;
  */
 import de.jaggl.sqlbuilder.domain.BuildingContext;
 import de.jaggl.sqlbuilder.domain.Limit;
+import de.jaggl.sqlbuilder.domain.Valuable;
+import de.jaggl.sqlbuilder.domain.ValuableColumn;
 import de.jaggl.sqlbuilder.queries.Delete;
+import de.jaggl.sqlbuilder.queries.Insert;
 import de.jaggl.sqlbuilder.queries.Select;
 import de.jaggl.sqlbuilder.utils.Indentation;
 
@@ -35,6 +43,55 @@ public class SybaseDialect extends DefaultDialect
     public String getName()
     {
         return "Sybase";
+    }
+
+    @Override
+    protected void appendInsertStatement(StringBuilder builder, Insert insert, BuildingContext context, Indentation indentation)
+    {
+        builder.append(context.getDialect().getLabels().getInsertInto()).append(" ").append(insert.getTable().getFullName(context));
+        builder.append(indentation.getDelimiter());
+        appendInsertColumns(builder, insert.getValues(), context, indentation.indent());
+        appendInsertValues(builder, insert.getValues(), context, indentation.indent());
+    }
+
+    protected void appendInsertColumns(StringBuilder builder, Map<Column, Valuable> values, BuildingContext context, Indentation indentation)
+    {
+        var counter = 0;
+        builder.append(indentation.getIndent()).append("(");
+        for (var entry : values.entrySet())
+        {
+            var column = entry.getKey();
+            builder.append(columnApostrophe(column.getName(), context));
+            if (++counter < values.size())
+            {
+                builder.append(", ");
+            }
+        }
+        builder.append(")").append(indentation.getDelimiter());
+    }
+
+    protected void appendInsertValues(StringBuilder builder, Map<Column, Valuable> values, BuildingContext context, Indentation indentation)
+    {
+        var counter = 0;
+        builder.append("VALUES").append(indentation.getDelimiter());
+        builder.append(indentation.getIndent()).append("(");
+        for (var entry : values.entrySet())
+        {
+            var value = entry.getValue();
+            if (ValuableColumn.class.isAssignableFrom(value.getClass()))
+            {
+                builder.append(columnApostrophe(((ValuableColumn) value).getName(), context));
+            }
+            else
+            {
+                builder.append(value.getValue(context, indentation));
+            }
+            if (++counter < values.size())
+            {
+                builder.append(", ");
+            }
+        }
+        builder.append(")");
     }
 
     @Override
