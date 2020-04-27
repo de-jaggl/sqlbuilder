@@ -21,4 +21,9 @@ public class ValuableColumn implements Valuable
     {
         return column.getFullNameOrAlias(context);
     }
+
+    public String getName()
+    {
+        return column.getName();
+    }
 }
