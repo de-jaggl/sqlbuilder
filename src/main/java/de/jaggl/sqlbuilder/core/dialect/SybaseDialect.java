@@ -41,6 +41,12 @@ public class SybaseDialect extends DefaultDialect
     }
 
     @Override
+    public String escape(String value, char apostrophe)
+    {
+        return value.replace(String.valueOf(apostrophe), String.valueOf(apostrophe) + String.valueOf(apostrophe));
+    }
+
+    @Override
     protected void appendInsertStatement(StringBuilder builder, Insert insert, BuildingContext context, Indentation indentation)
     {
         builder.append(context.getDialect().getLabels().getInsertInto()).append(" ").append(insert.getTable().getFullName(context));

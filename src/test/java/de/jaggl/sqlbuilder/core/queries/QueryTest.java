@@ -64,6 +64,7 @@ public class QueryTest
         query.println(System.out, "MYSQL", enabled());
     }
 
+    @SuppressWarnings("resource")
     @Test
     public void testPrepare() throws SQLException
     {
@@ -81,6 +82,7 @@ public class QueryTest
         verifyAll();
     }
 
+    @SuppressWarnings("resource")
     @Test
     public void testPrepareWithDialect() throws SQLException
     {
@@ -98,6 +100,7 @@ public class QueryTest
         verifyAll();
     }
 
+    @SuppressWarnings("resource")
     @Test
     public void testPrepareWithDialectName() throws SQLException
     {

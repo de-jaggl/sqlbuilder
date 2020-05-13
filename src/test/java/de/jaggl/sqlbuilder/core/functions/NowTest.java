@@ -12,7 +12,6 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import de.jaggl.sqlbuilder.core.functions.Function;
 import de.jaggl.sqlbuilder.core.schema.Table;
 import de.jaggl.sqlbuilder.core.testsupport.OtherColumnTestSupport;
 

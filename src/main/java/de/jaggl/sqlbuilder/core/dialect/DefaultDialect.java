@@ -42,8 +42,15 @@ public abstract class DefaultDialect implements Dialect
 {
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE;
     static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.nnnnnn");
+    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss.nnnnnn");
 
     private Labels labels = DefaultLabels.getInstance();
+
+    @Override
+    public String escape(String value, char apostrophe)
+    {
+        return value.replace("\\", "\\\\").replace(Character.toString(apostrophe), "\\" + apostrophe);
+    }
 
     @Override
     public final String build(Insert insert, Indentation indentation)
@@ -407,6 +414,12 @@ public abstract class DefaultDialect implements Dialect
     public DateTimeFormatter getDateTimeFormatter()
     {
         return DATE_TIME_FORMATTER;
+    }
+
+    @Override
+    public DateTimeFormatter getTimeFormatter()
+    {
+        return TIME_FORMATTER;
     }
 
     @Override

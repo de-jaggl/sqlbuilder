@@ -10,6 +10,8 @@ import de.jaggl.sqlbuilder.core.columns.datetime.DateColumn;
 import de.jaggl.sqlbuilder.core.columns.datetime.DateColumnBuilder;
 import de.jaggl.sqlbuilder.core.columns.datetime.DateTimeColumn;
 import de.jaggl.sqlbuilder.core.columns.datetime.DateTimeColumnBuilder;
+import de.jaggl.sqlbuilder.core.columns.datetime.TimeColumn;
+import de.jaggl.sqlbuilder.core.columns.datetime.TimeColumnBuilder;
 import de.jaggl.sqlbuilder.core.columns.number.doubletype.DecimalColumn;
 import de.jaggl.sqlbuilder.core.columns.number.doubletype.DecimalColumnBuilder;
 import de.jaggl.sqlbuilder.core.columns.number.doubletype.DoubleColumn;
@@ -254,6 +256,17 @@ public class Table implements Queryable
     public DateTimeColumnBuilder dateTimeColumn(String columnName)
     {
         return new DateTimeColumnBuilder(this, columnName);
+    }
+
+    /**
+     * Creates a {@link TimeColumnBuilder} to build a {@link TimeColumn} with the given name for the current {@link Table}
+     *
+     * @param columnName the name for the {@link TimeColumn} to be build
+     * @return the {@link TimeColumnBuilder} to build a {@link TimeColumn} from
+     */
+    public TimeColumnBuilder timeColumn(String columnName)
+    {
+        return new TimeColumnBuilder(this, columnName);
     }
 
     <T extends Column> T addColumn(T column)

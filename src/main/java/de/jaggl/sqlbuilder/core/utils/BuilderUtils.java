@@ -6,6 +6,7 @@ import static de.jaggl.sqlbuilder.core.domain.LikeType.BOTH;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import de.jaggl.sqlbuilder.core.columns.Column;
 import de.jaggl.sqlbuilder.core.domain.BuildingContext;
@@ -63,22 +64,26 @@ public final class BuilderUtils
         {
             return valueApostrophe(prefix + context.getDialect().getDateTimeFormatter().format((LocalDateTime) value) + postfix, context);
         }
+        if (LocalTime.class.isAssignableFrom(value.getClass()))
+        {
+            return valueApostrophe(prefix + context.getDialect().getTimeFormatter().format((LocalTime) value) + postfix, context);
+        }
         return valueApostrophe(prefix + String.valueOf(value) + postfix, context);
     }
 
     public static String columnApostrophe(String value, BuildingContext context)
     {
-        return apostrophe(value, context.getDialect().getLabels().getColumnApostrophe());
+        return apostrophe(value, context.getDialect().getLabels().getColumnApostrophe(), context);
     }
 
     public static String valueApostrophe(String value, BuildingContext context)
     {
-        return apostrophe(value, context.getDialect().getLabels().getValueApostrophe());
+        return apostrophe(value, context.getDialect().getLabels().getValueApostrophe(), context);
     }
 
-    private static String apostrophe(String value, char apostrophe)
+    private static String apostrophe(String value, char apostrophe, BuildingContext context)
     {
-        return apostrophe + value.replaceAll("\\\\", "\\\\\\\\").replaceAll(Character.toString(apostrophe), "\\\\" + apostrophe) + apostrophe;
+        return apostrophe + context.getDialect().escape(value, apostrophe) + apostrophe;
     }
 
     public static String buildLikePart(Object value, LikeType likeType, BuildingContext context, Indentation indentation)

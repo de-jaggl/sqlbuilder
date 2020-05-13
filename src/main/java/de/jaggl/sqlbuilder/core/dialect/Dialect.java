@@ -34,7 +34,11 @@ public interface Dialect
 
     DateTimeFormatter getDateTimeFormatter();
 
+    DateTimeFormatter getTimeFormatter();
+
     Labels getLabels();
+
+    String escape(String value, char apostrophe);
 
     public static void register(Dialect dialect)
     {
