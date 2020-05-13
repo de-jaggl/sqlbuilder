@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-import de.jaggl.sqlbuilder.core.conditions.EmptyCondition;
-
 class EmptyConditionTest
 {
     @Test

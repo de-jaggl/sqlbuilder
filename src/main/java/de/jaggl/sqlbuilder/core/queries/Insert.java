@@ -4,12 +4,14 @@ import static lombok.AccessLevel.PACKAGE;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import de.jaggl.sqlbuilder.core.columns.Column;
 import de.jaggl.sqlbuilder.core.columns.datetime.DateColumn;
 import de.jaggl.sqlbuilder.core.columns.datetime.DateTimeColumn;
+import de.jaggl.sqlbuilder.core.columns.datetime.TimeColumn;
 import de.jaggl.sqlbuilder.core.columns.number.NumberColumn;
 import de.jaggl.sqlbuilder.core.columns.string.StringColumn;
 import de.jaggl.sqlbuilder.core.dialect.Dialect;
@@ -92,6 +94,11 @@ public class Insert implements UpdatebleQuery
     }
 
     public Insert set(DateTimeColumn column, LocalDateTime value)
+    {
+        return addValue(column, new PlainValuable(value));
+    }
+
+    public Insert set(TimeColumn column, LocalTime value)
     {
         return addValue(column, new PlainValuable(value));
     }

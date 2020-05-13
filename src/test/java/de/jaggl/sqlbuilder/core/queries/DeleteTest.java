@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.core.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.core.columns.string.VarCharColumn;
-import de.jaggl.sqlbuilder.core.queries.Delete;
 import de.jaggl.sqlbuilder.core.schema.Table;
 
 class DeleteTest

@@ -20,7 +20,6 @@ import de.jaggl.sqlbuilder.core.columns.string.CharColumnBuilder;
 import de.jaggl.sqlbuilder.core.columns.string.TextColumnBuilder;
 import de.jaggl.sqlbuilder.core.columns.string.VarCharColumnBuilder;
 import de.jaggl.sqlbuilder.core.domain.BuildingContext;
-import de.jaggl.sqlbuilder.core.schema.Table;
 
 class TableTest
 {

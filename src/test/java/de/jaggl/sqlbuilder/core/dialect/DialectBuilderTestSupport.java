@@ -3,7 +3,6 @@ package de.jaggl.sqlbuilder.core.dialect;
 import static lombok.AccessLevel.PRIVATE;
 
 import de.jaggl.sqlbuilder.core.columns.ColumnDefinition;
-import de.jaggl.sqlbuilder.core.dialect.DefaultDialect;
 import de.jaggl.sqlbuilder.core.domain.BuildingContext;
 import de.jaggl.sqlbuilder.core.utils.Indentation;
 import lombok.NoArgsConstructor;

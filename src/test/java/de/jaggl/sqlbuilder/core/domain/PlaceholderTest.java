@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 import de.jaggl.sqlbuilder.core.columns.string.VarCharColumn;
-import de.jaggl.sqlbuilder.core.domain.Plain;
 import de.jaggl.sqlbuilder.core.schema.Table;
 
 class PlaceholderTest

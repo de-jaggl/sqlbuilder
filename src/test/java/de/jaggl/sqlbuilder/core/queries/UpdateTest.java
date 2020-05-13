@@ -21,7 +21,6 @@ import de.jaggl.sqlbuilder.core.columns.datetime.DateTimeColumn;
 import de.jaggl.sqlbuilder.core.columns.number.doubletype.DoubleColumn;
 import de.jaggl.sqlbuilder.core.columns.number.integer.IntColumn;
 import de.jaggl.sqlbuilder.core.columns.string.VarCharColumn;
-import de.jaggl.sqlbuilder.core.queries.Update;
 import de.jaggl.sqlbuilder.core.schema.Table;
 
 class UpdateTest
