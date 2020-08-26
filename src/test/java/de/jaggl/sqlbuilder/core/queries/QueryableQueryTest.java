@@ -9,13 +9,12 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import de.jaggl.sqlbuilder.core.queries.Query;
 import de.jaggl.sqlbuilder.core.queryexecutor.SelectQueryExecutor;
 import de.jaggl.sqlbuilder.core.schema.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 
-public class QueryableQueryTest
+class QueryableQueryTest
 {
     private static final Table TABLE = Table.create("table");
     private SelectQueryExecutor<MyClass> selectQueryExecutor = new MySelectQueryExecutor();

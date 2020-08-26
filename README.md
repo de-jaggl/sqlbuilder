@@ -22,7 +22,7 @@ A Java-Library to build SQL-Statements
 <dependency>
   <groupId>de.jaggl.sqlbuilder</groupId>
   <artifactId>sqlbuilder-core</artifactId>
-  <version>2.7.0</version>
+  <version>2.7.2</version>
 </dependency>
 ```
 

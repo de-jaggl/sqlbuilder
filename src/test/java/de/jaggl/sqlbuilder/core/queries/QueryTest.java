@@ -14,12 +14,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class QueryTest
+class QueryTest
 {
     @Test
-    public void testPrintAndPrintln()
+    void testPrintAndPrintln()
     {
         var query = select().from(create("table"));
 
@@ -66,7 +66,7 @@ public class QueryTest
 
     @SuppressWarnings("resource")
     @Test
-    public void testPrepare() throws SQLException
+    void testPrepare() throws SQLException
     {
         var query = select().from(create("table"));
 
@@ -84,7 +84,7 @@ public class QueryTest
 
     @SuppressWarnings("resource")
     @Test
-    public void testPrepareWithDialect() throws SQLException
+    void testPrepareWithDialect() throws SQLException
     {
         var query = select().from(create("table"));
 
@@ -102,7 +102,7 @@ public class QueryTest
 
     @SuppressWarnings("resource")
     @Test
-    public void testPrepareWithDialectName() throws SQLException
+    void testPrepareWithDialectName() throws SQLException
     {
         var query = select().from(create("table"));
 
