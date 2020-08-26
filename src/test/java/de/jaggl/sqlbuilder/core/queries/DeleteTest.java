@@ -24,6 +24,13 @@ class DeleteTest
     private static final IntColumn AGE = PERSONS.intColumn("age").build();
 
     @Test
+    void testBuildSimpleDelete()
+    {
+        assertThat(deleteFrom(PERSONS).where(LASTNAME.isEqualTo("Schumacher")).build(SYBASE))
+                .isEqualTo("DELETE FROM `persons` WHERE `persons`.`lastname` = 'Schumacher'");
+    }
+
+    @Test
     void testBuildDelete()
     {
         var delete = deleteFrom(PERSONS)

@@ -114,6 +114,10 @@ public class SybaseDialect extends DefaultDialect
     protected void appendDeleteStatement(StringBuilder builder, Delete delete, BuildingContext context, Indentation indentation)
     {
         builder.append(context.getDialect().getLabels().getDelete());
+        if (delete.getLimitation() == null)
+        {
+            builder.append(" ");
+        }
         appendLimit(builder, delete.getLimitation(), context, indentation);
         if (delete.getLimitation() != null)
         {
